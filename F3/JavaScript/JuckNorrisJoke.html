@@ -6,15 +6,27 @@
     <script>
         addEventListener("DOMContentLoaded", function () {
             document.getElementById("joke").addEventListener("click", function () {
-                fetch("https://api.chucknorris.io/jokes/random").then(response => response.json())
+                const response =fetch("https://api.chucknorris.io/jokes/random").then(response => response.json())
                     .then(data => document.getElementById("joke").value = data.value)
                     .catch(error => console.error(error))
+            })
+            document.getElementById("joke2").addEventListener("click", function () {
+                fetch("https://restcountries.com/v3.1/all ").then(response => response.json())
+                    .then(data => document.getElementById("joke2").value = data)
+                    .catch(error => console.error(error))
+            })
+            document.getElementById("joke3").addEventListener("click", function () {
+                const data = fetch("https://api.chucknorris.io/jokes/random").then(info => console.log(info));
+                console.log(data)
             })
         })
     </script>
 </head>
-<body>
+<body style="display: flex; align-items: center; justify-content: center; flex-direction: column">
 <input type="button" id="joke" value="Get funny joke">
+<input type="button" id="joke2" value="Get another funny joke">
+<input type="button" id="joke3" value="Get another another funny joke">
+
 </body>
 </html>
 <style>
