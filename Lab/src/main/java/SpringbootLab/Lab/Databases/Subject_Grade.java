@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table
 public class Subject_Grade {
     public Subject_Grade(Subject subject, Grade grade) {
         this.subject = subject;

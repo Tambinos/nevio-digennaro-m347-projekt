@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table
-public class User {
+public class Account {
     @Id
     @GeneratedValue
     Integer id;

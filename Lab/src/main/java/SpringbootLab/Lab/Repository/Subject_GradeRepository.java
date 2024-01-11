@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Subject_GradeRepository extends JpaRepository<Subject_Grade, Integer> {
-    @Query("SELECT AVG(grade.grade), subject FROM Subject_Grade WHERE subject.id = :subjectId")
+    @Query("SELECT coalesce(AVG(grade.grade), 0) FROM Subject_Grade WHERE subject.id = :subjectId")
     Double calculateAverageGradeBySubjectId(@Param("subjectId") Integer subjectId);
 
     @Query("select count(id) from Subject")

@@ -10,17 +10,18 @@ import java.util.List;
 @RequestMapping("/api/admin/subject")
 public class SubjectAdminController {
     private final SubjectService subjectService;
+
     public SubjectAdminController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Subject createNewSubject(@RequestBody Subject subject) {
         return subjectService.add(subject);
     }
 
-    @DeleteMapping("{id}")
-    public void deleteSubject(@PathVariable int id) {
+    @DeleteMapping("/delete")
+    public void deleteSubject(@RequestBody int id) {
         subjectService.delete(id);
     }
 
@@ -29,8 +30,8 @@ public class SubjectAdminController {
         return subjectService.getAll();
     }
 
-    @PutMapping("/{id}")
-    public void editSubject(@PathVariable int id, @RequestBody String newSubject) {
+    @PutMapping("/editSubject")
+    public void editSubject(@RequestBody int id, String newSubject) {
         subjectService.edit(id, newSubject);
     }
 }

@@ -6,34 +6,35 @@ import SpringbootLab.Lab.Databases.Subject_Grade;
 import SpringbootLab.Lab.Service.Subject_GradeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/grades")
 public class Subject_GradeController {
-    private final Subject_GradeService gradeService;
+    private final Subject_GradeService subject_gradeService;
 
-    public Subject_GradeController(Subject_GradeService gradeService) {
-        this.gradeService = gradeService;
+    public Subject_GradeController(Subject_GradeService subject_gradeService) {
+        this.subject_gradeService = subject_gradeService;
     }
 
     @PostMapping("/createNewGrade")
-    public Subject_Grade createNewGrade(@RequestBody Grade grade,Subject subject) {
-
-        return gradeService.add(grade,subject);
+    public Subject_Grade createNewGrade(@RequestBody Subject_Grade subject_grade) {
+            return subject_gradeService.add(subject_grade);
     }
-    @DeleteMapping("/{id}")
-    public void deleteSubject(@PathVariable Integer id) {
-        gradeService.delete(id);
+    @DeleteMapping("/delete")
+    public void deleteSubject(@RequestBody Integer id) {
+        subject_gradeService.delete(id);
     }
-    @PutMapping("/{id}")
-    public void editSubject(@PathVariable Integer id,@RequestBody Grade grade) {
-        gradeService.edit(id,grade);
+    @PutMapping("/edit")
+    public void editSubject(@RequestBody Integer id, Grade grade) {
+        subject_gradeService.edit(id,grade);
     }
     @GetMapping("/avgGrade")
     public double avgGrade(@RequestBody Subject subject) {
-        return gradeService.getAVG(subject);
+        return subject_gradeService.getAVG(subject);
     }
     @GetMapping("/report")
-    public String[] report() {
-        return gradeService.report();
+    public List<String> report() {
+        return subject_gradeService.report();
     }
 }
