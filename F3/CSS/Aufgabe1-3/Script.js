@@ -12,30 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }, 10)
     })
-    //  let myTimeOut = setInterval(function () {
-    //     console.log("Small")
-    //
-    //     if (document.getElementById("rightSide").getBoundingClientRect().width <= 825.6){
-    //         document.getElementById("rightSide").style.visibility = "hidden";
-    //         document.getElementById("listWithLinks").style.display = "flex";
-    //         document.getElementById("rightSide").style.fontSize = "20px";
-    //         const buttonToShowLinks = document.createElement("button");
-    //         buttonToShowLinks.innerText = "☰";
-    //         buttonToShowLinks.id = "buttonToShowLinks";
-    //         buttonToShowLinks.style.background = "black"
-    //         buttonToShowLinks.style.color = "white";
-    //         buttonToShowLinks.style.visibility =
-    //         document.getElementById("rightSide").add(buttonToShowLinks);
-    //         clearInterval(myTimeOut);
-    //         buttonToShowLinks.addEventListener("click", function () {
-    //
-    //         })
-    //         document.body.appendChild(buttonToShowLinks);
-    //     }else {
-    //         document.getElementById("rightSide").style.visibility = "visible";
-    //
-    //     }
-    // },10)
 })
 
 

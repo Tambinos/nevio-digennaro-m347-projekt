@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table
+@Table(name = "all_subjects")
 public class Subject {
     @Id
     @GeneratedValue

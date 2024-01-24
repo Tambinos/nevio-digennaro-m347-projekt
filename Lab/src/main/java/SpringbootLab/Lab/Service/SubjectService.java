@@ -1,9 +1,6 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.Grade;
 import SpringbootLab.Lab.Databases.Subject;
-import SpringbootLab.Lab.Databases.Subject_Grade;
-import SpringbootLab.Lab.Repository.GradeRepository;
 import SpringbootLab.Lab.Repository.SubjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +14,11 @@ public class SubjectService {
         this.subjectRepository = subjectRepository;
     }
 
-    public Subject add(Subject subject) {
-        if (contains(subject) != null){
-            return new Subject("Already exist");
+    public void add(Subject subject) {
+        if (contains(subject) != null) {
         }
         subject.setSubject(subject.getSubject().toUpperCase());
-        return subjectRepository.save(subject);
+        subjectRepository.save(subject);
     }
 
     public void delete(int id) {
@@ -39,16 +35,17 @@ public class SubjectService {
         return subjectRepository.findAll();
     }
 
-    public Subject contains(Subject subject){
-        Subject [] contains = new Subject[1];
+    public Subject contains(Subject subject) {
+        Subject[] contains = new Subject[1];
         subjectRepository.findAll().forEach(s -> {
-            if (s.getSubject().equalsIgnoreCase(subject.getSubject())){
+            if (s.getSubject().equalsIgnoreCase(subject.getSubject())) {
                 contains[0] = s;
             }
         });
         return contains[0];
     }
-    public Subject get(int id){
-        return subjectRepository.getById(id);
+
+    public Subject get(int id) {
+        return subjectRepository.findById(id).get();
     }
 }

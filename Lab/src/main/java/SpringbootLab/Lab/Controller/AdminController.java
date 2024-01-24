@@ -1,5 +1,6 @@
 package SpringbootLab.Lab.Controller;
 
+import SpringbootLab.Lab.DTO.SubjectDto;
 import SpringbootLab.Lab.Databases.Subject;
 import SpringbootLab.Lab.Service.SubjectService;
 import org.springframework.web.bind.annotation.*;
@@ -8,16 +9,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/subject")
-public class SubjectAdminController {
+public class AdminController {
     private final SubjectService subjectService;
 
-    public SubjectAdminController(SubjectService subjectService) {
+    public AdminController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
     @PostMapping("/create")
-    public Subject createNewSubject(@RequestBody Subject subject) {
-        return subjectService.add(subject);
+    public void createNewSubject(@RequestBody Subject subject) {
+        subjectService.add(subject);
     }
 
     @DeleteMapping("/delete")
@@ -31,7 +32,8 @@ public class SubjectAdminController {
     }
 
     @PutMapping("/editSubject")
-    public void editSubject(@RequestBody int id, String newSubject) {
-        subjectService.edit(id, newSubject);
+    public void editSubject(@RequestBody SubjectDto subjectDto) {
+        subjectService.edit(subjectDto.getId(), subjectDto.getSubject()
+        );
     }
 }

@@ -139,6 +139,7 @@ main {
     width: 180px;
     height: 100%;
     display: flex;
+    position: sticky;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -179,6 +180,7 @@ html {
     justify-content: start;
     flex-direction: row;
     font-size: 13px;
+    border-bottom: white 1px solid;
 }
 
 .divNavPic {
@@ -230,7 +232,7 @@ html {
     background-color: rgba(255, 255, 255, 1);
 }
 
-#rightNav:hover {
+.contact:hover {
     background-color: rgba(245, 245, 245, 1);
 }
 
@@ -428,4 +430,21 @@ body {
 
 #absenzenAntrag {
     font-size: 15px;
+}
+
+#cockpitText {
+    background-color: white;
+    height: 50px;
+    display: flex;
+    align-items: center
+}
+#colorInWhiteBoxVisumLogo {
+    filter: invert(20%) sepia(99%) saturate(1912%) hue-rotate(208deg) brightness(100%) contrast(92%);
+}
+
+#colorInWhiteBoxAbsenzenLogo {
+    filter: invert(57%) sepia(59%) saturate(4885%) hue-rotate(185deg) brightness(100%) contrast(91%);
+}
+#foldContainer{
+    flex-direction: column;
 }

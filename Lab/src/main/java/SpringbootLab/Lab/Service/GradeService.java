@@ -1,13 +1,12 @@
 package SpringbootLab.Lab.Service;
 
 import SpringbootLab.Lab.Databases.Grade;
-import SpringbootLab.Lab.Databases.Subject;
-import SpringbootLab.Lab.Databases.Subject_Grade;
 import SpringbootLab.Lab.Repository.GradeRepository;
-import SpringbootLab.Lab.Repository.SubjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class GradeService {
     public GradeRepository gradeRepository;
@@ -25,7 +24,7 @@ public class GradeService {
     }
 
     public void edit(int id, double newGrade) {
-        gradeRepository.findById(id).get().setGrade(newGrade);
+        gradeRepository.getOne(id).setGrade(newGrade);
     }
 
     public List<Grade> getAll() {
@@ -41,6 +40,6 @@ public class GradeService {
         return contains[0];
     }
     public Grade get(int id){
-        return gradeRepository.getById(id);
+        return gradeRepository.findById(id).get();
     }
 }

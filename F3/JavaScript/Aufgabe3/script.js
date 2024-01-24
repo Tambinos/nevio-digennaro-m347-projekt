@@ -1,4 +1,3 @@
-
 let amountOfFlakes = 100;
 let spawnRate = 100;
 document.addEventListener("DOMContentLoaded", function () {
@@ -6,28 +5,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createCircle() {
         const circle = document.createElement("div");
-        circle.className = "circle";
+        circle.className = "softRain";
         circle.style.left = `${Math.random() * window.innerWidth}px`;
         container.appendChild(circle);
-
         circle.addEventListener("animationiteration", () => {
             container.removeChild(circle);
         });
     }
-
     setInterval(function () {
-        if (container.getElementsByClassName("circle").length < amountOfFlakes) {
+        if (container.getElementsByClassName("softRain").length < amountOfFlakes) {
             createCircle();
-            console.log("Created")
         }
-        console.log("Created")
 
     }, spawnRate)
     setInterval(function () {
         let date = new Date();
-        document.getElementById("stundenZeiger").style.rotate = date.getHours()*30+date.getMinutes()*0.5+date.getSeconds()*0.00833333+"deg";
-        document.getElementById("minutenZeiger").style.rotate = date.getMinutes()*6+date.getSeconds()*0.1+"deg";
-        document.getElementById("sekundenZeiger").style.rotate = date.getSeconds()*6+"deg";
-
+        document.getElementById("stundenZeiger").style.rotate = date.getHours() * 30 + date.getMinutes() * 0.5 + date.getSeconds() * 0.00833333 + "deg";
+        document.getElementById("minutenZeiger").style.rotate = date.getMinutes() * 6 + date.getSeconds() * 0.1 + date.getMilliseconds() * 0.0001 + "deg";
+        document.getElementById("sekundenZeiger").style.rotate = date.getSeconds() * 6 + date.getMilliseconds() * 0.006 + "deg";
     })
 })

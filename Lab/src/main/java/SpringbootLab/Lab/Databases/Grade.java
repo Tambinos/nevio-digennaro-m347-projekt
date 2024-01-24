@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "all_grades")
 @NoArgsConstructor
 public class Grade {
     @Id

@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="Main.css">
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="script.js"></script>
 </head>
 <body style="height: 100%; width: 100%; margin: 0 0 0 0">
 <header>
@@ -13,7 +14,7 @@
         </div>
         <p id="day">24</p>
         <div id="date">
-            <p class="listDate">Donnerstag</p>
+            <p id="weekday" class="listDate">Donnerstag</p>
             <p class="listDate">März</p>
             <p class="listDate">KW 12</p>
         </div>
@@ -25,8 +26,8 @@
         </div>
         <div id="divAbwesenheit" class="whiteHover divHeaderText">
             <div>
-                <p>Grund unbekannt(999)</p>
-                <p>JBT Informatik Bern/1/1</p>
+                <p id="abwesenheitReason">Grund unbekannt(999)</p>
+                <p id="abwesenheitOrg">JBT Informatik Bern/1/1</p>
             </div>
             <div>
                 <p id="abwesenheitDauer">8:50</p>
@@ -64,7 +65,7 @@
                     <p style="color: rgb(211, 47, 47); margin-top: -10px">Abwesend</p>
                 </div>
             </div>
-            <div>
+            <div id="sidebarItemsContainer">
                 <div id="divCockpit" class="divNavText">
                     <div class="divNavPic">
                         <img class="navPic" alt="image not found" src="Pictures/cockpit.png">
@@ -83,6 +84,7 @@
                     </div>
                     <p>Einsatzplan</p>
                 </div>
+
                 <div class="divNavText">
                     <div class="divNavPic">
                         <img class="navPic" alt="image not found" src="Pictures/abfragen.svg">
@@ -92,48 +94,51 @@
                         <img src="Pictures/pfeil_oben.svg" alt="image not found" class="navPic" id="arrowTop">
                     </div>
                 </div>
-                <div id="divFold">
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/einsatzplan.svg">
+                <div id="divFoldContainer">
+                    <div id="divFold">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/einsatzplan.svg">
+                            </div>
+                            <p>Planungsliste</p>
                         </div>
-                        <p>Planungsliste</p>
-                    </div>
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                            </div>
+                            <p>Tagesübersicht</p>
                         </div>
-                        <p>Tagesübersicht</p>
-                    </div>
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                            </div>
+                            <p>Buchungsliste</p>
                         </div>
-                        <p>Buchungsliste</p>
-                    </div>
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                            </div>
+                            <p>Zeitwertliste</p>
                         </div>
-                        <p>Zeitwertliste</p>
-                    </div>
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/saldo.svg">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/saldo.svg">
+                            </div>
+                            <p>Saldoübersicht</p>
                         </div>
-                        <p>Saldoübersicht</p>
-                    </div>
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                            </div>
+                            <p>Spesenwertliste</p>
                         </div>
-                        <p>Spesenwertliste</p>
-                    </div>
-                    <div class="divNavText fold">
-                        <div class="divNavPic">
-                            <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                        <div class="divNavText fold">
+                            <div class="divNavPic">
+                                <img class="navPic" alt="image not found" src="Pictures/buchung.svg">
+                            </div>
+                            <p>Auftragsauswertung</p>
                         </div>
-                        <p>Auftragsauswertung</p>
+
                     </div>
                 </div>
                 <div class="divNavText">
@@ -143,6 +148,7 @@
                     <p>Berichte</p>
                 </div>
             </div>
+
         </div>
         <div id="leftNavFooter">
             <p>©2023 RTM Systems AG
@@ -152,6 +158,7 @@
         </div>
     </nav>
     <article id="content">
+        <div id="cockpitText"><h3>Cockpit</h3></div>
         <div id="logosContainer">
             <div class="logoContainer">
                 <img id="editLogo" src="Pictures/edit.svg" alt="image not found">
@@ -172,34 +179,34 @@
             <div class="cardContainer">
                 <div id="crackheadContainer">
                     <div id="crackheadStatus">
-                        <h1>SBB Crackhead</h1>
-                        <p>Abwesend<br>
-                            Grund unbekannt<br>
-                            Mi 23.03.2022 00.00
-                        </p>
+                        <h1 id="userDisplayname">SBB Crackhead</h1>
+                        <p id="crackheadStatusAvailability">Abwesend</p>
+                        <p id="crackheadStatusReason">Grund unbekannt</p>
+                        <p id="crackheadStatusDate">Mi 23.03.2022 00.00</p>
                     </div>
                     <img id="profilePic" src="Pictures/avatar.svg" alt="image not found">
                 </div>
                 <div class="card">
                     <div class="cardHeader">
-                        <div class="cardTitle">
-                            <h1>Saldoübersicht</h1>
+                        <div class="cardTitleDiv">
+                            <h1 class="cardTitle">Saldoübersicht</h1>
                         </div>
                         <div class="refreshLogoContainer">
                             <img class="refreshLogo" src="Pictures/refresh.svg" alt="image not found">
                         </div>
                     </div>
                     <div class="cardContent">
+
                         <img class="requestLogo" src="Pictures/request.svg" alt="image not found">
-                        <p>21</p>
+                        <p class="amount">21</p>
                     </div>
                 </div>
             </div>
             <div class="cardContainer">
                 <div class="card">
                     <div class="cardHeader">
-                        <div class="cardTitle">
-                            <h1>Personen</h1>
+                        <div class="cardTitleDiv">
+                            <h1 class="cardTitle">Personen</h1>
                         </div>
                         <div class="refreshLogoContainer">
                             <img class="refreshLogo" src="Pictures/refresh.svg" alt="image not found">
@@ -207,13 +214,13 @@
                     </div>
                     <div class="cardContent">
                         <img class="requestLogo" src="Pictures/request.svg" alt="image not found">
-                        <p>21</p>
+                        <p class="amount">21</p>
                     </div>
                 </div>
                 <div class="card blueColor">
                     <div class="cardHeader">
-                        <div class="cardTitle">
-                            <h1>Absenzen</h1>
+                        <div class="cardTitleDiv">
+                            <h1 class="cardTitle">Absenzen</h1>
                         </div>
                         <div class="refreshLogoContainer">
                             <img class="refreshLogo" src="Pictures/refresh.svg" alt="image not found">
@@ -221,8 +228,9 @@
                     </div>
                     <div id="absenzenContent" class="cardContent">
                         <div id="absenzen">
-                            <img class="requestLogo" src="Pictures/request.svg" alt="image not found">
-                            <p>0</p>
+                            <img class="requestLogo" id="colorInWhiteBoxAbsenzenLogo" src="Pictures/request.svg"
+                                 alt="image not found">
+                            <p class="amount"> 0</p>
                         </div>
                         <div id="absenzenAntrag">
                             <p>Anträge</p>
@@ -233,22 +241,23 @@
             <div class="cardContainer">
                 <div class="card darkblueColor">
                     <div class="cardHeader">
-                        <div class="cardTitle">
-                            <h1>Visum</h1>
+                        <div class="cardTitleDiv">
+                            <h1 class="cardTitle">Visum</h1>
                         </div>
                         <div class="refreshLogoContainer">
                             <img class="refreshLogo" src="Pictures/refresh.svg" alt="image not found">
                         </div>
                     </div>
                     <div class="cardContent">
-                        <img class="requestLogo" src="Pictures/request.svg" alt="image not found">
-                        <p>0</p>
+                        <img class="requestLogo" id="colorInWhiteBoxVisumLogo" src="Pictures/request.svg"
+                             alt="image not found">
+                        <p class="amount">0</p>
                     </div>
                 </div>
                 <div class="card violet">
                     <div class="cardHeader">
-                        <div class="cardTitle">
-                            <h1>Warnungen</h1>
+                        <div class="cardTitleDiv">
+                            <h1 class="cardTitle">Warnungen</h1>
                         </div>
                         <div class="refreshLogoContainer">
                             <img class="refreshLogo" src="Pictures/refresh.svg" alt="image not found">
@@ -256,15 +265,15 @@
                     </div>
                     <div class="cardContent">
                         <img class="requestLogo" src="Pictures/warning.svg" alt="image not found">
-                        <p>0</p>
+                        <p class="amount">0</p>
                     </div>
                 </div>
             </div>
             <div class="cardContainer red">
                 <div class="card">
                     <div class="cardHeader">
-                        <div class="cardTitle">
-                            <h1>Alarme</h1>
+                        <div class="cardTitleDiv">
+                            <h1 class="cardTitle">Alarme</h1>
                         </div>
                         <div class="refreshLogoContainer">
                             <img class="refreshLogo" src="Pictures/refresh.svg" alt="image not found">
@@ -272,127 +281,125 @@
                     </div>
                     <div class="cardContent">
                         <img class="requestLogo" src="Pictures/alert.svg" alt="image not found">
-                        <p>21</p>
+                        <p class="amount">21</p>
                     </div>
                 </div>
             </div>
         </div>
     </article>
     <nav id="rightNav">
-        <div>
-            <label><input></label>
+        <div style="display: flex;height: 50px; width: 100%;border: solid 1px black; flex-direction: row ">
+            <input id="searchField" style="border: none; height: 100%; width: 80%;">
+            <img alt="Image not found" src="Pictures/suchen.svg">
         </div>
-        <div>
+        <div id="anwesenheitsDiv">
             <p id="anwesendText">Anwesend</p>
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
         </div>
-        <div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-        </div>
-        <div>
+        <div id="abwesenheitsDiv">
             <p id="abwesendText">Abwesend</p>
-        </div>
-        <div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
-            <div class="contact">
-                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">
-                <p>Bashiri Sven
-                    Arbeitszeit(0)</p>
-                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">
-            </div>
+
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
+<!--            <div class="contact">-->
+<!--                <img class="profileLogo divNavPic" src="Pictures/avatar.svg" alt="image not found">-->
+<!--                <p>Bashiri Sven-->
+<!--                    Arbeitszeit(0)</p>-->
+<!--                <img class="watchLogo divNavPic" src="Pictures/clock.svg" alt="image not found">-->
+<!--            </div>-->
         </div>
     </nav>
 </main>

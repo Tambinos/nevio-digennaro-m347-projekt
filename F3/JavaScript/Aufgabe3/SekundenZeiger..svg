@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    width="2.1407094mm"
    height="86.537888mm"
@@ -35,16 +34,31 @@
   <defs
      id="defs1" />
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-70.147653,-109.74201)">
+
+          id="layer1"
+          transform="translate(-70.147653,-109.74201)">
+    <!-- Add white line -->
+    <line
+            style="fill:none;stroke:#ffffff;stroke-width:0.55;stroke-opacity:1"
+            id="line1"
+            x1="70.422653" y1="110.01701"
+            x2="70.422653" y2="195.004895" />
+
+    <!-- Add turquoise line -->
+    <line
+            style="fill:none;stroke:#00b7a1;stroke-width:0.55;stroke-opacity:1"
+            id="line2"
+            x1="70.422653" y1="110.01701"
+            x2="70.422653" y2="195.004895" />
+
+    <!-- Original black line -->
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:#00b7a1;stroke-width:0.55;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4"
-       width="1.5907094"
-       height="85.987885"
-       x="70.422653"
-       y="110.01701" />
+            style="fill:#000000;fill-opacity:1;stroke:#00b7a1;stroke-width:0.55;stroke-dasharray:none;stroke-opacity:1"
+            id="rect4"
+            width="1.5907094"
+            height="85.987885"
+            x="70.422653"
+            y="110.01701" />
   </g>
+
 </svg>

@@ -11,13 +11,13 @@ body {
     height: 100%;
 }
 
-.circle {
+.softRain {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: white;
+    width: 10px;
+    height: 10px;
+    background-color: dodgerblue;
     border-radius: 50%;
-    animation: fall linear infinite 2s;
+    animation: fall linear infinite 1s;
 }
 
 @keyframes fall {
@@ -25,6 +25,10 @@ body {
         transform: translateY(100vh);
     }
 }
-
+.flexyRexy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
