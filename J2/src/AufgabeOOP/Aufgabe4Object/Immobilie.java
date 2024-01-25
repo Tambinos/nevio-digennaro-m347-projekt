@@ -43,5 +43,4 @@ public class Immobilie {
         }
         return null;
     }
-
 }
