@@ -5,6 +5,8 @@ import SpringbootLab.Lab.Databases.Subject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.jayway.jsonpath.JsonPath;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +17,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -48,12 +54,14 @@ class SubjectAdminControllerTest {
 
     @Test
     void testAllSubjects() throws Exception {
-        mockMvc.perform(get("/api/admin/subject/all")).andExpect(status().isOk());
+        MvcResult mvcResult = mockMvc.perform(get("/api/admin/subject/all")).andExpect(status().isOk()).andReturn();
+        String content = mvcResult.getResponse().getContentAsString();
+        Assertions.assertEquals("[{\"id\":1,\"subject\":\"FRANZ\"}]",content);
     }
 
     @Test
     void testEditSubject() throws Exception {
-        SubjectDto subject = new SubjectDto(1,"MATH");
+        SubjectDto subject = new SubjectDto(1, "MATH");
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();

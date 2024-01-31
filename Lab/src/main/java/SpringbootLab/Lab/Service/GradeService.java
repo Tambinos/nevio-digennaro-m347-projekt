@@ -16,6 +16,9 @@ public class GradeService {
     }
 
     public Grade add(Grade grade) {
+        if (grade.getGrade() > 6 || grade.getGrade() < 1){
+            return new Grade(0);
+        }
         return gradeRepository.save(grade);
     }
 
