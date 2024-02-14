@@ -1,6 +1,13 @@
+
 <button routerLink="">To Default</button>
 <div>
-  <label for="triumph">Titel: </label>
-  <input [(ngModel)]="this.bicycle.name" id="triumph" type="text">
-  <button (click)="getFavoriteBicycleImage()">Fetch Pics</button>
+  <div>
+    <button (click)="displayBicycleName()">Wie heisst mein Fahrrad?</button>
+    <button (click)="getFavoriteBicycleImage()">Mein Lieblingsfahrrad suchen</button>
+  </div>
+  <label>Titel:<input [(ngModel)]="this.bicycle.name" type="text"></label>
+  <p>Mein Lieblingsfahrrad: {{ this.bicycle.name }} </p>
+  <div style="display: flex; flex-direction:row; " *ngFor="let bicycle of favoriteBicycle; let i = index">
+    <img alt="404 No Picture" [src]="this.favoriteBicycle[i].image.thumbnailLink">
+  </div>
 </div>

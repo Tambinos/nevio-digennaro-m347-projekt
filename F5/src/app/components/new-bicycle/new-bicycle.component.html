@@ -1,0 +1,21 @@
+<button routerLink="/homeComp">To Home</button>
+<button routerLink="/BicyclesComp">Bicycles</button>
+<button routerLink="/newBicyclesComp">New Bicycles</button>
+<button routerLink="/SearchBicycleComponent">Search Bicycle</button>
+<button (click)="updateBehaviorSubejct()">Searchbar On/Off</button>
+<button [routerLink]="'/Brand/' + brandId">Brand</button>
+<label>
+  <input type="text" [(ngModel)]="brandId" placeholder="Search Bicycle Brand">
+</label>
+<div *ngIf="searchBarOnOrOff">
+  <input [formControl]="formsControl" placeholder="Searched Bicycle"/>
+</div>
+<div *ngFor="let fullBike of fullBicycles">
+  <p>Id: {{ fullBike.id }}</p>
+  <p>Name: {{ fullBike.name }}</p>
+  <p>Value: {{ fullBike.value | currency:'' }}</p>
+  <p>Brandname: {{ fullBike.brand  }}</p>
+  <p>Typename: {{ fullBike.type }}</p>
+  <p>---------------</p>
+</div>
+

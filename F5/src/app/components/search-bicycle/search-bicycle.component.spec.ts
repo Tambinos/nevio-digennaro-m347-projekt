@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultComponent } from './default.component';
+import { SearchBicycleComponent } from './search-bicycle.component';
 
-describe('DefaultComponent', () => {
-  let component: DefaultComponent;
-  let fixture: ComponentFixture<DefaultComponent>;
+describe('SearchBicycleComponent', () => {
+  let component: SearchBicycleComponent;
+  let fixture: ComponentFixture<SearchBicycleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DefaultComponent ]
+      declarations: [ SearchBicycleComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DefaultComponent);
+    fixture = TestBed.createComponent(SearchBicycleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

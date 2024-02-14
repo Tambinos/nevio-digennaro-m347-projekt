@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Bicycle, BicycleImage, GoogleCustomSearchResponse } from './interfaces';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Bicycle, BicycleImage, GoogleCustomSearchResponse} from './interfaces';
 
 @Component({
   selector: 'app-bicycle',
@@ -9,9 +9,12 @@ import { Bicycle, BicycleImage, GoogleCustomSearchResponse } from './interfaces'
 })
 
 export class BicycleComponent implements OnInit {
-  public bicycle: Bicycle = { name: '', url: '' };
+  public bicycle: Bicycle = {name: '', url: ''};
   favoriteBicycle: BicycleImage[] = [];
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient) {
+  }
+
   ngOnInit(): void {
     this.bicycle.name = 'Specialized Diverge Pro Carbon';
     this.bicycle.url =
@@ -29,9 +32,9 @@ export class BicycleComponent implements OnInit {
     this.httpClient.get<GoogleCustomSearchResponse>(url).subscribe((response: GoogleCustomSearchResponse) => {
       for (let i = 0; i < 4; i++) {
         let item: BicycleImage = response.items[i];
-        console.log(item)
         item.image.height = (200 / item.image.width) * item.image.height;
         item.image.width = 200;
+        console.log(item.image)
         this.favoriteBicycle.push(item);
       }
     });

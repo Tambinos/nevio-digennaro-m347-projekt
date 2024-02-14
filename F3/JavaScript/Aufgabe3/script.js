@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, spawnRate)
     setInterval(function () {
         let date = new Date();
-        document.getElementById("stundenZeiger").style.rotate = date.getHours() * 30 + date.getMinutes() * 0.5 + date.getSeconds() * 0.00833333 + "deg";
-        document.getElementById("minutenZeiger").style.rotate = date.getMinutes() * 6 + date.getSeconds() * 0.1 + date.getMilliseconds() * 0.0001 + "deg";
-        document.getElementById("sekundenZeiger").style.rotate = date.getSeconds() * 6 + date.getMilliseconds() * 0.006 + "deg";
+        document.getElementById("stundenZeiger").style.rotate = date.getHours() * 30 + date.getMinutes() * 0.5 + date.getSeconds() * 0.00833333 -90 + "deg";
+        document.getElementById("minutenZeiger").style.rotate = date.getMinutes() * 6 + date.getSeconds() * 0.1 + date.getMilliseconds() * 0.0001 -90+ "deg";
+        document.getElementById("sekundenZeiger").style.rotate = date.getSeconds() * 6 + date.getMilliseconds() * 0.006 -90+ "deg";
     })
 })
