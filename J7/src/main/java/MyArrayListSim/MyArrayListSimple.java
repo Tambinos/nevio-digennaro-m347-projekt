@@ -1,10 +1,17 @@
 package MyArrayListSim;
 
 
-public  class MyArrayListSimple<T> implements MyListInterfaceSimple{
+public class MyArrayListSimple<T> implements MyListInterfaceSimple {
     private Object[] content;
 
-
+    public static void main(String[] args) {
+        MyArrayListSimple myArrayListSimple = new MyArrayListSimple();
+        String ka = "adada";
+        String[] ok = {"122", "1313"};
+        myArrayListSimple.add(ok);
+        myArrayListSimple.add(ka);
+        System.out.println(myArrayListSimple.toString());
+    }
 
     @Override
     public void add(Object element) {
@@ -13,13 +20,15 @@ public  class MyArrayListSimple<T> implements MyListInterfaceSimple{
             System.arraycopy(this.content, 0, newContent, 0, content.length);
             newContent[this.content.length] = element;
             this.content = newContent;
-        }else {
+        } else {
             this.content = new Object[]{element};
         }
     }
-    public Object get(int index){
+
+    public Object get(int index) {
         return this.content[index];
     }
+
     @Override
     public Object remove(int index) throws IndexOutOfBoundsException {
         if (this.content != null) {
@@ -29,44 +38,47 @@ public  class MyArrayListSimple<T> implements MyListInterfaceSimple{
                     this.content[i] = this.content[i + 1];
                 }
                 Object[] newContent = new Object[this.content.length - 1];
-                System.arraycopy(this.content,0,newContent,0,this.content.length - 1);
+                System.arraycopy(this.content, 0, newContent, 0, this.content.length - 1);
                 this.content = newContent;
                 return toBeRemoved;
 
-            }else {
+            } else {
                 throw new IndexOutOfBoundsException();
             }
         }
         return null;
     }
+
     @Override
     public int size() {
         if (this.content == null) {
             return 0;
-        }
-        else {
+        } else {
             return this.content.length;
         }
     }
+
     @Override
     public boolean isEmpty() {
-        try{
+        try {
             Object a = this.content[0];
             return false;
-        }catch (Exception e){
+        } catch (Exception e) {
             return true;
         }
     }
+
     @Override
     public void clear() {
         this.content = new Object[]{};
     }
+
     public String toString() {
-        if (this.content == null){
+        if (this.content == null) {
             return "";
         }
         String toReturn = "";
-        for (Object obj: this.content) {
+        for (Object obj : this.content) {
             if (obj instanceof Object[]) {
                 for (Object element : (Object[]) obj) {
                     toReturn += element + ", ";
@@ -76,15 +88,5 @@ public  class MyArrayListSimple<T> implements MyListInterfaceSimple{
             }
         }
         return toReturn;
-    }
-
-
-    public static void main(String[] args) {
-        MyArrayListSimple myArrayListSimple = new MyArrayListSimple();
-        String ka = "adada";
-        String[] ok = {"122","1313"};
-        myArrayListSimple.add(ok);
-        myArrayListSimple.add(ka);
-        System.out.println(myArrayListSimple.toString());
     }
 }

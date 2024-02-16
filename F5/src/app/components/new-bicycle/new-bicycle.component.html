@@ -1,9 +1,9 @@
-<button routerLink="/homeComp">To Home</button>
-<button routerLink="/BicyclesComp">Bicycles</button>
-<button routerLink="/newBicyclesComp">New Bicycles</button>
-<button routerLink="/SearchBicycleComponent">Search Bicycle</button>
-<button (click)="updateBehaviorSubejct()">Searchbar On/Off</button>
-<button [routerLink]="'/Brand/' + brandId">Brand</button>
+<button mat-raised-button  routerLink="/homeComp">To Home</button>
+<button mat-raised-button routerLink="/BicyclesComp">Bicycles</button>
+<button mat-raised-button routerLink="/newBicyclesComp">New Bicycles</button>
+<button mat-raised-button routerLink="/SearchBicycleComponent">Search Bicycle</button>
+<button mat-raised-button (click)="updateBehaviorSubejct()">Searchbar On/Off</button>
+<button mat-raised-button [routerLink]="'/Brand/' + brandId">Brand</button>
 <label>
   <input type="text" [(ngModel)]="brandId" placeholder="Search Bicycle Brand">
 </label>

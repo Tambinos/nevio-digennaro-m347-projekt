@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        addEventListener("DOMContentLoaded", function () {
+            document.getElementById("joke").addEventListener("click", function () {
+                fetchJoke("https://api.chucknorris.io/jokes/random", "joke")
+            })
+            document.getElementById("joke2").addEventListener("click", function () {
+                fetchJoke("https://catfact.ninja/fact", "joke2")
+            })
+            document.getElementById("joke3").addEventListener("click", function () {
+                fetchJoke("http://www.boredapi.com/api/activity/", "joke3")
+            })
+            function fetchJoke(apiUrl, elementId) {
+                fetch(apiUrl).then(response => response.json())
+                    .then(data => document.getElementById(elementId).value = data.value || data.fact || data.activity)
+                    .catch(error => console.error(error))
+            }
+        })
+    </script>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; flex-direction: column">
+<input type="button" id="joke"  value="Get funny joke">
+<input type="button" id="joke2" value="Get another funny joke">
+<input type="button" id="joke3" value="Get another another funny joke">
+</body>
+</html>
+<style>
+    body {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

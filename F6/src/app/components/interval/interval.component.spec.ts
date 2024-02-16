@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContentLinkComponent } from './content-link.component';
+import { IntervalComponent } from './interval.component';
 
-describe('ContentLinkComponent', () => {
-  let component: ContentLinkComponent;
-  let fixture: ComponentFixture<ContentLinkComponent>;
+describe('IntervalComponent', () => {
+  let component: IntervalComponent;
+  let fixture: ComponentFixture<IntervalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentLinkComponent ]
+      declarations: [ IntervalComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ContentLinkComponent);
+    fixture = TestBed.createComponent(IntervalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

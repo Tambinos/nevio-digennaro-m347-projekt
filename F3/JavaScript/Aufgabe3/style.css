@@ -1,7 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
-    background-color: RGB(3,1,20);
+    background-color: black;
 }
 
 .snowfall {
@@ -13,16 +13,16 @@ body {
 
 .softRain {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: dodgerblue;
+    width: 20px;
+    height: 20px;
+    background-color: white;
     border-radius: 50%;
     animation: fall linear infinite 1s;
 }
 
 @keyframes fall {
     to {
-        transform: translateY(100vh);
+        transform: translate(20vw, 100vh);
     }
 }
 .flexyRexy{
