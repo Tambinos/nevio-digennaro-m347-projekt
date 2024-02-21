@@ -1,0 +1,14 @@
+#loginHeader{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 10vh;
+}
+#loginBody{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  height: 90vh;
+}

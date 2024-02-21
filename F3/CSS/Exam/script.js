@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     .getElementsByClassName("amount")[0].innerText = values["tiles"][i]["amount"]
                 cardsArray[i].getElementsByClassName("cardHeader")[0].getElementsByClassName("cardTitleDiv")[0]
                     .getElementsByClassName("cardTitle")[0].innerText = values["tiles"][i]["title"]
-                if (values["tiles"][i]["action"] !== null && values["tiles"][i]["action"] !== undefined) {
+                if (values["tiles"][i]["action"] ?? false) {
                     const action = document.createElement("h6")
                     action.style = "padding: 0; margin-top: 10px"
                     action.innerText = values["tiles"][i]["action"]["title"]
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const searchbarFunction = function searchBar(allActiveContacts, allNonActiveContacts) {
         const inputSearchField = document.getElementById("searchField").value
         for (let i = 0; i < allActiveContacts.length; i++) {
-            if (!allActiveContacts[i].getElementsByTagName("p")[0].innerText.includes(inputSearchField)) {
+            if (!allActiveContacts[i].getElementsByTagName("p")[0].innerText.toLowerCase().includes(inputSearchField.toLowerCase())) {
                 if (document.getElementById("anwesenheitsDiv").contains(allActiveContacts[i])) {
                     document.getElementById("anwesenheitsDiv").removeChild(allActiveContacts[i])
                 }
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         }
         for (let i = 0; i < allNonActiveContacts.length; i++) {
-            if (!(allNonActiveContacts[i].getElementsByTagName("p")[0].innerText.includes(inputSearchField))) {
+            if (!(allNonActiveContacts[i].getElementsByTagName("p")[0].innerText.toLowerCase().includes(inputSearchField.toLowerCase()))) {
                 if (document.getElementById("abwesenheitsDiv").contains(allNonActiveContacts[i])) {
                     document.getElementById("abwesenheitsDiv").removeChild(allNonActiveContacts[i])
                 }

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let numbers;
     document.getElementById("submitNumbers").addEventListener("click", function () {
-        numbers = document.getElementById("numbersField").value.split("").filter(Number)
+        numbers = document.getElementById("numbersField").value.split(",").filter(Number)
         console.log(numbers.filter(Number))
         document.getElementById("currentNumbers").innerText = "Current Numbers " + numbers
 

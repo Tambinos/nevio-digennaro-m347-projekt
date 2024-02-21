@@ -25,10 +25,28 @@ body {
         transform: translate(20vw, 100vh);
     }
 }
-.flexyRexy{
+
+.flexyRexy {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pointer {
+    z-index: 0;
+    position: absolute;
+    width: 500px;
+    filter: invert(100);
+}
+
+.circle {
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
 
 

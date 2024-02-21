@@ -5,48 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d263981-b5a8-4634-b60d-ba24890a69a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../F3/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../F3/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/F4.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aufgabe4.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../F3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../F3/CSS/Exam/RTM.html" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/CSS/Exam/RTM.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Angular Exam/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AngularexamBackend/src/main/java/AngularexamBackend/AngularexamBackend/Entities/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AngularexamBackend/src/main/java/AngularexamBackend/AngularexamBackend/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../F3/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../F7/src/app/counter.reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../F3/CSS/Exam/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/CSS/Exam/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../F3/F3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/F3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/browserconfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/normalize.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/TOC.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/css.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/extend.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/faq.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/html.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/js.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/misc.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/usage.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/humans.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/plugins.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/vendor/modernizr-3.11.2.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/site.webmanifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tile-wide.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe3/Uhr.html" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe3/Uhr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe3/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe3/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe5/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe5/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe7/SchoolSystem.html" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe7/SchoolSystem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe7/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../F3/JavaScript/Aufgabe7/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F7/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../F7/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F7/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../F7/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F7/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../F7/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F7/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../F7/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F7/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../F7/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../F7/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../F7/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,23 +48,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.typescriptcompiler",
-    "ts.external.directory.path": "/home/ndigennaro/.asdf/installs/nodejs/18.17.0/lib/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/ndigennaro/.asdf/installs/nodejs/18.17.0/lib/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -100,6 +75,7 @@
       <updated>1706687029139</updated>
       <workItem from="1706687030406" duration="159000" />
       <workItem from="1706687203037" duration="3614000" />
+      <workItem from="1708519983961" duration="61000" />
     </task>
     <servers />
   </component>

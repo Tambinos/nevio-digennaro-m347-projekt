@@ -11,70 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
         new Student("Emily", [5, 5, 5, 5, 5, 5]),
         new Student("John", [4, 4, 4, 4, 4, 4]),
         new Student("Sarah", [3, 3, 3, 3, 3, 3]),
-        new Student("Alex", [2, 2, 2, 2, 2, 2])
+        new Student("Alex", [2, 2, 2, 2, 2, 2]),
+        new Student("Michael", [1, 1, 1, 1, 1, 1]),
     ]
-
-    function getWorstStudent() {
-        return getPerformance(student)[getPerformance(student).length - 1]
-    }
-
-    function getNamesSortedByPerformance() {
-        let nameArray = new Array(getPerformance(student).length)
-        let array2d = new Array(getPerformance(student).length);
-        for (let i = 0; i < getPerformance(student).length; i++) {
-            array2d[i] = getPerformance(student)[i].split(" ")
-            nameArray[i] = array2d[i][0]
-        }
-        return nameArray;
-    }
-
-    document.getElementById("getPerformance").addEventListener("click", function () {
-        const button = document.getElementById("getPerformance");
-        document.getElementById("labelPerformance").innerText = getPerformance()
-        document.getElementById("labelPerformance").appendChild(button);
-    })
-    document.getElementById("getBest").addEventListener("click", function () {
-        const button = document.getElementById("getBest");
-        document.getElementById("bestStudentLabel").innerText = getBestStudent()
-        document.getElementById("bestStudentLabel").appendChild(button);
-    })
-    document.getElementById("getWorst").addEventListener("click", function () {
-        const button = document.getElementById("getWorst");
-        document.getElementById("worstStudentLabel").innerText = getWorstStudent()
-        document.getElementById("worstStudentLabel").appendChild(button);
-    })
-    document.getElementById("namesSortedByPerformance").addEventListener("click", function () {
-        const button = document.getElementById("namesSortedByPerformance");
-        document.getElementById("namesSortedByPerformanceLabel").innerText = getNamesSortedByPerformance()
-        document.getElementById("namesSortedByPerformanceLabel").appendChild(button);
-    })
-
-    function getPerformance() {
-        let performanceArray = new Array(student.length);
-        let gradeArray = new Array(student.length)
-        for (let i = 0; i < student.length; i++) {
-            gradeArray[i] = getAVG(student[i].grades)
-        }
-        gradeArray.sort().reverse()
-        for (let i = 0; i < gradeArray.length; i++) {
-            student.forEach(s => {
-                if (getAVG(s.grades) === gradeArray[i]) {
-                    performanceArray[i] = s.name + " " + gradeDescription(gradeArray[i]) + gradeArray[i]
-                }
-            })
-        }
-        return performanceArray
-    }
-
-    function getBestStudent() {
-        return getPerformance()[0]
-    }
-
-    function getAVG(grades) {
-        let sum = 0;
-        grades.forEach(g => sum += parseInt(g))
-        return sum / grades.length;
-    }
 
     function gradeDescription(grade) {
         if (grade === 6) {
@@ -95,10 +34,37 @@ document.addEventListener("DOMContentLoaded", function () {
         return "Mid: ";
     }
 
-    document.getElementById("submitUser").addEventListener("click", function newStudent() {
+    function getAVG(grades) {
+        let sum = 0;
+        grades.forEach(g => sum += parseInt(g))
+        return sum / grades.length;
+    }
+
+    function getPerformance() {
+        let performanceArray = []
+        student.sort((a, b) => getAVG(b.grades) - getAVG(a.grades))
+        for (let i = 0; i < student.length; i++) {
+            performanceArray.push("Name: " + student[i].name + " Average Grade: " + getAVG(student[i].grades) + " Grade description: " + gradeDescription(getAVG(student[i].grades)) + "\n")
+        }
+        return performanceArray
+    }
+
+    function getWorstStudent() {
+        return getPerformance()[getPerformance(student).length - 1]
+    }
+
+    function getBestStudent() {
+        return getPerformance()[0]
+    }
+
+    function getNamesSortedByPerformance() {
+        student.sort((a, b) => getAVG(b.grades) - getAVG(a.grades))
+        return student.map(s => s.name);
+    }
+
+    document.getElementById("submitUser").addEventListener("click", newStudent => {
         let name = document.getElementById("name").value
         let grades = document.getElementById("grades").value.split(",").filter(Number)
-        console.log(grades)
         student.forEach(s => {
             if (s.name === name) {
                 throw new Error();
@@ -108,20 +74,29 @@ document.addEventListener("DOMContentLoaded", function () {
             if (grades[i] > 6 || grades[i] < 1) {
                 throw new Error();
             }
-            grades[i] =  parseFloat(grades[i]).toFixed(1);
+            grades[i] = parseFloat(grades[i]).toFixed(1);
+            student.push(new Student(name, grades))
         }
-        redefineArray();
-
-        function redefineArray() {
-            const newStudent = new Array(student.length + 1)
-            for (let i = 0; i < student.length; i++) {
-                newStudent[i] = student[i]
-            }
-            newStudent[student.length] = new Student(name, grades)
-            student = newStudent;
-        }
-
-        console.log(student)
     })
 
+    document.getElementById("getPerformance").addEventListener("click", function () {
+        const button = document.getElementById("getPerformance");
+        document.getElementById("divPerformance").innerText = getPerformance()
+        document.getElementById("divPerformance").appendChild(button);
+    })
+    document.getElementById("getBest").addEventListener("click", function () {
+        const button = document.getElementById("getBest");
+        document.getElementById("bestStudentDiv").innerText = getBestStudent()
+        document.getElementById("bestStudentDiv").appendChild(button);
+    })
+    document.getElementById("getWorst").addEventListener("click", function () {
+        const button = document.getElementById("getWorst");
+        document.getElementById("worstStudentDiv").innerText = getWorstStudent()
+        document.getElementById("worstStudentDiv").appendChild(button);
+    })
+    document.getElementById("namesSortedByPerformance").addEventListener("click", function () {
+        const button = document.getElementById("namesSortedByPerformance");
+        document.getElementById("namesSortedByPerformanceDiv").innerText = getNamesSortedByPerformance()
+        document.getElementById("namesSortedByPerformanceDiv").appendChild(button);
+    })
 })

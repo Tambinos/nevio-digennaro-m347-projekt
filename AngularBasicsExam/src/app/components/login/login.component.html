@@ -1,0 +1,8 @@
+<div id="loginHeader">
+  <p>Login</p>
+</div>
+<div id="loginBody">
+  <input type="text" [(ngModel)]="this.username" class="form-control" name="username" placeholder="Username">
+  <input type="password" [(ngModel)]="this.password" class="form-control" name="password" placeholder="Password">
+  <button (click)="checkLogin()" type="submit" class="btn btn-primary">Log In</button>
+</div>

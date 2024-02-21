@@ -1,0 +1,5 @@
+<div class="header">
+  <img routerLink="/profile" class="profilePicture" src="{{this.activeUser?.urlToProfilePicture}}" alt="image Not Found">
+  <p>Logged in as: {{activeUser?.preName}}</p>
+    <button (click)="logout()">Logout</button>
+</div>
