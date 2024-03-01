@@ -1,0 +1,19 @@
+<button routerLink="/dashboard">Return To Dashboard</button>
+<div class="bookings-container">
+  <div *ngFor="let booking of bookings"
+       (click)="this.bookingService.setFocusedBooking(booking);
+                this.bookingService.setIndexOfFocusedBooking(bookings.indexOf(booking))"
+       [ngStyle]="{'background-color': booking.timeCode.color}"
+       class="booking"
+       routerLink="/editBooking">
+    <p class="timeCode">{{ booking.timeCode.name }}</p>
+    <p class="project">{{ booking.project.name }}</p>
+    <div style="display: flex;justify-content: space-between">
+      <p class="duration">{{ booking.hours }} H</p>
+      <button [ngStyle]="{'background-color': booking.timeCode.color}" (click)="deleteBooking(booking)" class="delete">
+        X
+      </button>
+    </div>
+    <p style="font-size: 0.5rem; color: slategrey" *ngIf="booking.lastModified !== ''">Edited on: {{booking.lastModified}}</p>
+  </div>
+</div>

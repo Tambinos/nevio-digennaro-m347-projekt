@@ -1,0 +1,30 @@
+<div class="booking-form-container">
+  <form id="bookingForm">
+    <h2>Create a Booking</h2>
+    <div class="form-group">
+      <label for="bookingDate">Date:</label>
+      <input type="date" id="bookingDate" [(ngModel)]="date" name="bookingDate" required>
+    </div>
+    <div class="form-group">
+      <label for="bookingStartTime">Start Time: </label>
+      <input type="time" id="bookingStartTime"  [(ngModel)]="this.startTimeString" name="bookingStartTime" required>
+    </div>
+    <div class="form-group">
+      <label for="bookingHours">Hours:</label>
+      <input type="number" [(ngModel)] ="this.hours" id="bookingHours" name="bookingHours" min="1" max="24" required>
+    </div>
+    <div class="form-group">
+      <label for="projectName">Project:</label>
+      <select [(ngModel)]="project" id="projectName"  name="project">
+        <option *ngFor="let project of projects" >{{ project.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="timeCode">Time Code:</label>
+      <select [(ngModel)]="timeCode" id="timeCode" name="timeCode">
+        <option *ngFor="let timeCode of this.timeCodes">{{ timeCode.name }}</option>
+      </select>
+    </div>
+    <button (click)="createBooking()" routerLink="/dashboard" type="submit">Create Booking</button>
+  </form>
+</div>

@@ -1,5 +1,20 @@
 <div class="header">
-  <img routerLink="/profile" class="profilePicture" src="{{this.activeUser?.urlToProfilePicture}}" alt="image Not Found">
-  <p>Logged in as: {{this.activeUser?.preName}}</p>
-  <button (click)="logout()">Logout</button>
+  <div class="header-item">
+    <img routerLink="/dashboard" class="profile-picture" src="{{this.activeUser.urlToProfilePicture}}" alt="Profile Picture">
+  </div>
+  <div class="header-item">
+    <p>Logged in as: {{ this.activeUser.preName }}</p>
+  </div>
+  <div class="header-item">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="body">
+  <div class="body-item">
+    <button class="update-btn" (click)="updateProfilePicture()">Update Profile Picture</button>
+  </div>
+  <div class="body-item">
+    <button class="change-password-btn" (click)="updatePassword()">Change Password</button>
+  </div>
 </div>

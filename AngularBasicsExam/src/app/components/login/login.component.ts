@@ -18,11 +18,15 @@ export class LoginComponent {
   loginService: LoginService;
   router: Router;
   numberOfFailedAttempts: number = 0;
+
   constructor(loginService: LoginService, router: Router) {
     this.username = "";
     this.password = "";
     this.loginService = loginService;
     this.router = router;
+    if (this.loginService.getById(this.loginService.getLoggedInUserId()) ?? false) {
+      router.navigate(['/dashboard']);
+    }
   }
 
 
@@ -30,11 +34,19 @@ export class LoginComponent {
     if (this.numberOfFailedAttempts < 3) {
       this.loginService.getMembers().forEach(member => {
         if (member.username === this.username && member.password === this.password) {
-          this.loginService.setLoggedInUser(this.loginService.getMemberById(member.id));
+          this.loginService.setLoggedInUserId(member.id);
+          window.localStorage.setItem('activeUser', JSON.stringify(member));
           this.router.navigate(['/dashboard'])
         }
-        this.numberOfFailedAttempts++;
       })
+      this.loginService.superiors.forEach(superior => {
+        if (superior.username === this.username && superior.password === this.password) {
+          this.loginService.setLoggedInUserId(superior.id);
+          window.localStorage.setItem('activeUser', JSON.stringify(superior));
+          this.router.navigate(['/dashboard'])
+        }
+      })
+      this.numberOfFailedAttempts++;
     }else {
       alert("You have exceeded the number of login attempts. Please try again later.")
     }
