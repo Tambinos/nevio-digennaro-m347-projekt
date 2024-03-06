@@ -1,16 +1,14 @@
-import {Component} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
-import {LoginService} from "../../service/login.service";
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    FormsModule
-  ],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   username: string;
@@ -20,35 +18,43 @@ export class LoginComponent {
   numberOfFailedAttempts: number = 0;
 
   constructor(loginService: LoginService, router: Router) {
-    this.username = "";
-    this.password = "";
+    this.username = '';
+    this.password = '';
     this.loginService = loginService;
     this.router = router;
-    if (this.loginService.getById(this.loginService.getLoggedInUserId()) ?? false) {
+    if (
+      this.loginService.getById(this.loginService.getLoggedInUserId()) ??
+      false
+    ) {
       router.navigate(['/dashboard']);
     }
   }
 
-
   checkLogin() {
     if (this.numberOfFailedAttempts < 3) {
-      this.loginService.getMembers().forEach(member => {
-        if (member.username === this.username && member.password === this.password) {
+      this.loginService.members.forEach((member) => {
+        if (
+          member.username === this.username &&
+          member.password === this.password
+        ) {
           this.loginService.setLoggedInUserId(member.id);
-          window.localStorage.setItem('activeUser', JSON.stringify(member));
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/dashboard']);
         }
-      })
-      this.loginService.superiors.forEach(superior => {
-        if (superior.username === this.username && superior.password === this.password) {
+      });
+      this.loginService.superiors.forEach((superior) => {
+        if (
+          superior.username === this.username &&
+          superior.password === this.password
+        ) {
           this.loginService.setLoggedInUserId(superior.id);
-          window.localStorage.setItem('activeUser', JSON.stringify(superior));
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/dashboard']);
         }
-      })
+      });
       this.numberOfFailedAttempts++;
-    }else {
-      alert("You have exceeded the number of login attempts. Please try again later.")
+    } else {
+      alert(
+        'You have exceeded the number of login attempts. Please try again later.',
+      );
     }
   }
 }

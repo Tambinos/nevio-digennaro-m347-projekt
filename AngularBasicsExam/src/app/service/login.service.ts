@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Member} from "../entity/Member";
-import {Superior} from "../entity/Superior";
+import { Injectable } from '@angular/core';
+import { Member } from '../entity/Member';
+import { Superior } from '../entity/Superior';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-  members: Member[] = []
-  superiors: Superior[] = []
+  members: Member[] = [];
+  superiors: Superior[] = [];
   adminIds: number[] = [1];
 
   constructor() {
@@ -15,40 +15,49 @@ export class LoginService {
       this.members = JSON.parse(window.localStorage.getItem('Members') ?? '');
     }
     if (window.localStorage.getItem('Superiors')) {
-      this.superiors = JSON.parse(window.localStorage.getItem('Superiors') ?? '');
+      this.superiors = JSON.parse(
+        window.localStorage.getItem('Superiors') ?? '',
+      );
     }
     if (this.members.length === 0) {
       this.members = [
-        new Member(1,
+        new Member(
+          1,
           'Max',
           'Mustermann',
           'max',
           '1234',
           'IT',
           [],
-          'https://www.w3schools.com/howto/img_avatar.png'),
-        new Member(2,
+          'https://www.w3schools.com/howto/img_avatar.png',
+        ),
+        new Member(
+          2,
           'Erika',
           'Musterfrau',
           'erika',
           '1234',
           'HR',
           [],
-          'https://www.w3schools.com/howto/img_avatar2.png'),
-        new Member(3,
+          'https://www.w3schools.com/howto/img_avatar2.png',
+        ),
+        new Member(
+          3,
           'Hans',
           'Muster',
           'hans',
           '1234',
           'IT',
           [],
-          'https://www.w3schools.com/howto/img_avatar1.png'),
-      ]
+          'https://www.w3schools.com/howto/img_avatar1.png',
+        ),
+      ];
       window.localStorage.setItem('Members', JSON.stringify(this.members));
     }
     if (this.superiors.length === 0) {
       this.superiors = [
-        new Superior(4,
+        new Superior(
+          4,
           'Alex',
           'Manfred',
           'alex',
@@ -56,15 +65,16 @@ export class LoginService {
           'IT',
           [],
           'https://www.w3schools.com/howto/img_avatar.png',
-          [])
-      ]
+          [],
+        ),
+      ];
       window.localStorage.setItem('Superiors', JSON.stringify(this.superiors));
     }
     window.localStorage.setItem('AdminIds', JSON.stringify(this.adminIds));
   }
 
   getMembers(): Member[] {
-    return JSON.parse(window.localStorage.getItem('Members') ?? '')
+    return JSON.parse(window.localStorage.getItem('Members') ?? '');
   }
 
   setMembers(user: Member[] | Superior[]) {
@@ -79,17 +89,20 @@ export class LoginService {
   }
 
   removeMember(id: number) {
-    this.members = this.members.filter(member => member.id !== id);
+    this.members = this.members.filter((member) => member.id !== id);
     window.localStorage.setItem('Members', JSON.stringify(this.members));
     this.updateSuperiorsMembers();
   }
 
   replaceSuperiorMember(id: number, newMember: Member | Superior) {
     if (!(newMember instanceof Superior)) {
-      this.members[this.members.indexOf(this.getById(newMember.id) as Member)] = newMember
+      this.members[this.members.indexOf(this.getById(newMember.id) as Member)] =
+        newMember;
       this.setMembers(this.members);
     } else {
-      this.superiors[this.superiors.indexOf(this.getById(newMember.id) as Superior)] = newMember
+      this.superiors[
+        this.superiors.indexOf(this.getById(newMember.id) as Superior)
+      ] = newMember;
       this.setSuperiors(this.superiors);
     }
     this.updateSuperiorsMembers();
@@ -109,30 +122,39 @@ export class LoginService {
   }
 
   removeSuperior(id: number) {
-    this.superiors = this.superiors.filter(superior => superior.id !== id);
+    this.superiors = this.superiors.filter((superior) => superior.id !== id);
     window.localStorage.setItem('Superiors', JSON.stringify(this.superiors));
   }
 
   removeSuperiorMember(id: number, memberId: number) {
     this.superiors
-      .find(superior => superior.id === id)?.members
-      .splice(this.superiors.
-      find(superior => superior.id === id)?.members.
-      findIndex(member => member.id === memberId) as number, 1);
+      .find((superior) => superior.id === id)
+      ?.members.splice(
+        this.superiors
+          .find((superior) => superior.id === id)
+          ?.members.findIndex((member) => member.id === memberId) as number,
+        1,
+      );
     window.localStorage.setItem('Superiors', JSON.stringify(this.superiors));
   }
 
   addSuperiorMember(id: number, memberId: number) {
-    if (this.getSuperiors().find(superior => superior.id === id)?.members.filter(member => member.id === memberId).length === 0) {
-      this.superiors.find(superior => superior.id === id)?.members.push(this.getById(memberId) as Member);
+    if (
+      this.getSuperiors()
+        .find((superior) => superior.id === id)
+        ?.members.filter((member) => member.id === memberId).length === 0
+    ) {
+      this.superiors
+        .find((superior) => superior.id === id)
+        ?.members.push(this.getById(memberId) as Member);
       window.localStorage.setItem('Superiors', JSON.stringify(this.superiors));
-    }else {
+    } else {
       alert('Member already in Superior');
     }
   }
 
   isSuperior(id: number): Superior {
-    return this.superiors.find(superior => superior.id === id) as Superior;
+    return this.superiors.find((superior) => superior.id === id) as Superior;
   }
 
   updateSuperiorsMembers() {
@@ -141,7 +163,9 @@ export class LoginService {
         if (this.getById(this.superiors[i].members[j].id) === undefined) {
           this.superiors[i].members.splice(j, 1);
         } else {
-          this.superiors[i].members[j] = this.getById(this.superiors[i].members[j].id) as Member;
+          this.superiors[i].members[j] = this.getById(
+            this.superiors[i].members[j].id,
+          ) as Member;
         }
       }
     }
@@ -149,7 +173,11 @@ export class LoginService {
   }
 
   getLoggedInUserId(): number {
-    return JSON.parse(window.localStorage.getItem('LoggedInUserId') ? JSON.parse(window.localStorage.getItem('LoggedInUserId') ?? '') : -1);
+    return JSON.parse(
+      window.localStorage.getItem('LoggedInUserId')
+        ? JSON.parse(window.localStorage.getItem('LoggedInUserId') ?? '')
+        : -1,
+    );
   }
 
   setLoggedInUserId(id: number) {
@@ -157,9 +185,8 @@ export class LoginService {
   }
 
   getFocusedUserId(): number {
-    return JSON.parse(window.localStorage.getItem('FocusedUserId') ?? '-1')
+    return JSON.parse(window.localStorage.getItem('FocusedUserId') ?? '-1');
   }
-
 
   setFocusedUserId(id: number) {
     window.localStorage.setItem('FocusedUserId', JSON.stringify(id));
@@ -167,7 +194,10 @@ export class LoginService {
 
   getById(id: number): Member | Superior {
     // @ts-ignore
-    return this.members.find(member => member.id === id) ?? this.superiors.find(superior => superior.id === id);
+    return (
+      this.members.find((member) => member.id === id) ??
+      this.superiors.find((superior) => superior.id === id)
+    );
   }
 
   getAdminIds(): number[] {

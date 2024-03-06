@@ -65,16 +65,20 @@ body, html {
   .header {
     flex-direction: column;
   }
-  .body{
+
+  .body {
     margin-top: 10vh;
     align-items: center;
   }
-  .profile-picture{
+
+  .profile-picture {
     margin-top: 45px;
   }
-  .update-btn{
+
+  .update-btn {
     margin-top: 50px;
   }
+
   .update-btn, .change-password-btn {
     width: 60vw;
   }

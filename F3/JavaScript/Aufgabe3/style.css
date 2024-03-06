@@ -49,4 +49,17 @@ body {
     align-items: center
 }
 
+.hoursIndicator {
+    display: flex;
+    height: 10px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.hourIndicator {
+    width: 10%;
+    height: 100%;
+    background-color: white;
+}
+
 

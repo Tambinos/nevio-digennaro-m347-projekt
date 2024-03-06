@@ -5,6 +5,7 @@
   <button class="title" (click)="logout()">Logout</button>
 </div>
 <div class="body" style="height: 75vh;margin-top: 5vh">
+  <!--  <qrcode [qrdata]="generateQRData()"></qrcode>-->
   <div style="width: fit-content; overflow-wrap: break-word">
     <input type="submit"
            (click)="switchShift()"
@@ -17,12 +18,18 @@
       <button (click)="lastWeek()">Letzte Woche</button>
       <button (click)="nextWeek()">Nächste Woche</button>
     </div>
-    <button *ngIf="this.loginService.getAdminIds().includes(this.activeUser.id)" routerLink="/adminDashboard">Go to Admin Dashboard</button>
+    <button *ngIf="this.loginService.getAdminIds().includes(this.activeUser.id)" routerLink="/adminDashboard">Go to
+      Admin Dashboard
+    </button>
     <div class="days">
       <div class="day" *ngFor="let date of getDatesOfWeek()">
-        <p>{{ date + " " + this.activeUser.name }}</p>
+        <p>{{ date }} <br> {{ this.activeUser.name }}</p>
         <p>WH {{ this.getBookingsTimeByDate(date, this.activeUser) }}</p>
-        <button (click)="this.loginService.setFocusedUserId(this.activeUser.id)" routerLink="/createBooking">Create
+        <button
+          (click)="
+          this.bookingService.setFocusedDate(date);
+          this.loginService.setFocusedUserId(this.activeUser.id);"
+          routerLink="/createBooking">Create
           Booking
         </button>
         <button (click)=
@@ -38,7 +45,8 @@
           <div class="day" *ngFor="let date of getDatesOfWeek()">
             <p>{{ date + " " + this.worker.name }}</p>
             <p>WH {{ getBookingsTimeByDate(date, worker) }}</p>
-            <button (click)="this.loginService.setFocusedUserId(worker.id)" routerLink="/createBooking">Create Booking
+            <button (click)="this.loginService.setFocusedUserId(worker.id); this.bookingService.setFocusedDate(date)"
+                    routerLink="/createBooking">Create Booking
             </button>
             <button (click)="
             this.loginService.setFocusedUserId(worker.id);

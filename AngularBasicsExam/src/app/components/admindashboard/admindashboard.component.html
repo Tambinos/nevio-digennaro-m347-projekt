@@ -45,7 +45,8 @@
   <div class="admin-panel">
     <div class="membersDiv">
       <h2>Members</h2>
-      <button (click)="this.loginService.removeMember(this.allMembers[this.index].id)">Delete Member</button>
+      <button (click)="deleteSuperior()" *ngIf="loginService.isSuperior(this.getId())" >Delete Member</button>
+      <button (click)="deleteMember()" *ngIf="!loginService.isSuperior(this.getId())" >Delete Member</button>
     </div>
     <div>
       <button (click)="previousMember()">Previous Member</button>
@@ -81,7 +82,5 @@
         </button>
       </div>
     </div>
-  </div>
-  <div class="admin-panel">
   </div>
 </div>
