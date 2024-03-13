@@ -18,19 +18,29 @@ public class SubjectGradeService {
 
     private final GradeService gradeService;
     private final SubjectService subjectService;
+    private final UserService userService;
+
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public SubjectGradeService(SubjectGradeRepository subject_gradeRepository, GradeService gradeService, SubjectService subjectService) {
+    public SubjectGradeService(SubjectGradeRepository subject_gradeRepository, GradeService gradeService, SubjectService subjectService, UserService userService) {
         this.subject_gradeRepository = subject_gradeRepository;
         this.gradeService = gradeService;
         this.subjectService = subjectService;
+        this.userService = userService;
     }
 
     public void add(SubjectGrade subject_grade) {
-        if (!(gradeService.contains(subject_grade.getGrade()) == null || subjectService.contains(subject_grade.getSubject()) == null)) {
-            subject_gradeRepository.save(new SubjectGrade(subjectService.contains(subject_grade.getSubject()), gradeService.contains(subject_grade.getGrade())));
+        if (!(gradeService.contains(subject_grade.getGrade()) == null ||
+                subjectService.contains(subject_grade.getSubject()) == null) ||
+                userService.contains(subject_grade.getUser()) == null) {
+            SubjectGrade subjectGrade = new SubjectGrade(
+                    subjectService.contains(subject_grade.getSubject()),
+                    gradeService.contains(subject_grade.getGrade()),
+                    userService.contains(subject_grade.getUser()));
+            subjectGrade.setDate(java.time.LocalDate.now().toString());
+            subject_gradeRepository.save(subjectGrade);
         }
     }
 
@@ -46,31 +56,23 @@ public class SubjectGradeService {
     }
 
 
-    public double getAVG(Subject subject) {
-        if (subjectService.contains(subject) == null) {
-            return 0;
-        }
-        return subject_gradeRepository.calculateAverageGradeBySubjectId(subjectService.contains(subject).getId());
+    public double getAVG(Integer subjectId, Long userId) {
+        return subject_gradeRepository.calculateAverageGradeBySubjectId(subjectId, userId);
     }
 
-    public List<String> report() {
+    public List<String> report(Long userId) {
         List<Subject> subjects = subjectService.getAll();
         List<String> report = new ArrayList<>();
         for (Subject sub : subjects) {
-            report.add(sub.getSubject() + ":      " + getAVG(sub));
+            report.add(sub.getSubject() + ":      " + getAVG(sub.getId(), userId));
         }
         return report;
     }
 
-    //    public Subject contains(Subject subject){
-//        Subject [] contains = new Subject[1];
-//        subject_gradeRepository.findAll().forEach(s -> {
-//            if (s.getSubject().getSubject().equalsIgnoreCase(subject.getSubject())){
-//                contains[0] = s.getSubject();
-//            }
-//        });
-//        return contains[0];
-//    }
+    public List<SubjectGrade> getAllGrades(Long userId) {
+        return subject_gradeRepository.findAll().stream().filter(subjectGrade -> subjectGrade.getUser().getId().equals(userId)).toList();
+    }
+
     public SubjectGrade get(int id) {
         return subject_gradeRepository.getById(id);
     }

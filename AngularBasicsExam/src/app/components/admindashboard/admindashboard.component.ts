@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../service/login.service';
+import { RoleService } from '../../service/role.service';
 import { Member } from '../../entity/Member';
 import { Superior } from '../../entity/Superior';
 import { Router, RouterLink } from '@angular/router';
 import { Booking } from '../../entity/Booking';
 import { FormsModule } from '@angular/forms';
-import { NgForOf, NgIf } from '@angular/common';
+import {
+  NgForOf,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from '@angular/common';
 import { TimeCodeService } from '../../service/time-code.service';
 import { ProjectService } from '../../service/project.service';
 import { Project } from '../../entity/Project';
@@ -14,7 +20,15 @@ import { TimeCode } from '../../entity/TimeCode';
 @Component({
   selector: 'app-admindashboard',
   standalone: true,
-  imports: [FormsModule, NgForOf, RouterLink, NgIf],
+  imports: [
+    FormsModule,
+    NgForOf,
+    RouterLink,
+    NgIf,
+    NgSwitchCase,
+    NgSwitch,
+    NgSwitchDefault,
+  ],
   templateUrl: './admindashboard.component.html',
   styleUrl: './admindashboard.component.css',
 })
@@ -39,6 +53,14 @@ export class AdmindashboardComponent {
   index: number = 0;
   membersWithOutUser: Member[];
   memberToAddName = 'Select Member to Add';
+  actionIndex = 0;
+
+  nextAction() {
+    this.actionIndex++;
+  }
+  previousAction() {
+    this.actionIndex--;
+  }
 
   nextMember() {
     if (this.index < this.allMembers.length - 1) {
@@ -79,7 +101,7 @@ export class AdmindashboardComponent {
   }
 
   constructor(
-    protected loginService: LoginService,
+    protected loginService: RoleService,
     private router: Router,
     private projectService: ProjectService,
     private timeCodeService: TimeCodeService,
@@ -161,6 +183,4 @@ export class AdmindashboardComponent {
       this.allMembers[this.index],
     );
   }
-
-  protected readonly Superior = Superior;
 }

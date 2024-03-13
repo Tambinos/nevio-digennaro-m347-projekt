@@ -37,3 +37,4 @@ var Friend = /** @class */ (function (_super) {
 var peter = new Friend("Peter", 5);
 peter.introduceSelf();
 peter.timeKnown();
+//# sourceMappingURL=Aufgabe2.1.js.map

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../service/login.service';
+import { RoleService } from '../../service/role.service';
 import { Member } from '../../entity/Member';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
@@ -36,7 +36,7 @@ export class DashboardComponent {
   shift: any;
 
   constructor(
-    protected loginService: LoginService,
+    protected loginService: RoleService,
     private router: Router,
     private projectService: ProjectService,
     protected bookingService: BookingService,

@@ -3,7 +3,7 @@ import { ProjectService } from '../../service/project.service';
 import { NgForOf } from '@angular/common';
 import { Member } from '../../entity/Member';
 import { Superior } from '../../entity/Superior';
-import { LoginService } from '../../service/login.service';
+import { RoleService } from '../../service/role.service';
 import { Booking } from '../../entity/Booking';
 import { FormsModule } from '@angular/forms';
 import { Project } from '../../entity/Project';
@@ -32,7 +32,7 @@ export class BookingcreationComponent {
 
   constructor(
     private projectservice: ProjectService,
-    private loginService: LoginService,
+    private loginService: RoleService,
     private timeCodeService: TimeCodeService,
     private router: Router,
     private bookingService: BookingService,

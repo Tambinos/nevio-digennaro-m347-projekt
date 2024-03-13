@@ -1,12 +1,13 @@
 import * as readline from 'readline';
 class Person {
-    //code
+    name: string;
 
-    constructor() {
-        // code
+
+    constructor(name:string) {
+        this.name = name;
     }
     greetPerson() {
-        // code
+        console.log('Hallo ' + this.name + '!');
     }
 }
 let rl = readline.createInterface({
@@ -15,7 +16,8 @@ let rl = readline.createInterface({
 })
 
 rl.question('Wie ist dein name?', (name) => {
-    console.log(`Hallo, ${name}!`);
+    let person = new Person(name);
+    person.greetPerson();
     rl.question("War diese Aufgabe lehrreich für dich [j / n]",(answer:string) =>{
         if (answer.toLowerCase() === "j"){
             console.log("Super!")

@@ -15,10 +15,10 @@ var User = /** @class */ (function () {
         console.log("Hallo " + this.name + "Das ihre email: " + this.email);
     };
     User.prototype.emailValidation = function () {
-        return this.email.includes("@") && this.email.includes(".com");
+        return this.email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i) !== null;
     };
     return User;
 }());
 var user = new User("Hans", "Hans@gmail.com");
-console.log(user.emailValidation());
-//# sourceMappingURL=Aufgabe5.js.map
+var user2 = new User("Hans", "@.com");
+console.log(user2.emailValidation());

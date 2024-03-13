@@ -1,0 +1,24 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="title">Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <mat-form-field appearance="fill" class="login-input">
+          <mat-label>Username</mat-label>
+          <input [(ngModel)]="this.username" matInput name="userName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="login-input">
+          <mat-label>Password</mat-label>
+          <input [(ngModel)]="this.password" matInput type="password" name="password" required>
+        </mat-form-field>
+        <div style="display:flex; justify-content: space-between">
+          <button mat-raised-button color="primary"  (click)="checkLogin()" class="formLeftButton" type="submit">Login</button>
+          <button mat-raised-button color="primary"  (click)="register()" class="formRightButton" type="submit">Register</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

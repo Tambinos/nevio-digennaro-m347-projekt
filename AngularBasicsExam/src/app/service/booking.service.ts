@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../entity/Booking';
 import { TimeCodeService } from './time-code.service';
-import { LoginService } from './login.service';
+import { RoleService } from './role.service';
 
 @Injectable({
   providedIn: 'root',

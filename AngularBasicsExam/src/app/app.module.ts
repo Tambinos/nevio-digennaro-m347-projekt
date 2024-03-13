@@ -13,7 +13,7 @@ import { EditbookingComponent } from './components/editbooking/editbooking.compo
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
 
 // Import your services
-import { LoginService } from './service/login.service';
+import { RoleService } from './service/role.service';
 import { ProjectService } from './service/project.service';
 import { TimeCodeService } from './service/time-code.service';
 import { BookingService } from './service/booking.service';
@@ -34,7 +34,7 @@ import { BookingService } from './service/booking.service';
   ],
   providers: [
     HttpClientModule,
-    LoginService,
+    RoleService,
     ProjectService,
     TimeCodeService,
     BookingService,

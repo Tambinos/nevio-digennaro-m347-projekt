@@ -3,6 +3,7 @@ package SpringbootLab.Lab.Service;
 import SpringbootLab.Lab.Databases.Grade;
 import SpringbootLab.Lab.Databases.Subject;
 import SpringbootLab.Lab.Databases.SubjectGrade;
+import SpringbootLab.Lab.Databases.User;
 import SpringbootLab.Lab.Repository.SubjectGradeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,59 +26,64 @@ class SubjectGradeServiceTest {
     SubjectService subjectService;
     @Autowired
     GradeService gradeService;
+    @Autowired
+    UserService userService;
     Grade grade = new Grade(5);
     Grade grade1 = new Grade(3);
     Subject subject = new Subject("MATH");
+    User user = new User("Hans", "hansiPeter");
+
+    @BeforeEach
+    public void addBasicThings() {
+        gradeService.add(grade);
+        gradeService.add(grade1);
+        subjectService.add(subject);
+        userService.add(user);
+    }
 
     @DirtiesContext
     @Transactional
     @Test
     void edit() {
-        SubjectGrade subjectGrades = new SubjectGrade(subject, grade1);
+        SubjectGrade subjectGrades = new SubjectGrade(subject, grade1,user);
         subjectGradeService.add(subjectGrades);
         subjectGradeService.edit(1, new Grade(5));
-        assertEquals(5, subjectGradeService.getAVG(subject));
+        assertEquals(5, subjectGradeService.getAVG(subject.getId(), user.getId()));
     }
 
     @DirtiesContext
     @Transactional
     @Test
     void delete() {
-        subjectGradeService.add(new SubjectGrade(subject, grade));
-        assertEquals(5, subjectGradeService.getAVG(subject));
+        subjectGradeService.add(new SubjectGrade(subject, grade,user));
+        assertEquals(5, subjectGradeService.getAVG(subject.getId(), user.getId()));
         subjectGradeService.delete(1);
-        assertEquals(0, subjectGradeService.getAVG(subject));
+        assertEquals(0, subjectGradeService.getAVG(subject.getId(), user.getId()));
     }
 
-    @DirtiesContext
-    @BeforeEach
-    public void addBasicThings() {
-        gradeService.add(grade);
-        gradeService.add(grade1);
-        subjectService.add(subject);
-    }
+
 
     @DirtiesContext
     @Transactional
     @Test
     void getAVG() {
-        subjectGradeService.add(new SubjectGrade(subject, grade));
-        subjectGradeService.add(new SubjectGrade(subject, grade1));
-        assertEquals(4, subjectGradeService.getAVG(subject));
+        subjectGradeService.add(new SubjectGrade(subject, grade,user));
+        subjectGradeService.add(new SubjectGrade(subject, grade1,user));
+        assertEquals(4, subjectGradeService.getAVG(subject.getId(), user.getId()));
     }
 
     @DirtiesContext
     @Transactional
     @Test
     void report() {
-        subjectGradeService.add(new SubjectGrade(subject, grade));
-        assertEquals("[MATH:      5.0]", subjectGradeService.report().toString());
+        subjectGradeService.add(new SubjectGrade(subject, grade,user));
+        assertEquals("[MATH:      5.0]", subjectGradeService.report(user.getId()).toString());
     }
     @DirtiesContext
     @Transactional
     @Test
     void get(){
-        SubjectGrade subject_grade = new SubjectGrade(subject,grade);
+        SubjectGrade subject_grade = new SubjectGrade(subject,grade,user);
         subjectGradeService.add(subject_grade);
         assertEquals(subject_grade.getGrade(), subjectGradeService.get(1).getGrade());
         assertEquals(subject_grade.getSubject(), subjectGradeService.get(1).getSubject());
@@ -87,6 +93,6 @@ class SubjectGradeServiceTest {
     @Transactional
     @Test
     void getAVGReturns0(){
-        assertEquals(0,subjectGradeService.getAVG(new Subject("12345")));
+        assertEquals(0,subjectGradeService.getAVG(new Subject("12345").getId(),user.getId()));
     }
 }

@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Booking } from '../../entity/Booking';
 import { Project } from '../../entity/Project';
 import { TimeCode } from '../../entity/TimeCode';
-import { LoginService } from '../../service/login.service';
+import { RoleService } from '../../service/role.service';
 import { Superior } from '../../entity/Superior';
 import { Member } from '../../entity/Member';
 
@@ -33,7 +33,7 @@ export class EditbookingComponent {
     protected bookingService: BookingService,
     protected timeCodeService: TimeCodeService,
     protected projectService: ProjectService,
-    protected loginService: LoginService,
+    protected loginService: RoleService,
   ) {
     this.focusedBooking = this.bookingService.getFocusedBooking();
     this.timeCodes = this.timeCodeService

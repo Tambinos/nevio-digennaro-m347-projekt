@@ -1,11 +1,14 @@
 package SpringbootLab.Lab.Controller;
+
 import SpringbootLab.Lab.DTO.SubjectGradeDto;
 import SpringbootLab.Lab.Databases.Grade;
 import SpringbootLab.Lab.Databases.Subject;
 import SpringbootLab.Lab.Databases.SubjectGrade;
+import SpringbootLab.Lab.Databases.User;
 import SpringbootLab.Lab.Service.GradeService;
-import SpringbootLab.Lab.Service.SubjectService;
 import SpringbootLab.Lab.Service.SubjectGradeService;
+import SpringbootLab.Lab.Service.SubjectService;
+import SpringbootLab.Lab.Service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -20,8 +23,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,12 +43,14 @@ class SubjectGradeControllerTest {
     GradeService gradeService;
     @Autowired
     SubjectService subjectService;
+    @Autowired
+    UserService userService;
 
     @DirtiesContext
     @Transactional
     @Test
     void testCreateNewGrade() throws Exception {
-        SubjectGrade subject_grade = new SubjectGrade(new Subject("GEO"), new Grade(3));
+        SubjectGrade subject_grade = new SubjectGrade(new Subject("GEO"), new Grade(3), new User("Hans", "hansiPeter"));
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -82,7 +89,8 @@ class SubjectGradeControllerTest {
     void setUP() {
         gradeService.add(new Grade(5));
         subjectService.add(new Subject("GEO"));
-        subjectGradeService.add(new SubjectGrade(new Subject("GEO"), new Grade(5)));
+        userService.add(new User("Hans","hansiPeter"));
+        subjectGradeService.add(new SubjectGrade(new Subject("GEO"), new Grade(5),new User("Hans","hansiPeter")));
     }
 
     @DirtiesContext
@@ -102,11 +110,10 @@ class SubjectGradeControllerTest {
     void testReport() throws Exception {
         gradeService.add(new Grade(4));
         subjectService.add(new Subject("MATH"));
-        subjectGradeService.add(new SubjectGrade(new Subject("MATH"), new Grade(4)));
+        subjectGradeService.add(new SubjectGrade(new Subject("MATH"), new Grade(4),new User("Hans","hansiPeter")));
         List<String> stringList = new ArrayList<>();
         stringList.add("GEO:      5.0");
         stringList.add("MATH:      4.0");
         mockMvc.perform(get("/api/user/report")).andExpect(jsonPath("$").value(stringList));
     }
-
 }

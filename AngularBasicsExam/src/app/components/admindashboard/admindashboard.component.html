@@ -1,5 +1,6 @@
-<div>
-  <div class="admin-panel">
+<div class="admin-panel" [ngSwitch]="this.actionIndex">
+  <div *ngSwitchCase="0" class="admin-panel">
+    <button (click)="this.nextAction()">Next Action</button>
     <h2>Create Member</h2>
     <form id="create-member-form">
       <div class="form-group">
@@ -21,6 +22,10 @@
       </div>
       <button (click)="addMember()" routerLink="/dashboard" type="submit">Create Member</button>
     </form>
+  </div>
+  <div *ngSwitchCase="1" class="admin-panel">
+    <button (click)="this.previousAction()">Previous Action</button>
+    <button (click)="this.nextAction()">Next Action</button>
     <h2>Create Timecode</h2>
     <form>
       <div class="form-group">
@@ -33,6 +38,10 @@
       </div>
       <button (click)="createTimeCode()" routerLink="/dashboard" type="submit">Create Timecode</button>
     </form>
+  </div>
+  <div *ngSwitchCase="2" class="admin-panel">
+    <button (click)="this.previousAction()">Previous Action</button>
+    <button (click)="this.nextAction()">Next Action</button>
     <h2>Create Project</h2>
     <form>
       <div class="form-group">
@@ -42,11 +51,12 @@
       <button (click)="this.createProject()" routerLink="/dashboard" type="submit">Create Project</button>
     </form>
   </div>
-  <div class="admin-panel">
+  <div *ngSwitchCase="3" class="admin-panel">
+    <button (click)="this.previousAction()">Previous Action</button>
     <div class="membersDiv">
       <h2>Members</h2>
-      <button (click)="deleteSuperior()" *ngIf="loginService.isSuperior(this.getId())" >Delete Member</button>
-      <button (click)="deleteMember()" *ngIf="!loginService.isSuperior(this.getId())" >Delete Member</button>
+      <button (click)="deleteSuperior()" *ngIf="loginService.isSuperior(this.getId())">Delete Member</button>
+      <button (click)="deleteMember()" *ngIf="!loginService.isSuperior(this.getId())">Delete Member</button>
     </div>
     <div>
       <button (click)="previousMember()">Previous Member</button>
@@ -61,6 +71,14 @@
       <button (click)="changeAttribute('preName')" class="membersButton">Change Prename</button>
     </div>
     <div class="membersDiv">
+      <p>{{ allMembers[index].username }}</p>
+      <button (click)="changeAttribute('username')" class="membersButton">Change Username</button>
+    </div>
+    <div class="membersDiv">
+      <p>{{ allMembers[this.index].password }}</p>
+      <button (click)="this.changeAttribute('password')" class="membersButton">Change Password</button>
+    </div>
+    <div class="membersDiv">
       <p>{{ allMembers[this.index].department }}</p>
       <button (click)="this.changeAttribute('department')" class="membersButton">Change Department</button>
     </div>
@@ -69,7 +87,8 @@
       <div class="membersDiv" *ngFor="let member of loginService.isSuperior(this.allMembers[this.index].id).members">
         <p>{{ member.username }}</p>
         <button class="membersButton"
-                (click)="this.loginService.removeSuperiorMember(this.allMembers[this.index].id, member.id)">Remove Member
+                (click)="this.loginService.removeSuperiorMember(this.allMembers[this.index].id, member.id)">Remove
+          Member
         </button>
       </div>
       <div class="membersDiv">
@@ -83,4 +102,5 @@
       </div>
     </div>
   </div>
+  <div class="admin-panel" routerLink="/dashboard">Back to Dashboard</div>
 </div>

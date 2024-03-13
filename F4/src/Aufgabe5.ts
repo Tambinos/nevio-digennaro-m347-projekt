@@ -20,9 +20,10 @@ class User {
     }
 
     emailValidation(): boolean {
-        return this.email.includes("@") && this.email.includes(".com");
+        return this.email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i) !== null;
     }
 }
 
 const user = new User("Hans", "Hans@gmail.com")
-console.log(user.emailValidation())
+const user2 = new User("Hans", "@.com")
+console.log(user2.emailValidation())

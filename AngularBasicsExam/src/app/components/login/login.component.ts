@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../../service/login.service';
+import { RoleService } from '../../service/role.service';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +13,16 @@ import { LoginService } from '../../service/login.service';
 export class LoginComponent {
   username: string;
   password: string;
-  loginService: LoginService;
+  loginService: RoleService;
   router: Router;
   numberOfFailedAttempts: number = 0;
 
-  constructor(loginService: LoginService, router: Router) {
+  constructor(loginService: RoleService, router: Router) {
     this.username = '';
     this.password = '';
     this.loginService = loginService;
     this.router = router;
-    if (
-      this.loginService.getById(this.loginService.getLoggedInUserId()) ??
-      false
-    ) {
+    if (this.loginService.getById(this.loginService.getLoggedInUserId())) {
       router.navigate(['/dashboard']);
     }
   }
@@ -37,6 +34,13 @@ export class LoginComponent {
           member.username === this.username &&
           member.password === this.password
         ) {
+          while (member.password === '1234' || member.password.length < 4) {
+            member.password =
+              prompt(
+                'Please change your password. Your password must be at least 4 characters long.',
+              ) ?? '';
+          }
+          this.loginService.setMembers(this.loginService.members);
           this.loginService.setLoggedInUserId(member.id);
           this.router.navigate(['/dashboard']);
         }
@@ -46,6 +50,13 @@ export class LoginComponent {
           superior.username === this.username &&
           superior.password === this.password
         ) {
+          while (superior.password === '1234' || superior.password.length < 4) {
+            superior.password =
+              prompt(
+                'Please change your password. Your password must be at least 4 characters long.',
+              ) ?? '';
+          }
+          this.loginService.setSuperiors(this.loginService.superiors);
           this.loginService.setLoggedInUserId(superior.id);
           this.router.navigate(['/dashboard']);
         }

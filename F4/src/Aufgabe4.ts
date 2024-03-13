@@ -1,10 +1,10 @@
 function avgOfNumberArray(numberArray: number[]): number {
-    let avg = 0;
+    let sum = 0;
     numberArray.forEach(number => {
-            avg += number
+            sum += number
         }
     )
-    return avg/numberArray.length;
+    return sum/numberArray.length;
 }
 
 console.log(avgOfNumberArray([1,3,5,7,8,9]))

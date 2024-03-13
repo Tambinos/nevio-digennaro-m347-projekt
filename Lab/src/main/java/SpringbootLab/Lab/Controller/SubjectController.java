@@ -3,16 +3,17 @@ package SpringbootLab.Lab.Controller;
 import SpringbootLab.Lab.DTO.SubjectDto;
 import SpringbootLab.Lab.Databases.Subject;
 import SpringbootLab.Lab.Service.SubjectService;
+import com.sun.jna.platform.win32.WinBase;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/subject")
-public class AdminController {
+public class SubjectController {
     private final SubjectService subjectService;
 
-    public AdminController(SubjectService subjectService) {
+    public SubjectController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
@@ -21,8 +22,8 @@ public class AdminController {
         subjectService.add(subject);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteSubject(@RequestBody int id) {
+    @DeleteMapping("/delete/{id}")
+                        public void deleteSubject(@PathVariable int id) {
         subjectService.delete(id);
     }
 
@@ -35,5 +36,7 @@ public class AdminController {
     public void editSubject(@RequestBody SubjectDto subjectDto) {
         subjectService.edit(subjectDto.getId(), subjectDto.getSubject()
         );
+
     }
+
 }

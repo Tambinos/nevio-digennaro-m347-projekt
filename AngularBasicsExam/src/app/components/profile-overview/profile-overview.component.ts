@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../service/login.service';
+import { RoleService } from '../../service/role.service';
 import { Member } from '../../entity/Member';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ export class ProfileOverviewComponent {
   activeUser: Member | Superior;
 
   constructor(
-    private loginService: LoginService,
+    private loginService: RoleService,
     private router: Router,
   ) {
     if (
