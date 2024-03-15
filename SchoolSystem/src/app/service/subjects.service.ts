@@ -10,6 +10,7 @@ export class SubjectsService {
   subjects: Subject[] = []
   avgGrades: Subject[] = [];
 
+
   constructor(private http: HttpClient, private userService: UsersService) {
     this.updateSubjectsAndAVGGrades();
   }
@@ -17,6 +18,7 @@ export class SubjectsService {
   updateSubjectsAndAVGGrades() {
     this.http.get('http://localhost:8080/api/admin/subject/all').subscribe((data: any) => {
       this.subjects = data;
+      this.subjects.sort((a, b) => (a.subject.toUpperCase() > b.subject.toUpperCase()) ? 1 : -1);
       for (let subject of this.subjects) {
         this.http.get('http://localhost:8080/api/subjectGrade/avgGrade/' + this.userService.getLoggedInUser().id?.toString() + '/' + subject.id?.toString()).subscribe((data: any) => {
           if (this.avgGrades.find(s => s.id === subject.id) === undefined) {

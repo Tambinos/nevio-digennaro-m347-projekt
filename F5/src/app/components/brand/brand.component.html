@@ -1,9 +1,9 @@
 <button mat-raised-button routerLink="">To Default</button>
 <h1>{{getBrandName() | copyright}}</h1>
-<div *ngFor="let fullBike of fullBicycles">
+<div *ngFor="let fullBike of fullBicycles">y
   <p>Id: {{ fullBike.id }}</p>
   <p>Name: {{ fullBike.name }}</p>
-  <p>Value: {{ fullBike.value | currency:'' }}</p>
+  <p>Value: {{ fullBike.value | currency:'CHF' }}</p>
   <p>Brandname: {{ fullBike.brand }}</p>
   <p>Typename: {{ fullBike.type }}</p>
   <p>---------------</p>

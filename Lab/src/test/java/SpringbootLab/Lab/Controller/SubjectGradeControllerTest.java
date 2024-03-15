@@ -50,7 +50,7 @@ class SubjectGradeControllerTest {
     @Transactional
     @Test
     void testCreateNewGrade() throws Exception {
-        SubjectGrade subject_grade = new SubjectGrade(new Subject("GEO"), new Grade(3), new User("Hans", "hansiPeter"));
+        SubjectGrade subject_grade = new SubjectGrade(new Subject("GEO"), new Grade(3), new User("Hans", "hansiPeter",false));
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -89,8 +89,8 @@ class SubjectGradeControllerTest {
     void setUP() {
         gradeService.add(new Grade(5));
         subjectService.add(new Subject("GEO"));
-        userService.add(new User("Hans","hansiPeter"));
-        subjectGradeService.add(new SubjectGrade(new Subject("GEO"), new Grade(5),new User("Hans","hansiPeter")));
+        userService.add(new User("Hans","hansiPeter",false));
+        subjectGradeService.add(new SubjectGrade(new Subject("GEO"), new Grade(5),new User("Hans","hansiPeter",false)));
     }
 
     @DirtiesContext
@@ -110,7 +110,7 @@ class SubjectGradeControllerTest {
     void testReport() throws Exception {
         gradeService.add(new Grade(4));
         subjectService.add(new Subject("MATH"));
-        subjectGradeService.add(new SubjectGrade(new Subject("MATH"), new Grade(4),new User("Hans","hansiPeter")));
+        subjectGradeService.add(new SubjectGrade(new Subject("MATH"), new Grade(4),new User("Hans","hansiPeter",false)));
         List<String> stringList = new ArrayList<>();
         stringList.add("GEO:      5.0");
         stringList.add("MATH:      4.0");

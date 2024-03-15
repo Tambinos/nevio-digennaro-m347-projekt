@@ -27,3 +27,4 @@ rl.question('Wie ist dein name?', function (name) {
         rl.close();
     });
 });
+//# sourceMappingURL=Aufgabe3.js.map

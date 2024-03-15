@@ -1,4 +1,3 @@
-// Purpose: This file creates the Bicycle class and its properties
 export class Bicycle {
   id: number;
   name: string;

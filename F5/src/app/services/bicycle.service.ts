@@ -12,7 +12,7 @@ export class BicycleService {
   private data: Bicycle[] = [
     new Bicycle(1, "Hans", 1000, 1, 1),
     new Bicycle(2, "Jakob", 10000, 2, 2),
-    new Bicycle(3, "Jens", 100000000, 3, 3)
+    new Bicycle(3, "Jens", 1000000000000000, 3, 3)
   ]
 
   getAllBicycles(): Bicycle[] {

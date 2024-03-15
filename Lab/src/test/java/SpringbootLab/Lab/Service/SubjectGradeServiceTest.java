@@ -31,7 +31,7 @@ class SubjectGradeServiceTest {
     Grade grade = new Grade(5);
     Grade grade1 = new Grade(3);
     Subject subject = new Subject("MATH");
-    User user = new User("Hans", "hansiPeter");
+    User user = new User("Hans", "hansiPeter", false);
 
     @BeforeEach
     public void addBasicThings() {

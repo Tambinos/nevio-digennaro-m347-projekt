@@ -4,8 +4,6 @@ import SpringbootLab.Lab.Databases.User;
 import SpringbootLab.Lab.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
     UserRepository userRepository;
@@ -14,14 +12,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
     public void add(User user) {
-        userRepository.save(user);
+        if (contains(user) == null) {
+            userRepository.save(user);
+        }
     }
 
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public User login(User user) {
+        return contains(user);
     }
-
-
     public User contains(User user) {
         User[] users = new User[1];
         userRepository.findAll().forEach(s -> {

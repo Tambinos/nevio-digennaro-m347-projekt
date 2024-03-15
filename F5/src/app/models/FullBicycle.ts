@@ -1,4 +1,3 @@
-// Purpose: This file contains the FullBicycle class which is used to create a full bicycle object.
 export class FullBicycle{
   id:number;
   name:string;

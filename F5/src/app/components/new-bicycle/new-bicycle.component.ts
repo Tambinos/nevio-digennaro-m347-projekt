@@ -16,7 +16,7 @@ export class NewBicycleComponent {
   fullBicycles: FullBicycle[] = [];
   bicyleValuePipe = new BicycleValuePipe();
   static behaviorSubject = new BehaviorSubject<boolean>(false);
-  searchBarOnOrOff = NewBicycleComponent.behaviorSubject.getValue();
+  searchOnOrOff = NewBicycleComponent.behaviorSubject.getValue();
   formsControl = new FormControl();
   brandId: string = "";
   router = new Router();
@@ -44,6 +44,6 @@ export class NewBicycleComponent {
 
   updateBehaviorSubejct() {
     NewBicycleComponent.behaviorSubject.next(!NewBicycleComponent.behaviorSubject.getValue());
-    this.searchBarOnOrOff = NewBicycleComponent.behaviorSubject.getValue();
+    this.searchOnOrOff = NewBicycleComponent.behaviorSubject.getValue();
   }
 }

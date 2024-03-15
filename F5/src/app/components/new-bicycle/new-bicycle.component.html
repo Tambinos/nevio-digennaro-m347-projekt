@@ -1,15 +1,11 @@
 <button mat-raised-button  routerLink="/homeComp">To Home</button>
 <button mat-raised-button routerLink="/BicyclesComp">Bicycles</button>
-<button mat-raised-button routerLink="/newBicyclesComp">New Bicycles</button>
 <button mat-raised-button routerLink="/SearchBicycleComponent">Search Bicycle</button>
-<button mat-raised-button (click)="updateBehaviorSubejct()">Searchbar On/Off</button>
+<button mat-raised-button (click)="updateBehaviorSubejct()">Search On/Off</button>
 <button mat-raised-button [routerLink]="'/Brand/' + brandId">Brand</button>
 <label>
   <input type="text" [(ngModel)]="brandId" placeholder="Search Bicycle Brand">
 </label>
-<div *ngIf="searchBarOnOrOff">
-  <input [formControl]="formsControl" placeholder="Searched Bicycle"/>
-</div>
 <div *ngFor="let fullBike of fullBicycles">
   <p>Id: {{ fullBike.id }}</p>
   <p>Name: {{ fullBike.name }}</p>

@@ -39,4 +39,13 @@ export class GradeService {
       this.getGradesOfLoggedInUser();
     });
   }
+  getGradeRatingColor(grade: number): string {
+    if (grade >= 4.5) {
+      return '#90ff90';
+    } else if (grade >= 3.5) {
+      return '#e8f178';
+    } else {
+      return '#ff6666';
+    }
+  }
 }

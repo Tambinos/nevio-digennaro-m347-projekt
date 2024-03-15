@@ -1,19 +1,27 @@
 <div class="app-container">
   <mat-toolbar color="primary" class="app-header">
-    <span class="title">Grade System</span>
-    <button mat-button routerLink="">Log out</button>
+    <span class="title">{{ 'Grade System' | translate }}</span>
+    <button mat-button routerLink="">{{ 'Log out' | translate }}</button>
   </mat-toolbar>
   <div class="app-content">
-    <button mat-button color="primary" routerLink="/gradeDashboard">❮ Go Back</button>
+    <div class="headerAndButtonDiv">
+      <button mat-button color="primary" routerLink="/dashboard">❮{{ "Go Back"|translate }}</button>
+      <mat-select [(ngModel)]="languageService.selectedLanguage" style="width: 120px;"
+                  (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
+        <mat-option *ngFor="let language of languageService.languages" [value]="language">
+          {{ language }}
+        </mat-option>
+      </mat-select>
+    </div>
     <div style="display:flex;justify-content: center;align-items: center;height: 90%; flex-direction: column">
       <mat-form-field>
-        <mat-label>Subject Name</mat-label>
+        <mat-label>{{ 'Subject Name'|translate }}</mat-label>
         <input matInput [(ngModel)]="selectedSubject">
       </mat-form-field>
       <div>
-        <button mat-raised-button class="formLeftButton" routerLink="/dashboard"> Cancel</button>
+        <button mat-raised-button class="formLeftButton" routerLink="/dashboard"> {{ 'Cancel' | translate }}</button>
         <button mat-raised-button class="formRightButton" (click)="this.createSubject(this.selectedSubject)"
-                routerLink="/dashboard" color="primary">Add
+                routerLink="/dashboard" color="primary">{{ 'Add'| translate }}
         </button>
       </div>
     </div>

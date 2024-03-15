@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SubjectsService} from "../../service/subjects.service";
-import {UsersService} from "../../service/users.service";
-import {Subject} from "../../entity/Subject";
 import {GradeService} from "../../service/grade.service";
 import {Grade} from "../../entity/Grade";
-import {GradeSubject} from "../../entity/GradeSubject";
-import {User} from "../../entity/User";
+import {LanguageService} from "../../service/language.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-gradedashboard',
@@ -14,12 +12,12 @@ import {User} from "../../entity/User";
 })
 export class GradedashboardComponent {
   displayedColumns: string[] = ['grade', 'date', 'actions'];
-  constructor(protected subjectService: SubjectsService, protected userService: UsersService,protected gradeService: GradeService) {
+
+  constructor(protected subjectService: SubjectsService, protected languageService: LanguageService, protected gradeService: GradeService, protected translate: TranslateService) {
   }
 
   editGrade(gradeId: number) {
-    let grade = new Grade(Number.parseFloat(prompt('Enter new grade:') ?? '0'));
-    console.log(grade);
+    let grade = new Grade(Number.parseFloat(prompt(this.translate.instant('Enter new grade:')) ?? '0'));
     if (grade.grade === 0 || isNaN(grade.grade)) {
       return;
     }

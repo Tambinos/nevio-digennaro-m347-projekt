@@ -1,8 +1,6 @@
 import * as readline from 'readline';
 class Person {
     name: string;
-
-
     constructor(name:string) {
         this.name = name;
     }

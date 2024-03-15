@@ -1,36 +1,57 @@
 <div class="app-container">
   <mat-toolbar color="primary" class="app-header">
-    <span class="title">Grade System</span>
-    <button mat-button routerLink="">Log out</button>
+    <span class="title">{{ 'Grade System' | translate }}</span>
+    <button mat-button routerLink="">{{ 'Log out' | translate }}</button>
   </mat-toolbar>
   <div class="app-content">
-    <button mat-button color="primary" routerLink="/dashboard">❮ Go Back</button>
+    <button mat-button color="primary" routerLink="/dashboard">❮{{ 'Go Back' | translate }}
+    </button>
     <div class="headerAndButtonDiv">
-      <mat-card-title class="title">Grades</mat-card-title>
-      <button class="mat-elevation-z2" mat-raised-button color="primary" routerLink="/createGrade">Add Grade</button>
+      <mat-card-title class="title">{{ 'Grades' | translate }}</mat-card-title>
+      <mat-select [(ngModel)]="languageService.selectedLanguage" style="width: 120px;"
+                  (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
+        <mat-option *ngFor="let language of languageService.languages" [value]="language">
+          {{ language }}
+        </mat-option>
+      </mat-select>
+      <button class="mat-elevation-z2 primaryAddButton" mat-raised-button color="primary"
+              routerLink="/createGrade">{{ 'Add Grade'|translate }}
+      </button>
     </div>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="this.gradeService.getGradesOfSubject(this.subjectService.getFocusedSubject().id ?? 0)"
+      <table mat-table
+             [dataSource]="gradeService.getGradesOfSubject(subjectService.getFocusedSubject().id ?? 0)"
              class="mat-elevation-z8">
         <ng-container matColumnDef="grade">
-          <th mat-header-cell *matHeaderCellDef> Grade</th>
-          <td mat-cell *matCellDef="let element"> {{ element.grade.grade }}</td>
+          <th mat-header-cell *matHeaderCellDef> {{ 'Grade' | translate }}</th>
+          <td mat-cell *matCellDef="let subjectGrade">
+            <span class="gradeSpan" [ngStyle]="{'background-color': gradeService.getGradeRatingColor(subjectGrade.grade.grade)}">
+              {{ subjectGrade.grade.grade }}
+            </span>
+          </td>
         </ng-container>
         <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>Date</th>
-          <td mat-cell *matCellDef="let element"> {{ element.date }}</td>
+          <th mat-header-cell *matHeaderCellDef>{{ 'Date' | translate }}</th>
+          <td mat-cell *matCellDef="let subjectGrade"> {{ subjectGrade.date }}</td>
         </ng-container>
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-button (click)="editGrade(element.id)">🖋</button>
-            <button mat-button (click)="this.gradeService.deleteGrade(element.id)">🗑</button>
+          <th mat-header-cell *matHeaderCellDef> {{ 'Actions' | translate }}</th>
+          <td mat-cell *matCellDef="let subjectGrade">
+            <button mat-button (click)="editGrade(subjectGrade.id)"><i class="material-icons">{{ 'edit'|translate }}</i>
+            </button>
+            <button mat-button (click)="gradeService.deleteGrade(subjectGrade.id)"><i
+              class="material-icons">{{ 'delete' | translate }}</i>
+            </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
+    <button class="secondaryAddButton"
+            mat-fab color="primary"
+            routerLink="/createGrade">+
+    </button>
   </div>
 </div>
 
