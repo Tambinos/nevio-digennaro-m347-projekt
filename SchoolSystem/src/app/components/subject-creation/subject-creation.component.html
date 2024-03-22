@@ -6,21 +6,21 @@
   <div class="app-content">
     <div class="headerAndButtonDiv">
       <button mat-button color="primary" routerLink="/dashboard">❮{{ "Go Back"|translate }}</button>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" style="width: 120px;"
+      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelector"
                   (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
         <mat-option *ngFor="let language of languageService.languages" [value]="language">
           {{ language }}
         </mat-option>
       </mat-select>
     </div>
-    <div style="display:flex;justify-content: center;align-items: center;height: 90%; flex-direction: column">
+    <div class="creationDiv">
       <mat-form-field>
         <mat-label>{{ 'Subject Name'|translate }}</mat-label>
         <input matInput [(ngModel)]="selectedSubject">
       </mat-form-field>
       <div>
         <button mat-raised-button class="formLeftButton" routerLink="/dashboard"> {{ 'Cancel' | translate }}</button>
-        <button mat-raised-button class="formRightButton" (click)="this.createSubject(this.selectedSubject)"
+        <button mat-raised-button class="formRightButton" (click)="this.handleSubject(this.selectedSubject)"
                 routerLink="/dashboard" color="primary">{{ 'Add'| translate }}
         </button>
       </div>

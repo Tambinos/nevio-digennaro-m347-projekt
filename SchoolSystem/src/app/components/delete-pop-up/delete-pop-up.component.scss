@@ -1,0 +1,44 @@
+.popup {
+  height: 40vh;
+  width: 40vh;
+  background-color: white;
+}
+
+.popup-title {
+  font-size: 5vh;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  margin-bottom: 4vh;
+  line-height: 5vw;
+}
+
+.popup-content {
+  margin: 0;
+  padding: 0;
+}
+
+.popup-text {
+  font-size: 3vh;
+  display: flex;
+  line-height: 4vh;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 1vh 1vw;
+}
+
+.button-save, .button-cancel {
+  min-width: 8vw; /* Adjust based on your preference */
+  height: 4vh; /* Adjust based on your preference */
+  font-size: 2vh; /* Adjust based on your preference */
+}
+
+.content {
+  text-align: center;
+  margin-top: 2vh;
+}
+

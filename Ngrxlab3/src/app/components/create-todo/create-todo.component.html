@@ -1,0 +1,7 @@
+<mat-toolbar>TODO's</mat-toolbar>
+<form (submit)="addTask(textField.value ?? ''); router.navigate([''])">
+  <mat-label><input type="text" [formControl]="textField" required></mat-label>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
+
+

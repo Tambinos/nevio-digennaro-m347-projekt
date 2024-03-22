@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SubjectsService} from "../../service/subjects.service";
-import {GradeService} from "../../service/grade.service";
-import {UsersService} from "../../service/users.service";
-import {GradeSubject} from "../../entity/GradeSubject";
-import {Grade} from "../../entity/Grade";
-import {Subject} from "../../entity/Subject";
+import {Subject} from "../../models/Subject";
 import {LanguageService} from "../../service/language.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-subject-creation',
@@ -15,10 +12,14 @@ import {LanguageService} from "../../service/language.service";
 export class SubjectCreationComponent {
   selectedSubject: string = '';
 
-  constructor(protected subjectService: SubjectsService, protected languageService:LanguageService) {
+  constructor(protected subjectService: SubjectsService, protected languageService: LanguageService, private route: ActivatedRoute) {
   }
 
-  createSubject(subject: string) {
-    this.subjectService.addSubject(new Subject(subject));
+  handleSubject(subject: string) {
+    if (this.route.snapshot.url[0].path === 'editSubject') {
+      this.subjectService.editSubject(this.subjectService.getFocusedSubject(), this.selectedSubject);
+    }else {
+      this.subjectService.addSubject(new Subject(subject));
+    }
   }
 }

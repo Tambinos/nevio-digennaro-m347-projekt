@@ -13,7 +13,9 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'gradeDashboard', component: GradedashboardComponent},
   {path: 'createGrade', component: GradeCreationComponent},
-  {path: 'createSubject', component: SubjectCreationComponent}
+  {path: 'createSubject', component: SubjectCreationComponent},
+  {path:'editSubject', component: SubjectCreationComponent},
+  {path:'editGrade', component: GradeCreationComponent}
 ];
 
 @NgModule({

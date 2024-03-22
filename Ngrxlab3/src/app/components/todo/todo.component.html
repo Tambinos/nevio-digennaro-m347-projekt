@@ -1,0 +1,14 @@
+<mat-toolbar>TODO's</mat-toolbar>
+<mat-card>
+  <mat-card-content>
+    <mat-list>
+      <div *ngFor="let task of tasks | async">
+        <mat-list-item *ngIf="!task.completed">
+          <button (click)="removeTask(task.id)" style="width: 20px; height: 20px">-</button>
+          <mat-checkbox [checked]="task.completed" (change)="completeTask(task.id)">{{ task.name }}</mat-checkbox>
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </mat-card-content>
+  <button mat-raised-button routerLink="/create" color="primary">Add Todo</button>
+</mat-card>

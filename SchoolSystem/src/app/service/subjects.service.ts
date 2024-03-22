@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Subject} from "../entity/Subject";
+import {Subject} from "../models/Subject";
 import {UsersService} from "./users.service";
 
 @Injectable({
@@ -33,7 +33,6 @@ export class SubjectsService {
       }
     })
   }
-
   getAverageGrade(subjectId: number): number {
     return Number.parseFloat(this.avgGrades.find(s => s.id === subjectId)?.subject ?? "0");
   }

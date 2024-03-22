@@ -8,7 +8,7 @@
     </button>
     <div class="headerAndButtonDiv">
       <mat-card-title class="title">{{ 'Grades' | translate }}</mat-card-title>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" style="width: 120px;"
+      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelector"
                   (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
         <mat-option *ngFor="let language of languageService.languages" [value]="language">
           {{ language }}
@@ -25,7 +25,8 @@
         <ng-container matColumnDef="grade">
           <th mat-header-cell *matHeaderCellDef> {{ 'Grade' | translate }}</th>
           <td mat-cell *matCellDef="let subjectGrade">
-            <span class="gradeSpan" [ngStyle]="{'background-color': gradeService.getGradeRatingColor(subjectGrade.grade.grade)}">
+            <span class="gradeSpan"
+                  [ngStyle]="{'background-color': gradeService.getGradeRatingColor(subjectGrade.grade.grade)}">
               {{ subjectGrade.grade.grade }}
             </span>
           </td>
@@ -37,11 +38,18 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> {{ 'Actions' | translate }}</th>
           <td mat-cell *matCellDef="let subjectGrade">
-            <button mat-button (click)="editGrade(subjectGrade.id)"><i class="material-icons">{{ 'edit'|translate }}</i>
+            <button mat-button (click)="gradeService.setFocusedGrade(subjectGrade)" routerLink="/editGrade"><i
+              class="material-icons">{{ 'edit'|translate }}</i>
             </button>
-            <button mat-button (click)="gradeService.deleteGrade(subjectGrade.id)"><i
+
+            <button mat-button
+                    (click)="showPopup = true"><i
               class="material-icons">{{ 'delete' | translate }}</i>
             </button>
+            <div class="popup-backdrop" *ngIf="showPopup">
+              <app-delete-pop-up (close)="showPopup = false"
+                                  (decision)="handleEvent($event,subjectGrade)"></app-delete-pop-up>
+            </div>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

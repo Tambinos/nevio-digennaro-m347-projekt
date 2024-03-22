@@ -20,6 +20,7 @@ import {SubjectCreationComponent} from './components/subject-creation/subject-cr
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { DeletePopUpComponent } from './components/delete-pop-up/delete-pop-up.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     GradedashboardComponent,
     GradeCreationComponent,
-    SubjectCreationComponent
+    SubjectCreationComponent,
+    DeletePopUpComponent
   ],
   imports: [
     BrowserModule,

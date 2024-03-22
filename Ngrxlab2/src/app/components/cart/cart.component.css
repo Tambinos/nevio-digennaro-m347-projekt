@@ -1,0 +1,16 @@
+.card-footer{
+  display: flex;
+  flex-direction: row;
+}
+.column{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

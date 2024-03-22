@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {GradeSubject} from "../entity/GradeSubject";
+import {GradeSubject} from "../models/GradeSubject";
 import {UsersService} from "./users.service";
 import {SubjectsService} from "./subjects.service";
-import {Grade} from "../entity/Grade";
+import {Grade} from "../models/Grade";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,13 @@ export class GradeService {
   constructor(protected http: HttpClient, protected userService: UsersService,protected subjectService:SubjectsService) {
     this.getGradesOfLoggedInUser();
   }
+  setFocusedGrade(grade: GradeSubject) {
+    window.localStorage.setItem('focusedGrade', JSON.stringify(grade));
+  }
+  getFocusedGrade(): GradeSubject {
+    return JSON.parse(window.localStorage.getItem('focusedGrade') ?? '');
+  }
+
 
   getGradesOfLoggedInUser() {
     this.http.get('http://localhost:8080/api/subjectGrade/getAllGrades/' + this.userService.getLoggedInUser().id?.toString()).subscribe((data: any) => {
@@ -34,8 +41,8 @@ export class GradeService {
       this.getGradesOfLoggedInUser();
     });
   }
-  updateGrade(grade: Grade , gradeId:number) {
-    this.http.put('http://localhost:8080/api/subjectGrade/edit/'+gradeId, grade).subscribe((data: any) => {
+  updateGrade(subjectGradeId:number, grade: Grade) {
+    this.http.put('http://localhost:8080/api/subjectGrade/edit/'+subjectGradeId, grade).subscribe((data: any) => {
       this.getGradesOfLoggedInUser();
     });
   }

@@ -94,6 +94,7 @@ $breakpoint-desktop: 1200px;
   width: 100px;
   margin-right: 7px
 }
+
 .formRightButton {
   width: 100px;
   margin-left: 7px
@@ -105,6 +106,36 @@ $breakpoint-desktop: 1200px;
   bottom: 20px !important;
   right: 20px !important;
   visibility: hidden;
+}
+
+.creationDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  flex-direction: column
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between
+}
+
+.languageSelector {
+  width: 120px !important;
+}
+
+.popup-backdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Adjusted to cover the full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it's above other content */
 }
 
 /* Responsive Styles */

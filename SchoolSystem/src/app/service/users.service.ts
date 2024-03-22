@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {User} from "../entity/User";
+import {User} from "../models/User";
 import {Router} from "@angular/router";
 import {SubjectsService} from "./subjects.service";
 

@@ -19,5 +19,11 @@
   "Grade": "Note",
   "Date": "Datum",
   "Add Grade": "Note hinzufügen",
-  "Enter new grade:": "Neue Note eingeben:"
+  "Enter new grade:": "Neue Note eingeben:",
+  "Delete Grade": "Note löschen",
+  "Do you really wanna delete this grade ?": "Möchten sie diese Note wirklich löschen?",
+  "Confirm": "Bestätigen",
+  "Delete Subject": "Fach löschen",
+  "Do you really wanna delete this subject ?": "Möchten sie dieses Fach wirklich löschen?",
+  "All the related grades will be deleted as well.": "Alle zugehörigen Noten werden ebenfalls gelöscht."
 }

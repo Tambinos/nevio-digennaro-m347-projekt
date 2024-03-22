@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {SubjectsService} from "../../service/subjects.service";
 import {GradeService} from "../../service/grade.service";
-import {Grade} from "../../entity/Grade";
 import {LanguageService} from "../../service/language.service";
 import {TranslateService} from "@ngx-translate/core";
+import {GradeSubject} from "../../models/GradeSubject";
 
 @Component({
   selector: 'app-gradedashboard',
@@ -12,15 +12,18 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class GradedashboardComponent {
   displayedColumns: string[] = ['grade', 'date', 'actions'];
+  showPopup: boolean = false;
 
-  constructor(protected subjectService: SubjectsService, protected languageService: LanguageService, protected gradeService: GradeService, protected translate: TranslateService) {
+  constructor(protected subjectService: SubjectsService,
+              protected languageService: LanguageService,
+              protected gradeService: GradeService,
+              protected translate: TranslateService) {
   }
 
-  editGrade(gradeId: number) {
-    let grade = new Grade(Number.parseFloat(prompt(this.translate.instant('Enter new grade:')) ?? '0'));
-    if (grade.grade === 0 || isNaN(grade.grade)) {
-      return;
+  handleEvent(event: any, gradeSubject: GradeSubject) {
+    if (event) {
+      this.gradeService.deleteGrade(gradeSubject.id ?? 0);
     }
-    this.gradeService.updateGrade(grade, gradeId);
+    this.showPopup = false;
   }
 }

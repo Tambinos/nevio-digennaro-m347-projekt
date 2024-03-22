@@ -1,0 +1,10 @@
+<button mat-raised-button routerLink="/newBicycle">To Default</button>
+<h1>{{ getBrandName() | copyright }}</h1>
+@for (fullBike of fullBicycles; track $index) {
+  <p>Id: {{ fullBike.id }}</p>
+  <p>Name: {{ fullBike.name }}</p>
+  <p>Value: {{ fullBike.value | currency:'CHF' }}</p>
+  <p>Brandname: {{ fullBike.brand }}</p>
+  <p>Typename: {{ fullBike.type }}</p>
+  <p>---------------</p>
+}

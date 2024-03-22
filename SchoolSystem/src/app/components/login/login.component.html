@@ -2,7 +2,7 @@
   <mat-card class="login-card">
     <mat-card-header class="headerAndButtonDiv">
       <mat-card-title class="title">{{ 'Login' | translate }}</mat-card-title>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" style="width: 120px;"
+      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelector"
                   (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
         <mat-option *ngFor="let language of languageService.languages" [value]="language">
           {{ language }}
@@ -19,7 +19,7 @@
           <mat-label>{{ 'Password' | translate }}</mat-label>
           <input [(ngModel)]="password" matInput type="password" name="password" required>
         </mat-form-field>
-        <div style="display:flex; justify-content: space-between">
+        <div class="buttonContainer">
           <button mat-raised-button color="primary"  (click)="login()" class="formLeftButton" type="submit">{{ 'Login'|translate }}</button>
           <button mat-raised-button color="primary"  (click)="register()" class="formRightButton" type="submit">{{'Register' | translate}}</button>
         </div>

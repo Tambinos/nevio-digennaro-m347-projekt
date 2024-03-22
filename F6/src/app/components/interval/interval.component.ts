@@ -7,16 +7,10 @@ import {Observable} from "rxjs";
   styleUrls: ['./interval.component.css']
 })
 export class IntervalComponent {
-
-
   getRandomInterval(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
-
   // Observable
-
-
   // subscription
   intervalSubscription() {
     const intervalObservable = new Observable<number>(subscriber => {
