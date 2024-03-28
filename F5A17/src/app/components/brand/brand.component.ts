@@ -33,7 +33,7 @@ export class BrandComponent {
       this.brandId = parseInt(params['brandId']);
     });
     this.fullBicycles = this.bicycleService.getAllBicycles().map(bicycle =>
-      this.bicycleService.getfullBicycle(bicycle.id)
+      this.bicycleService.getFullBicycle(bicycle.id)
     ).filter(bicycle => bicycle.brand === this.brandService.getBrandName(this.brandId));
   }
 

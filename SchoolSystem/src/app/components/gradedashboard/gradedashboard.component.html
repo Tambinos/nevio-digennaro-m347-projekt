@@ -1,3 +1,4 @@
+<body>
 <div class="app-container">
   <mat-toolbar color="primary" class="app-header">
     <span class="title">{{ 'Grade System' | translate }}</span>
@@ -20,7 +21,7 @@
     </div>
     <div class="mat-elevation-z8">
       <table mat-table
-             [dataSource]="gradeService.getGradesOfSubject(subjectService.getFocusedSubject().id ?? 0)"
+             [dataSource]="gradesOfSubject"
              class="mat-elevation-z8">
         <ng-container matColumnDef="grade">
           <th mat-header-cell *matHeaderCellDef> {{ 'Grade' | translate }}</th>
@@ -41,14 +42,15 @@
             <button mat-button (click)="gradeService.setFocusedGrade(subjectGrade)" routerLink="/editGrade"><i
               class="material-icons">{{ 'edit'|translate }}</i>
             </button>
-
             <button mat-button
-                    (click)="showPopup = true"><i
+                    (click)="showPopup = true; this.gradeService.setFocusedGrade(subjectGrade)"><i
               class="material-icons">{{ 'delete' | translate }}</i>
             </button>
             <div class="popup-backdrop" *ngIf="showPopup">
-              <app-delete-pop-up (close)="showPopup = false"
-                                  (decision)="handleEvent($event,subjectGrade)"></app-delete-pop-up>
+              <app-delete-pop-up
+                (close)="showPopup = false"
+                (decision)="handleEvent($event,gradeService.getFocusedGrade())">
+              </app-delete-pop-up>
             </div>
           </td>
         </ng-container>
@@ -62,5 +64,6 @@
     </button>
   </div>
 </div>
+</body>
 
 

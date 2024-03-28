@@ -1,10 +1,6 @@
 import {Component} from '@angular/core';
 import {UsersService} from "../../service/users.service";
-import {Router} from "@angular/router";
-import {User} from "../../models/User";
-import {SubjectsService} from "../../service/subjects.service";
 import {LanguageService} from "../../service/language.service";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -20,10 +16,10 @@ export class LoginComponent {
   }
 
   register() {
-    this.userService.createUser(new User(this.username, this.password));
+    this.userService.createUser({username: this.username, password: this.password});
   }
 
   login() {
-    this.userService.login(new User(this.username, this.password));
+    this.userService.login({username: this.username, password: this.password});
   }
 }

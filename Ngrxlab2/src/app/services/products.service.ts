@@ -6,10 +6,9 @@ import {Product} from "../models/Product";
 })
 export class ProductsService {
   products: Product[] = [
-    new Product('Phone Kilo', 99),
-    new Product('Phone Mega', 199),
-    new Product('Phone Giga', 299),
-    new Product('Phone Tera', 399),
+    {name: 'Phone XL', price: 799},
+    {name: 'Phone Mini', price: 699},
+    {name: 'Phone Standard', price: 299}
   ];
 
   constructor() {

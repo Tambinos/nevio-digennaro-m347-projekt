@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {SubjectsService} from "../../service/subjects.service";
-import {Subject} from "../../models/Subject";
 import {LanguageService} from "../../service/language.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -15,11 +14,13 @@ export class SubjectCreationComponent {
   constructor(protected subjectService: SubjectsService, protected languageService: LanguageService, private route: ActivatedRoute) {
   }
 
-  handleSubject(subject: string) {
+  handleSubject() {
     if (this.route.snapshot.url[0].path === 'editSubject') {
       this.subjectService.editSubject(this.subjectService.getFocusedSubject(), this.selectedSubject);
-    }else {
-      this.subjectService.addSubject(new Subject(subject));
+    } else {
+      this.subjectService.addSubject({
+        subject: this.selectedSubject
+      });
     }
   }
 }

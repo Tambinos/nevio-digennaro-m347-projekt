@@ -2,7 +2,10 @@ package SpringbootLab.Lab.Service;
 
 import SpringbootLab.Lab.Databases.User;
 import SpringbootLab.Lab.Repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -11,15 +14,15 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public void add(User user) {
-        if (contains(user) == null) {
-            userRepository.save(user);
-        }
+        userRepository.save(user);
     }
 
     public User login(User user) {
         return contains(user);
     }
+
     public User contains(User user) {
         User[] users = new User[1];
         userRepository.findAll().forEach(s -> {
@@ -28,5 +31,13 @@ public class UserService {
             }
         });
         return users[0];
+    }
+
+    public UserDetails loadUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow();
+    }
+
+    public List<User> allUsers() {
+        return userRepository.findAll();
     }
 }

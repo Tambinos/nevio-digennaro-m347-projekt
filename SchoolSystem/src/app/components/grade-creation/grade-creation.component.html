@@ -1,3 +1,4 @@
+<body>
 <div class="app-container">
   <mat-toolbar color="primary" class="app-header">
     <span class="title">{{ "Grade System" | translate }}</span>
@@ -13,7 +14,7 @@
         </mat-option>
       </mat-select>
     </div>
-    <div class="creationDiv" >
+    <div class="creationDiv">
       <mat-form-field>
         <mat-label>{{ 'Grade'|translate }}</mat-label>
         <input matInput [(ngModel)]="selectedGrade">
@@ -21,12 +22,12 @@
       <div>
         <button mat-raised-button class="formLeftButton" routerLink="/gradeDashboard"> {{ 'Cancel' | translate }}
         </button>
-        <button mat-raised-button class="formRightButton" (click)="this.handleGrade(this.selectedGrade)"
+        <button mat-raised-button class="formRightButton" (click)="this.handleGrade()"
                 routerLink="/gradeDashboard" color="primary">{{ 'Add' | translate }}
         </button>
       </div>
     </div>
   </div>
 </div>
-
+</body>
 

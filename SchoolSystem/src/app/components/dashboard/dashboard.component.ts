@@ -1,29 +1,72 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {UsersService} from "../../service/users.service";
 import {SubjectsService} from "../../service/subjects.service";
 import {LanguageService} from "../../service/language.service";
 import {TranslateService} from "@ngx-translate/core";
 import {GradeService} from "../../service/grade.service";
-import {GradeSubject} from "../../models/GradeSubject";
 import {Subject} from "../../models/Subject";
+import {Grade} from "../../models/Grade";
+import {Subject as RxjsSubject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
-  displayedColumns: string[] = ['subject', 'avgGrade', 'actions'];
+export class DashboardComponent implements OnDestroy {
+  displayedColumns: string[] = ['subject', 'avgGrade'];
   showPopup: boolean = false;
+  subjects: Subject[] = [];
+  avgGrades: Grade[] = [];
+  subscriptions: RxjsSubject<void> = new RxjsSubject<void>();
 
-  constructor(protected subjectService: SubjectsService, protected userService: UsersService, protected languageService: LanguageService, protected translate: TranslateService, protected gradeService: GradeService) {
-    subjectService.updateSubjectsAndAVGGrades();
+  ngOnDestroy(): void {
+    this.subscriptions.next();
+    this.subscriptions.complete();
   }
-  handleEvent(event: any, subject: Subject) {
+
+  constructor(protected subjectService: SubjectsService,
+              protected userService: UsersService,
+              protected languageService: LanguageService,
+              protected translate: TranslateService,
+              protected gradeService: GradeService) {
+    subjectService.updateSubjectsAndAVGGrades();
+    if (this.userService.getLoggedInUser().admin) {
+      this.displayedColumns = ['subject', 'avgGrade', 'actions'];
+    }
+    this.subjectService.updateSubjectsAndAVGGrades()
+      .pipe(takeUntil(this.subscriptions))
+      .subscribe((data: any) => {
+        this.subjects = data;
+        this.subjects.forEach((subject: Subject) => {
+          this.subjectService.getAverageGrade(subject.id ?? 0)
+            .pipe(takeUntil(this.subscriptions))
+            .subscribe((data: any) => {
+              let avgGrade = this.avgGrades.find((grade: Grade) => grade.id === subject.id);
+              if (!avgGrade) {
+                this.avgGrades.push({grade: data, id: subject.id ?? 0});
+              } else {
+                avgGrade.grade = data;
+              }
+            })
+        })
+      });
+
+  }
+
+
+  handleEvent(event: any, subject: Subject
+  ) {
+    console.log(subject)
     if (event) {
       this.subjectService.deleteSubject(subject);
     }
     this.showPopup = false;
   }
-  protected readonly Math = Math;
+
+  getAvgGrade(subject: Subject): number {
+    return this.avgGrades.find((grade: Grade) => grade.id === subject.id)?.grade ?? 0;
+  }
+
+  Math: Math = Math;
 }

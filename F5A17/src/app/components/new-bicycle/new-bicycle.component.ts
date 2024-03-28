@@ -33,7 +33,7 @@ export class NewBicycleComponent {
   constructor() {
     // Use map to create FullBicycle objects directly
     this.fullBicycles = this.bicycleService.getAllBicycles().map(bicycle =>
-      this.bicycleService.getfullBicycle(bicycle.id)
+      this.bicycleService.getFullBicycle(bicycle.id)
     );
     NewBicycleComponent.behaviorSubject.subscribe(value => {
       if (value) {
@@ -44,7 +44,7 @@ export class NewBicycleComponent {
     })
     this.formsControl.valueChanges.subscribe(value => {
       this.fullBicycles = this.bicycleService.getAllBicycles().map(bicycle =>
-        this.bicycleService.getfullBicycle(bicycle.id)
+        this.bicycleService.getFullBicycle(bicycle.id)
       );
       this.fullBicycles = this.fullBicycles.filter(bicycle => bicycle.name.includes(value));
     })

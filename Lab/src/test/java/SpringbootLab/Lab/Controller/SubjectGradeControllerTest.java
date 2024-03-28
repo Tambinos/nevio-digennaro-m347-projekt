@@ -46,20 +46,27 @@ class SubjectGradeControllerTest {
     @Autowired
     UserService userService;
 
+    @BeforeEach
+    void setUP() {
+        gradeService.add(new Grade(5));
+        subjectService.add(new Subject("GEO"));
+        userService.add(new User("Hans", "hansiPeter", false));
+        subjectGradeService.add(new SubjectGrade(new Subject("GEO"), new Grade(5), new User("Hans", "hansiPeter", false)));
+    }
+
     @DirtiesContext
     @Transactional
     @Test
     void testCreateNewGrade() throws Exception {
-        SubjectGrade subject_grade = new SubjectGrade(new Subject("GEO"), new Grade(3), new User("Hans", "hansiPeter",false));
+        SubjectGrade subject_grade = new SubjectGrade(new Subject("GEO"), new Grade(5), new User("Hans", "hansiPeter", false));
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String json = ow.writeValueAsString(subject_grade);
         mockMvc.perform(post("/api/user/createNewGrade")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+        ).andExpect(status().isOk());
     }
 
     @DirtiesContext
@@ -85,13 +92,6 @@ class SubjectGradeControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @BeforeEach
-    void setUP() {
-        gradeService.add(new Grade(5));
-        subjectService.add(new Subject("GEO"));
-        userService.add(new User("Hans","hansiPeter",false));
-        subjectGradeService.add(new SubjectGrade(new Subject("GEO"), new Grade(5),new User("Hans","hansiPeter",false)));
-    }
 
     @DirtiesContext
     @Transactional
@@ -110,10 +110,12 @@ class SubjectGradeControllerTest {
     void testReport() throws Exception {
         gradeService.add(new Grade(4));
         subjectService.add(new Subject("MATH"));
-        subjectGradeService.add(new SubjectGrade(new Subject("MATH"), new Grade(4),new User("Hans","hansiPeter",false)));
+        subjectGradeService.add(new SubjectGrade(new Subject("MATH"), new Grade(4), new User("Hans", "hansiPeter", false)));
         List<String> stringList = new ArrayList<>();
         stringList.add("GEO:      5.0");
         stringList.add("MATH:      4.0");
-        mockMvc.perform(get("/api/user/report")).andExpect(jsonPath("$").value(stringList));
+        mockMvc.perform(get("/api/user/report/" + userService.contains(new User("Hans", "hansiPeter", false)).getId()))
+                .andExpect(jsonPath("$")
+                        .value(stringList));
     }
 }

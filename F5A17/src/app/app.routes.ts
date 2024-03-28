@@ -8,7 +8,7 @@ import {HomeComponent} from "./components/home/home.component";
 export const routes: Routes = [
   {path: 'BicyclesComp', component: BicycleComponent},
   {path: '', redirectTo: '/bicycle', pathMatch: 'full'},
-  {path: 'newBicycle', component: NewBicycleComponent},
+  {path: 'bicycle', component: NewBicycleComponent},
   {path: 'Brand/:brandId', component: BrandComponent},
   {path:'SearchBicycleComponent', component: SearchBicycleComponent},
   {path:'homeComp',component:HomeComponent}

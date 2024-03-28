@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {SubjectsService} from "../../service/subjects.service";
-import {GradeSubject} from "../../models/GradeSubject";
 import {Grade} from "../../models/Grade";
 import {GradeService} from "../../service/grade.service";
 import {UsersService} from 'src/app/service/users.service';
@@ -23,11 +22,15 @@ export class GradeCreationComponent {
 
   }
 
-  handleGrade(grade: number) {
+  handleGrade() {
     if (this.route.snapshot.url[0].path === 'editGrade') {
-      this.gradeService.updateGrade(this.gradeService.getFocusedGrade().id ?? 0, new Grade(this.selectedGrade));
-    }else {
-      this.gradeService.createGrade(new GradeSubject(new Grade(grade), this.subjectService.getFocusedSubject(), this.userService.getLoggedInUser()));
+      this.gradeService.updateGrade(this.gradeService.getFocusedGrade().id ?? 0, {grade: this.selectedGrade});
+    } else {
+      this.gradeService.createGrade({
+        grade: {grade: this.selectedGrade},
+        subject: this.subjectService.getFocusedSubject(),
+        user: this.userService.getLoggedInUser()
+      });
     }
   }
 }

@@ -11,7 +11,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$SchoolSystem-primary: mat.define-palette(mat.$indigo-palette);
+$SchoolSystem-primary: mat.define-palette(mat.$blue-gray-palette);
 $SchoolSystem-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -51,7 +51,6 @@ $breakpoint-desktop: 1200px;
 }
 
 .app-header {
-  // Assuming you want a specific height for the header
   min-height: 100px;
   max-height: 200px;
   height: 8vh;
@@ -133,11 +132,10 @@ $breakpoint-desktop: 1200px;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; /* Adjusted to cover the full viewport height */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 1000; /* Ensure it's above other content */
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
-
 /* Responsive Styles */
 @media only screen and (max-width: $breakpoint-mobile) {
   .app-header {
@@ -161,7 +159,5 @@ $breakpoint-desktop: 1200px;
   .secondaryAddButton {
     visibility: visible;
   }
-
 }
-
 

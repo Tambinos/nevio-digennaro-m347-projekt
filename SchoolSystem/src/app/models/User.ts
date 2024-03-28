@@ -1,7 +1,6 @@
 export interface User {
-  id: number | undefined;
+  id?: number | undefined;
   username: string;
   password: string;
-  admin: boolean | undefined;
+  admin?: boolean | undefined;
 }
-<

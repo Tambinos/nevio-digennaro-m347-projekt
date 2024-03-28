@@ -2,39 +2,60 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "../models/Subject";
 import {UsersService} from "./users.service";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectsService {
-  subjects: Subject[] = []
-  avgGrades: Subject[] = [];
-
-
   constructor(private http: HttpClient, private userService: UsersService) {
     this.updateSubjectsAndAVGGrades();
-  }
+  };
 
   updateSubjectsAndAVGGrades() {
-    this.http.get('http://localhost:8080/api/admin/subject/all').subscribe((data: any) => {
-      this.subjects = data;
-      this.subjects.sort((a, b) => (a.subject.toUpperCase() > b.subject.toUpperCase()) ? 1 : -1);
-      for (let subject of this.subjects) {
-        this.http.get('http://localhost:8080/api/subjectGrade/avgGrade/' + this.userService.getLoggedInUser().id?.toString() + '/' + subject.id?.toString()).subscribe((data: any) => {
-          if (this.avgGrades.find(s => s.id === subject.id) === undefined) {
-            let newSubject = new Subject(data.toString());
-            newSubject.id = subject.id;
-            this.avgGrades.push(newSubject);
-          } else {
-            // @ts-ignore
-            this.avgGrades.find(s => s.id === subject.id).subject = data;
-          }
-        })
+    return this.http.get('http://localhost:8080/api/admin/subject/all', {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
       }
-    })
+    }).pipe(map((data: any) => {
+      return data;
+    }))
   }
-  getAverageGrade(subjectId: number): number {
-    return Number.parseFloat(this.avgGrades.find(s => s.id === subjectId)?.subject ?? "0");
+
+  getAverageGrade(subjectId: number): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/api/subjectGrade/avgGrade/' + this.userService.getLoggedInUser().id?.toString() + '/' + subjectId.toString(), {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    }).pipe(map((data: any) => {
+        return data;
+    }))
+  }
+
+  addSubject(subject: Subject) {
+    this.http.post('http://localhost:8080/api/admin/subject/create', subject, {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    }).subscribe()
+  }
+
+  editSubject(subject: Subject, newSubject: string) {
+    let newSub: Subject = {id: subject.id, subject: newSubject};
+    newSub.id = subject.id;
+    this.http.put('http://localhost:8080/api/admin/subject/editSubject', newSub, {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    }).subscribe()
+  }
+
+  deleteSubject(subject: Subject) {
+    this.http.delete('http://localhost:8080/api/admin/subject/delete/' + subject.id, {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    }).subscribe()
   }
 
   setFocusedSubject(subject: Subject) {
@@ -45,23 +66,4 @@ export class SubjectsService {
     return JSON.parse(window.localStorage.getItem('focusedSubject') ?? '');
   }
 
-  addSubject(subject: Subject) {
-    this.http.post('http://localhost:8080/api/admin/subject/create', subject).subscribe(() => {
-      this.updateSubjectsAndAVGGrades();
-    });
-  }
-
-  editSubject(subject: Subject, newSubject: string) {
-    let newSub: Subject = new Subject(newSubject);
-    newSub.id = subject.id;
-    this.http.put('http://localhost:8080/api/admin/subject/editSubject', newSub).subscribe(() => {
-      this.updateSubjectsAndAVGGrades();
-    });
-  }
-
-  deleteSubject(subject: Subject) {
-    this.http.delete('http://localhost:8080/api/admin/subject/delete/' + subject.id).subscribe(() => {
-      this.updateSubjectsAndAVGGrades();
-    });
-  }
 }

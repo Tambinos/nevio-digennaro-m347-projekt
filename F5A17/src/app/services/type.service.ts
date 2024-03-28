@@ -6,9 +6,9 @@ import {Type} from '../models/Type';
 })
 export class TypeService {
   data: Type[] = [
-    new Type(1, "Trio"),
-    new Type(2, "Solo"),
-    new Type(3, "Duo")
+    {id: 1, type: 'Normal'},
+    {id: 2, type: 'Fire'},
+    {id: 3, type: 'Water'},
   ]
 
   getAllTypes(): Type[] {

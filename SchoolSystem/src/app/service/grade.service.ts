@@ -1,51 +1,66 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {GradeSubject} from "../models/GradeSubject";
 import {UsersService} from "./users.service";
-import {SubjectsService} from "./subjects.service";
 import {Grade} from "../models/Grade";
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GradeService {
-  allGradesOfLoggedInUser:GradeSubject[] = [];
-  constructor(protected http: HttpClient, protected userService: UsersService,protected subjectService:SubjectsService) {
-    this.getGradesOfLoggedInUser();
+
+
+  constructor(protected http: HttpClient, protected userService: UsersService) {
   }
+
+
   setFocusedGrade(grade: GradeSubject) {
     window.localStorage.setItem('focusedGrade', JSON.stringify(grade));
   }
+
   getFocusedGrade(): GradeSubject {
     return JSON.parse(window.localStorage.getItem('focusedGrade') ?? '');
   }
 
-
   getGradesOfLoggedInUser() {
-    this.http.get('http://localhost:8080/api/subjectGrade/getAllGrades/' + this.userService.getLoggedInUser().id?.toString()).subscribe((data: any) => {
-      this.allGradesOfLoggedInUser = data;
-      this.subjectService.updateSubjectsAndAVGGrades();
-    })
+    return this.http.get('http://localhost:8080/api/subjectGrade/getAllGrades/' + this.userService.getLoggedInUser().id?.toString(), {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    }).pipe(map((data: any) => {
+      return data;
+    }))
   }
-  getGradesOfSubject(subjectId: number): GradeSubject[] {
-    return this.allGradesOfLoggedInUser.filter(g => g.subject.id === subjectId);
-  }
+
   deleteGrade(gradeId: number) {
-    this.http.delete('http://localhost:8080/api/subjectGrade/delete/' + gradeId.toString()).subscribe(() => {
-      this.getGradesOfLoggedInUser();
-    });
+    this.http.delete('http://localhost:8080/api/subjectGrade/delete/' + gradeId.toString(), {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    })
+      .subscribe()
   }
 
   createGrade(grade: GradeSubject) {
-    this.http.post('http://localhost:8080/api/subjectGrade/createNewGrade', grade).subscribe((data: any) => {
-      this.getGradesOfLoggedInUser();
-    });
+    this.http.post('http://localhost:8080/api/subjectGrade/createNewGrade', grade, {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    })
+      .subscribe();
   }
-  updateGrade(subjectGradeId:number, grade: Grade) {
-    this.http.put('http://localhost:8080/api/subjectGrade/edit/'+subjectGradeId, grade).subscribe((data: any) => {
-      this.getGradesOfLoggedInUser();
-    });
+
+  updateGrade(subjectGradeId: number, grade: Grade) {
+    this.http.put('http://localhost:8080/api/subjectGrade/edit/' + subjectGradeId, grade, {
+      headers: {
+        'Authorization': `Bearer ${this.userService.getToken()}`
+      }
+    })
+      .subscribe();
   }
+
+
   getGradeRatingColor(grade: number): string {
     if (grade >= 4.5) {
       return '#90ff90';

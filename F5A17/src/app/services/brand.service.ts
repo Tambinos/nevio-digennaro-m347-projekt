@@ -7,9 +7,9 @@ import {Brand} from '../models/Brand';
 export class BrandService {
 
   data: Brand[] = [
-    new Brand(1, "Trek", false),
-    new Brand(2, "Mount", true),
-    new Brand(3, "Canyon", false)
+    {id: 1, brand: 'Brand 1', is_cheap_brand: true},
+    {id: 2, brand: 'Brand 2', is_cheap_brand: false},
+    {id: 3, brand: 'Brand 3', is_cheap_brand: true}
   ]
 
   getBrands() {
@@ -17,19 +17,18 @@ export class BrandService {
   }
 
   getBrand(id: number): Brand {
-    // if (this.data.find(brand => brand.id === id) === undefined){
-    //   throw new Error("Brand not found")
-    // }
-    // @ts-ignore
-    return this.data.find(brand => brand.id === id)
+    const brand = this.data.find(brand => brand.id === id)
+    if (brand) {
+      return brand
+    } else {
+      throw new Error("Brand not found")
+    }
   }
 
   getBrandName(id: number): string {
-    if (this.data.find(brand => brand.id === id) === undefined) {
-      throw new Error("Brand not found")
-    }
-    // @ts-ignore
-    return this.data.find(brand => brand.id === id).brand
+    const brand = this.data.find(brand => brand.id === id)
+    if (!brand) throw new Error("Brand not found")
+    return brand.brand
   }
 }
 

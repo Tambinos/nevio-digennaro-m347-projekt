@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 @Service
 public class SubjectGradeService {
@@ -70,7 +71,7 @@ public class SubjectGradeService {
     }
 
     public List<SubjectGrade> getAllGrades(Long userId) {
-        return subject_gradeRepository.findAll().stream().filter(subjectGrade -> subjectGrade.getUser().getId().equals(userId)).toList();
+        return subject_gradeRepository.findAllByUserId(userId.intValue());
     }
 
     public SubjectGrade get(int id) {

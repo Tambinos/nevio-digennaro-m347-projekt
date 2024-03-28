@@ -2,7 +2,7 @@ import {createReducer, on} from '@ngrx/store';
 import {Product} from "../models/Product";
 import {add, remove, reset} from "../actions/cart.actions";
 
-export const initialCart: Product[] = JSON.parse(window.localStorage.getItem('cart') ?? '[]')
+export const initialCart: Product[] =[];
 
 export const cartReduced = createReducer(
   initialCart,

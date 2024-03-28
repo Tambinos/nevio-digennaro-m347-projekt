@@ -26,11 +26,11 @@ export class SearchBicycleComponent {
 
   constructor() {
     this.fullBicycles = this.bicycleService.getAllBicycles().map(bicycle =>
-      this.bicycleService.getfullBicycle(bicycle.id)
+      this.bicycleService.getFullBicycle(bicycle.id)
     );
     this.formsControl.valueChanges.subscribe(value => {
       this.fullBicycles = this.bicycleService.getAllBicycles().map(bicycle =>
-        this.bicycleService.getfullBicycle(bicycle.id)
+        this.bicycleService.getFullBicycle(bicycle.id)
       );
       this.fullBicycles = this.fullBicycles.filter(bicycle => bicycle.name.includes(value));
     })

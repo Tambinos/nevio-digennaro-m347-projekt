@@ -1,3 +1,4 @@
+<body>
 <div class="app-container">
   <mat-toolbar color="primary" class="app-header">
     <span class="title">{{ 'Grade System' | translate }}</span>
@@ -21,7 +22,7 @@
       </button>
     </div>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="subjectService.subjects" class="mat-elevation-z8">
+      <table mat-table [dataSource]="subjects"  class="mat-elevation-z8">
         <ng-container matColumnDef="subject">
           <th mat-header-cell *matHeaderCellDef> {{ 'Subject' | translate }}</th>
           <td mat-cell *matCellDef="let subject" (click)="subjectService.setFocusedSubject(subject)"
@@ -33,23 +34,27 @@
           <td mat-cell *matCellDef="let subject" (click)="subjectService.setFocusedSubject(subject)"
               routerLink="/gradeDashboard">
             <span class="gradeSpan"
-                  [ngStyle]="{'background-color': gradeService.getGradeRatingColor(subjectService.getAverageGrade(subject.id))}">
-                {{ Math.round(subjectService.getAverageGrade(subject.id) * 10) / 10 }}
+                  [ngStyle]="{'background-color': gradeService.getGradeRatingColor(getAvgGrade(subject))}">
+                {{ Math.round((getAvgGrade(subject) * 10)) / 10 }}
             </span>
           </td>
         </ng-container>
-        <ng-container matColumnDef="actions">
+        <ng-container *ngIf="userService.getLoggedInUser().admin" matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> {{ 'Actions'| translate }}</th>
           <td mat-cell *matCellDef="let subject" class="tableActionCell">
-            <button *ngIf="userService.getLoggedInUser().admin" mat-button
+            <button mat-button
                     (click)="subjectService.setFocusedSubject(subject)" routerLink="/editSubject"><i
               class="material-icons">edit</i></button>
-            <button *ngIf="userService.getLoggedInUser().admin" mat-button
-                    (click)="showPopup = true"
+            <button mat-button
+                    (click)="subjectService.setFocusedSubject(subject);showPopup = true"
             ><i class="material-icons">delete</i></button>
-            <div class="popup-backdrop" *ngIf="showPopup">
-              <app-delete-pop-up (close)="showPopup = false"
-                                 (decision)="handleEvent($event,subject)"></app-delete-pop-up>
+            <div
+              class="popup-backdrop"
+              *ngIf="showPopup">
+              <app-delete-pop-up
+                (close)="showPopup = false"
+                (decision)="handleEvent($event,subjectService.getFocusedSubject())">
+              </app-delete-pop-up>
             </div>
           </td>
         </ng-container>
@@ -57,11 +62,13 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
-    <button *ngIf="userService.getLoggedInUser().admin"
-            class="secondaryAddButton"
-            routerLink="/createSubject"
-            mat-fab color="primary">+
+    <button
+      *ngIf="userService.getLoggedInUser().admin"
+      class="secondaryAddButton"
+      routerLink="/createSubject"
+      mat-fab color="primary">+
     </button>
   </div>
 </div>
+</body>
 

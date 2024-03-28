@@ -3,7 +3,6 @@ package SpringbootLab.Lab.Controller;
 import SpringbootLab.Lab.DTO.SubjectDto;
 import SpringbootLab.Lab.Databases.Subject;
 import SpringbootLab.Lab.Service.SubjectService;
-import com.sun.jna.platform.win32.WinBase;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class SubjectController {
     }
 
     @DeleteMapping("/delete/{id}")
-                        public void deleteSubject(@PathVariable int id) {
+    public void deleteSubject(@PathVariable int id) {
         subjectService.delete(id);
     }
 
@@ -36,7 +35,6 @@ public class SubjectController {
     public void editSubject(@RequestBody SubjectDto subjectDto) {
         subjectService.edit(subjectDto.getId(), subjectDto.getSubject()
         );
-
     }
 
 }

@@ -13,11 +13,21 @@ import {GradeSubject} from "../../models/GradeSubject";
 export class GradedashboardComponent {
   displayedColumns: string[] = ['grade', 'date', 'actions'];
   showPopup: boolean = false;
+  gradesOfLoggedInUser: GradeSubject[] = [];
+  gradesOfSubject: GradeSubject[] = [];
 
   constructor(protected subjectService: SubjectsService,
               protected languageService: LanguageService,
               protected gradeService: GradeService,
               protected translate: TranslateService) {
+    this.updateGradesOfSubject();
+  }
+
+  updateGradesOfSubject() {
+    this.gradeService.getGradesOfLoggedInUser().subscribe((data: any) => {
+      this.gradesOfLoggedInUser = data;
+      this.gradesOfSubject = this.gradesOfLoggedInUser.filter((gradeSubject: GradeSubject) => gradeSubject.subject.id === this.subjectService.getFocusedSubject().id);
+    });
   }
 
   handleEvent(event: any, gradeSubject: GradeSubject) {
@@ -25,5 +35,8 @@ export class GradedashboardComponent {
       this.gradeService.deleteGrade(gradeSubject.id ?? 0);
     }
     this.showPopup = false;
+    setTimeout(() => {
+      this.updateGradesOfSubject();
+    }, 10)
   }
 }

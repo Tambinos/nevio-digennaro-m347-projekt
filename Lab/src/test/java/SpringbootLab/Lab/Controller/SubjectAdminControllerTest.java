@@ -44,7 +44,7 @@ class SubjectAdminControllerTest {
     @Transactional
     @Test
     void testDeleteSubject() throws Exception {
-        mockMvc.perform(delete("/api/admin/subject/delete").contentType(MediaType.APPLICATION_JSON).content("1")).andExpect(status().isOk());
+        mockMvc.perform(delete("/api/admin/subject/delete/" + 1)).andExpect(status().isOk()).andExpect(status().isOk());
     }
 
     @Test

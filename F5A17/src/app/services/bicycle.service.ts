@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core'
 import {Bicycle} from "../models/Bicycle"
-import { TypeService } from './type.service'
-import { BrandService } from './brand.service'
-import { FullBicycle } from '../models/FullBicycle'
+import {TypeService} from './type.service'
+import {BrandService} from './brand.service'
+import {FullBicycle} from '../models/FullBicycle'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +11,9 @@ import { FullBicycle } from '../models/FullBicycle'
 export class BicycleService {
 
   private data: Bicycle[] = [
-    new Bicycle(1, "Hans", 1000, 1, 1),
-    new Bicycle(2, "Jakob", 10000, 2, 2),
-    new Bicycle(3, "Jens", 1000000000000000, 3, 3)
+    {id: 1, name: 'Bicycle 1', value: 100, brandID: 1, typeID: 1},
+    {id: 2, name: 'Bicycle 2', value: 200, brandID: 2, typeID: 2},
+    {id: 3, name: 'Bicycle 3', value: 300, brandID: 3, typeID: 3},
   ]
 
   getAllBicycles(): Bicycle[] {
@@ -20,21 +21,30 @@ export class BicycleService {
   }
 
   getBicycle(id: number): Bicycle {
-    // @ts-ignore
-    return this.data.find(s => s.id === id)
+    const bicycle = this.data.find(s => s.id === id)
+    if (bicycle) {
+      return bicycle
+    } else {
+      throw new Error("Bicycle not found")
+    }
   }
+
   typeService = new TypeService()
   brandService = new BrandService()
 
-  getfullBicycle(id: number): FullBicycle {
-    if (!(this.data.find(s => s.id === id) === undefined)) {
-      // @ts-ignore
-      let bicycle: Bicycle = this.data.find(s => s.id === id)
-      let fullBicycle :FullBicycle = new FullBicycle(bicycle.id, bicycle.name, bicycle.value,
-        this.brandService.getBrandName(bicycle.brandID), this.typeService.getTypesName(Array.of(bicycle.typeID))[0])
-      return fullBicycle
-    }else {
+  getFullBicycle(id: number): FullBicycle {
+    const bicycle: Bicycle | undefined = this.data.find(s => s.id === id)
+    if (bicycle) {
+      return {
+        id: bicycle.id,
+        name: bicycle.name,
+        value: bicycle.value,
+        brand: this.brandService.getBrand(bicycle.brandID).brand,
+        type: this.typeService.getTypes([bicycle.typeID])[0].type
+      }
+    } else {
       throw new Error("Bicycle not found")
     }
+
   }
 }
