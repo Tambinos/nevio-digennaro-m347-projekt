@@ -34,12 +34,11 @@ export class GradeService {
   }
 
   deleteGrade(gradeId: number) {
-    this.http.delete('http://localhost:8080/api/subjectGrade/delete/' + gradeId.toString(), {
+    return this.http.delete('http://localhost:8080/api/subjectGrade/delete/' + gradeId.toString(), {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
       }
     })
-      .subscribe()
   }
 
   createGrade(grade: GradeSubject) {

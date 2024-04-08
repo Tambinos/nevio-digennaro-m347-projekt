@@ -5,7 +5,7 @@ import {TranslateService} from "@ngx-translate/core";
   providedIn: 'root'
 })
 export class LanguageService {
-  languages: string[] = ['English','Deutsch','Francais', '-- --- .-. ... . / -.-. --- -.. .','😀📧🔣❗'];
+  languages: string[] = ['English','Deutsch','Francais'];
   selectedLanguage: string = 'English';
   constructor(private translate: TranslateService) {
     translate.setDefaultLang(this.languageConverter(this.selectedLanguage));

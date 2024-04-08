@@ -66,7 +66,7 @@ export class UsersService implements OnDestroy {
   }
 
   getToken(){
-    return window.localStorage.getItem('token');
+    return window.localStorage.getItem('token') ?? '';
   }
   setToken(token: string){
     window.localStorage.setItem('token', token);

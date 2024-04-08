@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Member } from '../entity/Member';
-import { Superior } from '../entity/Superior';
+import { Member } from '../models/Member';
+import { Superior } from '../models/Superior';
 
 @Injectable({
   providedIn: 'root',

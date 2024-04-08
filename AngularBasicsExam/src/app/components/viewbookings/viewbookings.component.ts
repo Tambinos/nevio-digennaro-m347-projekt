@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RoleService } from '../../service/role.service';
 import { BookingService } from '../../service/booking.service';
-import { Booking } from '../../entity/Booking';
-import { Member } from '../../entity/Member';
-import { Superior } from '../../entity/Superior';
+import { Booking } from '../../models/Booking';
+import { Member } from '../../models/Member';
+import { Superior } from '../../models/Superior';
 import { Router, RouterLink } from '@angular/router';
 import { NgForOf, NgIf, NgStyle } from '@angular/common';
 

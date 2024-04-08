@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Booking } from '../entity/Booking';
+import { Booking } from '../models/Booking';
 import { TimeCodeService } from './time-code.service';
 import { RoleService } from './role.service';
 

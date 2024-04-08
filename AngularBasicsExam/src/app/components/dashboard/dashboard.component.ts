@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RoleService } from '../../service/role.service';
-import { Member } from '../../entity/Member';
+import { Member } from '../../models/Member';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgForOf, NgIf } from '@angular/common';
 import { ProjectService } from '../../service/project.service';
-import { Superior } from '../../entity/Superior';
-import { Project } from '../../entity/Project';
+import { Superior } from '../../models/Superior';
+import { Project } from '../../models/Project';
 import { BookingService } from '../../service/booking.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Booking } from '../../entity/Booking';
+import { Booking } from '../../models/Booking';
 import { TimeCodeService } from '../../service/time-code.service';
 import { QRCodeModule } from 'angularx-qrcode';
 

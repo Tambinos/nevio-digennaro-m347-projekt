@@ -1,20 +1,30 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {SubjectsService} from "../../service/subjects.service";
 import {GradeService} from "../../service/grade.service";
 import {LanguageService} from "../../service/language.service";
 import {TranslateService} from "@ngx-translate/core";
 import {GradeSubject} from "../../models/GradeSubject";
+import {Subject as RxjsSubject} from "rxjs/internal/Subject";
+import {takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-gradedashboard',
   templateUrl: './gradedashboard.component.html',
   styleUrls: ['./gradedashboard.component.scss']
 })
-export class GradedashboardComponent {
+export class GradedashboardComponent implements OnDestroy{
   displayedColumns: string[] = ['grade', 'date', 'actions'];
   showPopup: boolean = false;
   gradesOfLoggedInUser: GradeSubject[] = [];
   gradesOfSubject: GradeSubject[] = [];
+  subscriptions: RxjsSubject<void> = new RxjsSubject<void>();
+
+
+  ngOnDestroy(): void {
+    this.subscriptions.next();
+    this.subscriptions.complete();
+  }
+
 
   constructor(protected subjectService: SubjectsService,
               protected languageService: LanguageService,
@@ -24,7 +34,7 @@ export class GradedashboardComponent {
   }
 
   updateGradesOfSubject() {
-    this.gradeService.getGradesOfLoggedInUser().subscribe((data: any) => {
+    this.gradeService.getGradesOfLoggedInUser().pipe(takeUntil(this.subscriptions)).subscribe((data: any) => {
       this.gradesOfLoggedInUser = data;
       this.gradesOfSubject = this.gradesOfLoggedInUser.filter((gradeSubject: GradeSubject) => gradeSubject.subject.id === this.subjectService.getFocusedSubject().id);
     });

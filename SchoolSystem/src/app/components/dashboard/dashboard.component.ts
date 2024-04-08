@@ -20,6 +20,7 @@ export class DashboardComponent implements OnDestroy {
   avgGrades: Grade[] = [];
   subscriptions: RxjsSubject<void> = new RxjsSubject<void>();
 
+
   ngOnDestroy(): void {
     this.subscriptions.next();
     this.subscriptions.complete();
@@ -34,6 +35,10 @@ export class DashboardComponent implements OnDestroy {
     if (this.userService.getLoggedInUser().admin) {
       this.displayedColumns = ['subject', 'avgGrade', 'actions'];
     }
+    this.updateSubjectsAndAVGGrades();
+  }
+
+  updateSubjectsAndAVGGrades(): void {
     this.subjectService.updateSubjectsAndAVGGrades()
       .pipe(takeUntil(this.subscriptions))
       .subscribe((data: any) => {
@@ -42,7 +47,7 @@ export class DashboardComponent implements OnDestroy {
           this.subjectService.getAverageGrade(subject.id ?? 0)
             .pipe(takeUntil(this.subscriptions))
             .subscribe((data: any) => {
-              let avgGrade = this.avgGrades.find((grade: Grade) => grade.id === subject.id);
+              let avgGrade: Grade | undefined = this.avgGrades.find((grade: Grade) => grade.id === subject.id);
               if (!avgGrade) {
                 this.avgGrades.push({grade: data, id: subject.id ?? 0});
               } else {
@@ -51,21 +56,26 @@ export class DashboardComponent implements OnDestroy {
             })
         })
       });
-
   }
 
 
-  handleEvent(event: any, subject: Subject
-  ) {
-    console.log(subject)
+  handleEvent(event: any, subject: Subject): void {
     if (event) {
       this.subjectService.deleteSubject(subject);
     }
     this.showPopup = false;
+    setTimeout(() => {
+      this.updateSubjectsAndAVGGrades();
+    }, 100)
   }
 
   getAvgGrade(subject: Subject): number {
-    return this.avgGrades.find((grade: Grade) => grade.id === subject.id)?.grade ?? 0;
+    let subjectGrade = this.avgGrades.find((grade: Grade) => grade.id === subject.id);
+    if (subjectGrade) {
+      return subjectGrade.grade;
+    } else {
+      return 0;
+    }
   }
 
   Math: Math = Math;

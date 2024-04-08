@@ -11,7 +11,6 @@ describe('DashboardComponent', () => {
       declarations: [ DashboardComponent ]
     })
     .compileComponents();
-
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

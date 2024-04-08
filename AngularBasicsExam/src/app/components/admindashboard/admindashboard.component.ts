@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RoleService } from '../../service/role.service';
-import { Member } from '../../entity/Member';
-import { Superior } from '../../entity/Superior';
+import { Member } from '../../models/Member';
+import { Superior } from '../../models/Superior';
 import { Router, RouterLink } from '@angular/router';
-import { Booking } from '../../entity/Booking';
+import { Booking } from '../../models/Booking';
 import { FormsModule } from '@angular/forms';
 import {
   NgForOf,
@@ -14,8 +14,8 @@ import {
 } from '@angular/common';
 import { TimeCodeService } from '../../service/time-code.service';
 import { ProjectService } from '../../service/project.service';
-import { Project } from '../../entity/Project';
-import { TimeCode } from '../../entity/TimeCode';
+import { Project } from '../../models/Project';
+import { TimeCode } from '../../models/TimeCode';
 
 @Component({
   selector: 'app-admindashboard',

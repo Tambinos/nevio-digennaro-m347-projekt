@@ -5,12 +5,12 @@ import { ProjectService } from '../../service/project.service';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Booking } from '../../entity/Booking';
-import { Project } from '../../entity/Project';
-import { TimeCode } from '../../entity/TimeCode';
+import { Booking } from '../../models/Booking';
+import { Project } from '../../models/Project';
+import { TimeCode } from '../../models/TimeCode';
 import { RoleService } from '../../service/role.service';
-import { Superior } from '../../entity/Superior';
-import { Member } from '../../entity/Member';
+import { Superior } from '../../models/Superior';
+import { Member } from '../../models/Member';
 
 @Component({
   selector: 'app-editbooking',

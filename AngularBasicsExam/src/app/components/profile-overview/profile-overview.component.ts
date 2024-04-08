@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RoleService } from '../../service/role.service';
-import { Member } from '../../entity/Member';
+import { Member } from '../../models/Member';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Superior } from '../../entity/Superior';
+import { Superior } from '../../models/Superior';
 
 @Component({
   selector: 'app-profile-overview',

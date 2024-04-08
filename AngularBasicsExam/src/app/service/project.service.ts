@@ -1,12 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Project} from "../entity/Project";
+import { Injectable } from '@angular/core';
+import { Project } from '../models/Project';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
-
-  projects: Project[]
+  projects: Project[];
 
   constructor() {
     if (window.localStorage.getItem('Projects')) {
@@ -15,15 +14,15 @@ export class ProjectService {
       this.projects = [
         new Project('No Project'),
         new Project('Fortnite'),
-        new Project('Epic Games')
-      ]
+        new Project('Epic Games'),
+      ];
     }
     window.localStorage.setItem('Projects', JSON.stringify(this.projects));
   }
 
   getProjects(): Project[] {
     this.projects = JSON.parse(window.localStorage.getItem('Projects') ?? '');
-    return this.projects
+    return this.projects;
   }
   addProject(project: Project) {
     this.projects.push(project);
