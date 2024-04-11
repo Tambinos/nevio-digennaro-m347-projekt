@@ -21,6 +21,13 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { DeletePopUpComponent } from './components/delete-pop-up/delete-pop-up.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { StoreModule } from '@ngrx/store';
+import {subjectGradeReduced} from "./reducers/SubjectGrade.reducer";
+import {subjectReduced} from "./reducers/Subject.reducer";
+import { EffectsModule } from '@ngrx/effects';
+import {SubjectEffects} from "./events/subject.effects";
+import {SubjectGradesEffects} from "./events/subjectGrades.effects";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GradedashboardComponent,
     GradeCreationComponent,
     SubjectCreationComponent,
-    DeletePopUpComponent
+    DeletePopUpComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +66,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    StoreModule.forRoot({subjectGrades: subjectGradeReduced, subject: subjectReduced}, {}),
+    EffectsModule.forRoot([SubjectEffects, SubjectGradesEffects])
+
   ],
   providers: [],
   bootstrap: [AppComponent]

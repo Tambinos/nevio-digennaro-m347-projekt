@@ -1,7 +1,7 @@
 package SpringbootLab.Lab.Controller;
 
-import SpringbootLab.Lab.Databases.User;
-import SpringbootLab.Lab.Responses.LoginResponse;
+import SpringbootLab.Lab.Entity.User;
+import SpringbootLab.Lab.Response.LoginResponse;
 import SpringbootLab.Lab.Service.AuthenticationService;
 import SpringbootLab.Lab.Service.JwtService;
 import org.springframework.http.ResponseEntity;

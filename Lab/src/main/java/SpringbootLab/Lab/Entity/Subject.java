@@ -1,4 +1,4 @@
-package SpringbootLab.Lab.Databases;
+package SpringbootLab.Lab.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

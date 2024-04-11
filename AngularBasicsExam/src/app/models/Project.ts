@@ -1,6 +1,3 @@
-export class Project {
+export interface Project {
   name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
 }

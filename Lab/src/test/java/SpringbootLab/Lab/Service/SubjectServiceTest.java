@@ -1,6 +1,6 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.Subject;
+import SpringbootLab.Lab.Entity.Subject;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

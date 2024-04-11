@@ -9,10 +9,9 @@ import {map, Observable} from "rxjs";
 })
 export class SubjectsService {
   constructor(private http: HttpClient, private userService: UsersService) {
-    this.updateSubjectsAndAVGGrades();
   };
 
-  updateSubjectsAndAVGGrades() {
+  getSubjects():Observable<Subject[]>{
     return this.http.get('http://localhost:8080/api/admin/subject/all', {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
@@ -33,29 +32,29 @@ export class SubjectsService {
   }
 
   addSubject(subject: Subject) {
-    this.http.post('http://localhost:8080/api/admin/subject/create', subject, {
+    return this.http.post('http://localhost:8080/api/admin/subject/create', subject, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
       }
-    }).subscribe()
+    })
   }
 
   editSubject(subject: Subject, newSubject: string) {
     let newSub: Subject = {id: subject.id, subject: newSubject};
     newSub.id = subject.id;
-    this.http.put('http://localhost:8080/api/admin/subject/editSubject', newSub, {
+    return this.http.put('http://localhost:8080/api/admin/subject/editSubject', newSub, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
       }
-    }).subscribe()
+    })
   }
 
   deleteSubject(subject: Subject) {
-    this.http.delete('http://localhost:8080/api/admin/subject/delete/' + subject.id, {
+    return this.http.delete('http://localhost:8080/api/admin/subject/delete/' + subject.id, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
       }
-    }).subscribe()
+    })
   }
 
   setFocusedSubject(subject: Subject) {

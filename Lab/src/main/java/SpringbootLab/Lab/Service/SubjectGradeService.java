@@ -1,8 +1,8 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.Grade;
-import SpringbootLab.Lab.Databases.Subject;
-import SpringbootLab.Lab.Databases.SubjectGrade;
+import SpringbootLab.Lab.Entity.Grade;
+import SpringbootLab.Lab.Entity.Subject;
+import SpringbootLab.Lab.Entity.SubjectGrade;
 import SpringbootLab.Lab.Repository.SubjectGradeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 @Service
 public class SubjectGradeService {
@@ -32,7 +31,7 @@ public class SubjectGradeService {
         this.userService = userService;
     }
 
-    public void add(SubjectGrade subject_grade) {
+    public SubjectGrade add(SubjectGrade subject_grade) {
         if (!(gradeService.contains(subject_grade.getGrade()) == null ||
                 subjectService.contains(subject_grade.getSubject()) == null) ||
                 userService.contains(subject_grade.getUser()) == null) {
@@ -41,7 +40,9 @@ public class SubjectGradeService {
                     gradeService.contains(subject_grade.getGrade()),
                     userService.contains(subject_grade.getUser()));
             subjectGrade.setDate(java.time.LocalDate.now().toString());
-            subject_gradeRepository.save(subjectGrade);
+            return subject_gradeRepository.save(subjectGrade);
+        }else {
+            return null;
         }
     }
 

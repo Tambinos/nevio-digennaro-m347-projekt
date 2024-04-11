@@ -1,7 +1,7 @@
 package SpringbootLab.Lab.Controller;
 
 import SpringbootLab.Lab.DTO.SubjectDto;
-import SpringbootLab.Lab.Databases.Subject;
+import SpringbootLab.Lab.Entity.Subject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;

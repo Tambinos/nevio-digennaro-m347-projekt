@@ -1,11 +1,10 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.Grade;
+import SpringbootLab.Lab.Entity.Grade;
 import SpringbootLab.Lab.Repository.GradeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GradeService {

@@ -1,9 +1,8 @@
 package SpringbootLab.Lab.DTO;
 
-import SpringbootLab.Lab.Databases.Grade;
+import SpringbootLab.Lab.Entity.Grade;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 

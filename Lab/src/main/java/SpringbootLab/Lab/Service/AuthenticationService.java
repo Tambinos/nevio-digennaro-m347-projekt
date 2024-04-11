@@ -1,6 +1,6 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.User;
+import SpringbootLab.Lab.Entity.User;
 import SpringbootLab.Lab.Repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

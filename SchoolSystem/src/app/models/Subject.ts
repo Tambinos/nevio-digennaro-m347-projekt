@@ -1,5 +1,5 @@
 export interface Subject {
-  id?: number | undefined;
+  id?: number;
   subject: string;
 
 }

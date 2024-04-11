@@ -14,8 +14,6 @@ import {
 } from '@angular/common';
 import { TimeCodeService } from '../../service/time-code.service';
 import { ProjectService } from '../../service/project.service';
-import { Project } from '../../models/Project';
-import { TimeCode } from '../../models/TimeCode';
 
 @Component({
   selector: 'app-admindashboard',
@@ -52,12 +50,13 @@ export class AdmindashboardComponent {
   allMembers: (Member | Superior)[] = [];
   index: number = 0;
   membersWithOutUser: Member[];
-  memberToAddName = 'Select Member to Add';
-  actionIndex = 0;
+  memberToAddName: string = 'Select Member to Add';
+  actionIndex: number = 0;
 
   nextAction() {
     this.actionIndex++;
   }
+
   previousAction() {
     this.actionIndex--;
   }
@@ -126,48 +125,51 @@ export class AdmindashboardComponent {
   addMember() {
     let newUser;
     if (this.selectedRole === 'Member') {
-      newUser = new Member(
-        this.loginService.getMembers().length +
+      newUser = {
+        id:
+          this.loginService.getMembers().length +
           this.loginService.getSuperiors().length +
           1,
-        this.name,
-        this.preName,
-        (this.preName + '.' + this.name).toLowerCase(),
-        this.password,
-        this.department,
-        this.bookings,
-        this.urlToProfilePicture,
-      );
+        name: this.name,
+        preName: this.preName,
+        username: (this.preName + '.' + this.name).toLowerCase(),
+        password: this.password,
+        department: this.department,
+        bookings: this.bookings,
+        urlToProfilePicture: this.urlToProfilePicture,
+      };
       this.loginService.addMember(newUser);
     } else {
-      newUser = new Superior(
-        this.loginService.getSuperiors().length +
+      newUser = {
+        id:
+          this.loginService.getSuperiors().length +
           this.loginService.getMembers().length +
           1,
-        this.name,
-        this.preName,
-        (this.preName + '.' + this.name).toLowerCase(),
-        this.password,
-        this.department,
-        this.bookings,
-        this.urlToProfilePicture,
-        [],
-      );
+        name: this.name,
+        preName: this.preName,
+        username: (this.preName + '.' + this.name).toLowerCase(),
+        password: this.password,
+        department: this.department,
+        bookings: this.bookings,
+        urlToProfilePicture: this.urlToProfilePicture,
+        members: [],
+      };
       this.loginService.addSuperior(newUser);
     }
   }
 
   createProject() {
-    this.projectService.addProject(new Project(this.projectName));
+    this.projectService.addProject({ name: this.projectName });
   }
 
   createTimeCode() {
-    this.timeCodeService.addTimeCode(
-      new TimeCode(this.timeCodeName, this.timeCodeColor),
-    );
+    this.timeCodeService.addTimeCode({
+      name: this.timeCodeName,
+      color: this.timeCodeColor,
+    });
   }
 
-  getSelectedMemberToAdd() {
+  getSelectedMemberToAdd(): Member {
     return this.members.filter(
       (member) => member.username === this.memberToAddName,
     )[0];
@@ -178,9 +180,6 @@ export class AdmindashboardComponent {
     this.allMembers[this.index][attribute] = prompt(
       'Enter new ' + attribute + ' for ' + this.members[this.index].username,
     );
-    this.loginService.replaceSuperiorMember(
-      this.allMembers[this.index].id,
-      this.allMembers[this.index],
-    );
+    this.loginService.replaceSuperiorMember(this.allMembers[this.index]);
   }
 }

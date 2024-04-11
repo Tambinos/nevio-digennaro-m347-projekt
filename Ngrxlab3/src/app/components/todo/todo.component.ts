@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {Task} from "../../models/Task";
-import {completeTask, removeTask} from "../../actions/tasks.actions";
+import {completeTask, notCompleteTask, removeTask} from "../../actions/tasks.actions";
 import {Observable} from "rxjs";
 
 @Component({
@@ -16,9 +16,13 @@ export class TodoComponent {
     this.tasks = this.store.select('tasks');
   }
 
-  completeTask(id: number) {
-    this.tasks.subscribe(tasks => console.log(tasks));
-    this.store.dispatch(completeTask({id}));
+  completeTask(task: Task) {
+    const id :number = task.id
+    if (task.completed) {
+      this.store.dispatch(notCompleteTask({id}));
+    }else {
+      this.store.dispatch(completeTask({id}));
+    }
   }
 
   removeTask(id: number) {

@@ -1,6 +1,6 @@
 package SpringbootLab.Lab.Repository;
 
-import SpringbootLab.Lab.Databases.SubjectGrade;
+import SpringbootLab.Lab.Entity.SubjectGrade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

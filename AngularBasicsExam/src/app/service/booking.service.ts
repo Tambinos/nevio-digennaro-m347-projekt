@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../models/Booking';
 import { TimeCodeService } from './time-code.service';
-import { RoleService } from './role.service';
 
 @Injectable({
   providedIn: 'root',
@@ -77,14 +76,13 @@ export class BookingService {
     bookings = bookings
       .filter((booking) => booking.date === date)
       .sort((a, b) => a.startTime - b.startTime);
-
     let totalWorkedHours = bookings.reduce((acc, curr) => acc + curr.hours, 0);
     let workDayStart = bookings[0].startTime;
-    let workDayEnd = bookings[bookings.length - 1].endTime;
-
+    let workDayEnd =
+      bookings[bookings.length - 1].startTime +
+      bookings[bookings.length - 1].hours;
     let totalDaySpan = workDayEnd - workDayStart;
     let totalBreakTime = totalDaySpan - totalWorkedHours;
-
     if (totalWorkedHours > 9) {
       if (totalBreakTime > 1) {
         return true;
@@ -102,12 +100,16 @@ export class BookingService {
     }
     return true;
   }
+
   checkForOverlappingBookings(bookings: Booking[], date: string): boolean {
     bookings = bookings
       .filter((booking) => booking.date === date)
       .sort((a, b) => a.startTime - b.startTime);
     for (let i = 0; i < bookings.length - 1; i++) {
-      if (bookings[i].endTime > bookings[i + 1].startTime) {
+      if (
+        bookings[i].startTime + bookings[i].hours >
+        bookings[i + 1].startTime
+      ) {
         alert('Overlapping Bookings\n Changes not saved.');
         return false;
       }
@@ -118,15 +120,22 @@ export class BookingService {
   calcTime(startTimeString: string) {
     let hour = startTimeString.substring(0, 2);
     let min = startTimeString.substring(3, 5);
+    if (startTimeString.substring(6, 8) === 'PM') {
+      hour = (parseInt(hour) + 12).toString();
+    }
     return parseInt(hour) + parseInt(min) / 60;
   }
 
   calcTimeString(time: number) {
     let hour = Math.floor(time);
     let min = Math.round((time - hour) * 60);
+    let timeString = hour + ':' + min;
     if (min < 10) {
-      return hour.toString() + ':0' + min.toString();
+      timeString = hour + ':0' + min;
     }
-    return hour.toString() + ':' + min.toString();
+    if (hour < 10) {
+      timeString = '0' + timeString;
+    }
+    return timeString;
   }
 }

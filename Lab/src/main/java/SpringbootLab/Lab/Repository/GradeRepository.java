@@ -1,6 +1,6 @@
 package SpringbootLab.Lab.Repository;
 
-import SpringbootLab.Lab.Databases.Grade;
+import SpringbootLab.Lab.Entity.Grade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

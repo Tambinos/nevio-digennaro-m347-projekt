@@ -3,9 +3,9 @@
   <mat-card-content>
     <mat-list>
       <div *ngFor="let task of tasks | async">
-        <mat-list-item *ngIf="!task.completed">
+        <mat-list-item>
           <button (click)="removeTask(task.id)" style="width: 20px; height: 20px">-</button>
-          <mat-checkbox [checked]="task.completed" (change)="completeTask(task.id)">{{ task.name }}</mat-checkbox>
+          <mat-checkbox [checked]="task.completed" (change)="completeTask(task)">{{ task.name }}</mat-checkbox>
         </mat-list-item>
       </div>
     </mat-list>

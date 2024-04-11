@@ -56,15 +56,21 @@ export class BookingcreationComponent {
 
   createBooking() {
     console.log(this.focusedUser.bookings);
-    const newBooking = new Booking(
-      this.projects.find((project) => project.name === this.project) ??
-        new Project('No Project'),
-      this.bookingService.formatDate(this.date),
-      this.hours,
-      this.timeCodes.find((timeCode) => timeCode.name === this.timeCode) ??
-        new TimeCode('No TimeCode', '#FFFFFF'),
-      this.bookingService.calcTime(this.startTimeString),
-    );
+    const newBooking: Booking = {
+      project: this.projects.find(
+        (project) => project.name === this.project,
+      ) ?? { name: 'No Project' },
+      date: this.bookingService.formatDate(this.date),
+      hours: this.hours,
+      timeCode: this.timeCodes.find(
+        (timeCode) => timeCode.name === this.timeCode,
+      ) ?? {
+        name: 'No TimeCode',
+        color: '#FFFFFF',
+      },
+      startTime: this.bookingService.calcTime(this.startTimeString),
+    };
+
     const newBookings = [...this.focusedUser.bookings];
     newBookings.push(newBooking);
     if (
@@ -78,10 +84,7 @@ export class BookingcreationComponent {
       )
     ) {
       this.focusedUser.bookings = newBookings;
-      this.loginService.replaceSuperiorMember(
-        this.focusedUser.id,
-        this.focusedUser,
-      );
+      this.loginService.replaceSuperiorMember(this.focusedUser);
     }
   }
 }

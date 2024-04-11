@@ -9,11 +9,11 @@ import {Subject as SubjectRxjs} from "rxjs/internal/Subject";
   providedIn: 'root'
 })
 export class UsersService implements OnDestroy {
-  loggedInUser: User | undefined;
+  private loggedInUser: User | undefined;
   private subscriptions: SubjectRxjs<void> = new SubjectRxjs<void>();
 
 
-  constructor(private http: HttpClient, private router: Router){
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -23,28 +23,17 @@ export class UsersService implements OnDestroy {
   }
 
   login(user: User) {
-    this.http.post('http://localhost:8080/api/user/login', user).pipe((takeUntil(this.subscriptions))).subscribe((data: any) => {
-     this.setToken(data.token);
+    this.http.post('http://localhost:8080/api/user/login', user).subscribe((data: any) => {
+      this.setToken(data.token);
       this.http.get('http://localhost:8080/api/user/me', {
         headers: {
-          'Authorization': `Bearer ${data.token}`
+          'Authorization': `Bearer ${this.getToken()}`
         }
+      }).pipe(takeUntil(this.subscriptions)).subscribe((data: any) => {
+        this.setLoggedInUser(data);
+        this.router.navigate(['/dashboard']);
       })
-        .pipe(
-          takeUntil(this.subscriptions)
-        )
-        .subscribe({
-          next: (data: any) => {
-            this.setLoggedInUser(data);
-            if (data) {
-              this.router.navigate(['/dashboard'])
-            }
-          },
-          error: (error) => {
-            console.error('Error fetching user data:', error);
-          }
-        })
-    })
+    });
   }
 
   createUser(user: User) {
@@ -58,17 +47,14 @@ export class UsersService implements OnDestroy {
   }
 
   getLoggedInUser(): User {
-    if (window.localStorage.getItem('loggedInUser')) {
-      return JSON.parse(window.localStorage.getItem('loggedInUser') !);
-    } else {
-      return {username: '', password: ''};
-    }
+    return JSON.parse(window.localStorage.getItem('loggedInUser') ?? '');
   }
 
-  getToken(){
+  getToken() {
     return window.localStorage.getItem('token') ?? '';
   }
-  setToken(token: string){
+
+  setToken(token: string) {
     window.localStorage.setItem('token', token);
   }
 }

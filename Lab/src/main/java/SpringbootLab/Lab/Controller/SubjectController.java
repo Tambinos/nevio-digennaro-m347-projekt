@@ -1,7 +1,7 @@
 package SpringbootLab.Lab.Controller;
 
 import SpringbootLab.Lab.DTO.SubjectDto;
-import SpringbootLab.Lab.Databases.Subject;
+import SpringbootLab.Lab.Entity.Subject;
 import SpringbootLab.Lab.Service.SubjectService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +17,8 @@ public class SubjectController {
     }
 
     @PostMapping("/create")
-    public void createNewSubject(@RequestBody Subject subject) {
-        subjectService.add(subject);
+    public Subject createNewSubject(@RequestBody Subject subject) {
+        return subjectService.add(subject);
     }
 
     @DeleteMapping("/delete/{id}")

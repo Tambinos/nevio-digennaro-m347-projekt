@@ -42,10 +42,7 @@ export class ProfileOverviewComponent {
       let newPassword = prompt('Enter new password');
       if (newPassword != null && newPassword.length >= 4) {
         this.activeUser.password = newPassword;
-        this.loginService.replaceSuperiorMember(
-          this.activeUser.id,
-          this.activeUser,
-        );
+        this.loginService.replaceSuperiorMember(this.activeUser);
       }
     } else {
       alert('Wrong Password');
@@ -58,10 +55,7 @@ export class ProfileOverviewComponent {
       alert('Invalid URL');
     } else {
       this.activeUser.urlToProfilePicture = response;
-      this.loginService.replaceSuperiorMember(
-        this.activeUser.id,
-        this.activeUser,
-      );
+      this.loginService.replaceSuperiorMember(this.activeUser);
     }
   }
 }

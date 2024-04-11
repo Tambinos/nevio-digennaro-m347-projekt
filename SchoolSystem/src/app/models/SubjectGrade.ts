@@ -2,10 +2,10 @@ import {Subject} from "./Subject";
 import {Grade} from "./Grade";
 import {User} from "./User";
 
-export interface GradeSubject {
-  id?: number|undefined;
+export interface SubjectGrade {
+  id?: number;
   grade: Grade;
-  date?: string|undefined;
+  date?: string;
   subject: Subject;
   user: User;
 

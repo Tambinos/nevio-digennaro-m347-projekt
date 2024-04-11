@@ -1,12 +1,16 @@
 import {Component, OnDestroy} from '@angular/core';
-import {UsersService} from "../../service/users.service";
-import {SubjectsService} from "../../service/subjects.service";
-import {LanguageService} from "../../service/language.service";
+import {UsersService} from "../../services/users.service";
+import {SubjectsService} from "../../services/subjects.service";
+import {LanguageService} from "../../services/language.service";
 import {TranslateService} from "@ngx-translate/core";
-import {GradeService} from "../../service/grade.service";
+import {GradeService} from "../../services/grade.service";
 import {Subject} from "../../models/Subject";
 import {Grade} from "../../models/Grade";
-import {Subject as RxjsSubject, takeUntil} from 'rxjs';
+import {map, Observable, of, Subject as RxjsSubject, switchMap, takeUntil} from 'rxjs';
+import {SubjectGrade} from "../../models/SubjectGrade";
+import {Store} from "@ngrx/store";
+import {removeSubject} from "../../actions/Subject.action";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +23,9 @@ export class DashboardComponent implements OnDestroy {
   subjects: Subject[] = [];
   avgGrades: Grade[] = [];
   subscriptions: RxjsSubject<void> = new RxjsSubject<void>();
-
+  Math: Math = Math;
+  subjectGrades$: Observable<SubjectGrade[]> = new Observable<SubjectGrade[]>;
+  subjects$: Observable<Subject[]> = new Observable<Subject[]>;
 
   ngOnDestroy(): void {
     this.subscriptions.next();
@@ -30,43 +36,48 @@ export class DashboardComponent implements OnDestroy {
               protected userService: UsersService,
               protected languageService: LanguageService,
               protected translate: TranslateService,
-              protected gradeService: GradeService) {
-    subjectService.updateSubjectsAndAVGGrades();
+              protected gradeService: GradeService,
+              private store: Store<{ subjectGrades: SubjectGrade[], subject: Subject[] }>) {
+
     if (this.userService.getLoggedInUser().admin) {
       this.displayedColumns = ['subject', 'avgGrade', 'actions'];
     }
+    this.subjects$ = this.store.select('subject');
+    this.subjectGrades$ = this.store.select('subjectGrades');
     this.updateSubjectsAndAVGGrades();
   }
 
+
   updateSubjectsAndAVGGrades(): void {
-    this.subjectService.updateSubjectsAndAVGGrades()
-      .pipe(takeUntil(this.subscriptions))
-      .subscribe((data: any) => {
-        this.subjects = data;
-        this.subjects.forEach((subject: Subject) => {
-          this.subjectService.getAverageGrade(subject.id ?? 0)
-            .pipe(takeUntil(this.subscriptions))
-            .subscribe((data: any) => {
-              let avgGrade: Grade | undefined = this.avgGrades.find((grade: Grade) => grade.id === subject.id);
-              if (!avgGrade) {
-                this.avgGrades.push({grade: data, id: subject.id ?? 0});
-              } else {
-                avgGrade.grade = data;
-              }
+    this.subjects$
+      .pipe(
+        takeUntil(this.subscriptions),
+        switchMap((subjects: Subject[]) => {
+          this.subjects = subjects;
+          return this.subjectGrades$.pipe(
+            takeUntil(this.subscriptions),
+            map((grades: SubjectGrade[]) => {
+              return this.subjects.map(subject => {
+                const subjectGrades = grades.filter(grade => grade.subject.id === subject.id);
+                return this.gradeService.calculateAvgGrades(subjectGrades, subject);
+              });
             })
+          );
         })
+      )
+      .subscribe((avgGrades: Grade[]) => {
+        this.avgGrades = avgGrades;
       });
   }
 
 
-  handleEvent(event: any, subject: Subject): void {
+  handleEvent(event: boolean, subject: Subject): void {
     if (event) {
-      this.subjectService.deleteSubject(subject);
+      this.store.dispatch(removeSubject(subject));
+      this.updateSubjectsAndAVGGrades();
+      this.subjectService.deleteSubject(subject).pipe(takeUntil(this.subscriptions)).subscribe();
     }
     this.showPopup = false;
-    setTimeout(() => {
-      this.updateSubjectsAndAVGGrades();
-    }, 100)
   }
 
   getAvgGrade(subject: Subject): number {
@@ -77,6 +88,4 @@ export class DashboardComponent implements OnDestroy {
       return 0;
     }
   }
-
-  Math: Math = Math;
 }

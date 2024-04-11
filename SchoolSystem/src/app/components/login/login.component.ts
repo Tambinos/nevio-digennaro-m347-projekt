@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {UsersService} from "../../service/users.service";
-import {LanguageService} from "../../service/language.service";
+import {UsersService} from "../../services/users.service";
+import {LanguageService} from "../../services/language.service";
 
 @Component({
   selector: 'app-login',

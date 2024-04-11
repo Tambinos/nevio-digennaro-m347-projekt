@@ -1,4 +1,4 @@
 export interface Grade{
-  id?: number | undefined;
+  id?: number;
   grade: number;
 }

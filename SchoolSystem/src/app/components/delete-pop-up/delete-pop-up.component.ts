@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {LanguageService} from "../../service/language.service";
+import {LanguageService} from "../../services/language.service";
 
 
 @Component({

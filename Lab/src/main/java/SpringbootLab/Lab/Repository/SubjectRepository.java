@@ -1,6 +1,6 @@
 package SpringbootLab.Lab.Repository;
 
-import SpringbootLab.Lab.Databases.Subject;
+import SpringbootLab.Lab.Entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

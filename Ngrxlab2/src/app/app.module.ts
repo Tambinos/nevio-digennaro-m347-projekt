@@ -22,7 +22,6 @@ import {AsyncPipe} from "@angular/common";
     AppRoutingModule,
     CurrencyPipe,
     AsyncPipe
-    // Include AppRoutingModule here
   ],
   providers: [],
   exports: [

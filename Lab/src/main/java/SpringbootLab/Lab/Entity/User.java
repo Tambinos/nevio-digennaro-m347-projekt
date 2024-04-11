@@ -1,4 +1,4 @@
-package SpringbootLab.Lab.Databases;
+package SpringbootLab.Lab.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,7 +19,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String username;
@@ -29,6 +29,15 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private boolean isAdmin;
+
+    @Column(nullable = false)
+    private boolean isAccountNonExpired;
+    @Column(nullable = false)
+    private boolean isAccountNonLocked;
+    @Column(nullable = false)
+    private boolean isCredentialsNonExpired;
+    @Column(nullable = false)
+    private boolean isEnabled;
 
 
     public User(String username, String password, boolean isAdmin) {

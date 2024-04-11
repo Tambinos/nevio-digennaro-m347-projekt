@@ -1,10 +1,10 @@
 package SpringbootLab.Lab.Controller;
 
 import SpringbootLab.Lab.DTO.SubjectGradeDto;
-import SpringbootLab.Lab.Databases.Grade;
-import SpringbootLab.Lab.Databases.Subject;
-import SpringbootLab.Lab.Databases.SubjectGrade;
-import SpringbootLab.Lab.Databases.User;
+import SpringbootLab.Lab.Entity.Grade;
+import SpringbootLab.Lab.Entity.Subject;
+import SpringbootLab.Lab.Entity.SubjectGrade;
+import SpringbootLab.Lab.Entity.User;
 import SpringbootLab.Lab.Service.GradeService;
 import SpringbootLab.Lab.Service.SubjectGradeService;
 import SpringbootLab.Lab.Service.SubjectService;
@@ -35,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 class SubjectGradeControllerTest {
+
     @Autowired
     MockMvc mockMvc;
     @Autowired

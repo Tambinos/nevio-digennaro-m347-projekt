@@ -1,11 +1,8 @@
 package SpringbootLab.Lab.Controller;
 
-import SpringbootLab.Lab.DTO.SubjectGradeDto;
-import SpringbootLab.Lab.Databases.Grade;
-import SpringbootLab.Lab.Databases.Subject;
-import SpringbootLab.Lab.Databases.SubjectGrade;
+import SpringbootLab.Lab.Entity.Grade;
+import SpringbootLab.Lab.Entity.SubjectGrade;
 import SpringbootLab.Lab.Service.SubjectGradeService;
-import org.jetbrains.kotlin.types.ConstantValueKind;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +17,8 @@ public class SubjectGradeController {
     }
 
     @PostMapping("/createNewGrade")
-    public void createNewGrade(@RequestBody SubjectGrade subject_grade) {
-        subject_gradeService.add(subject_grade);
+    public SubjectGrade createNewGrade(@RequestBody SubjectGrade subject_grade) {
+        return subject_gradeService.add(subject_grade);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -30,14 +27,15 @@ public class SubjectGradeController {
     }
 
     @PutMapping("/edit/{gradeId}")
-    public void editSubject(@PathVariable int gradeId,@RequestBody Grade grade) {
+    public void editSubject(@PathVariable int gradeId, @RequestBody Grade grade) {
         subject_gradeService.edit(gradeId, grade);
     }
 
     @GetMapping("/avgGrade/{userId}/{subjectId}")
-    public double avgGrade(@PathVariable Integer subjectId,@PathVariable Long userId) {
+    public double avgGrade(@PathVariable Integer subjectId, @PathVariable Long userId) {
         return subject_gradeService.getAVG(subjectId, userId);
     }
+
     @GetMapping("getAllGrades/{userId}")
     public List<SubjectGrade> getAllGrades(@PathVariable Long userId) {
         return subject_gradeService.getAllGrades(userId);

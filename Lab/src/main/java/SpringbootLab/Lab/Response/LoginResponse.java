@@ -1,4 +1,4 @@
-package SpringbootLab.Lab.Responses;
+package SpringbootLab.Lab.Response;
 
 
 import lombok.Getter;

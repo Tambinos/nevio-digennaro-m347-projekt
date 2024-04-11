@@ -6,11 +6,13 @@ import { Member } from '../../models/Member';
 import { Superior } from '../../models/Superior';
 import { Router, RouterLink } from '@angular/router';
 import { NgForOf, NgIf, NgStyle } from '@angular/common';
+import { MatCardSubtitle } from '@angular/material/card';
+import { MatTextColumn } from '@angular/material/table';
 
 @Component({
   selector: 'app-viewbookings',
   standalone: true,
-  imports: [NgForOf, NgStyle, RouterLink, NgIf],
+  imports: [NgForOf, NgStyle, RouterLink, NgIf, MatCardSubtitle, MatTextColumn],
   templateUrl: './viewbookings.component.html',
   styleUrl: './viewbookings.component.css',
 })
@@ -51,9 +53,6 @@ export class ViewbookingsComponent {
     this.bookings = this.focusedUser.bookings.filter(
       (booking) => booking.date === this.focusedDate,
     );
-    this.loginService.replaceSuperiorMember(
-      this.focusedUser.id,
-      this.focusedUser,
-    );
+    this.loginService.replaceSuperiorMember(this.focusedUser);
   }
 }

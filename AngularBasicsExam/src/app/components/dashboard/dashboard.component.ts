@@ -7,22 +7,16 @@ import { ProjectService } from '../../service/project.service';
 import { Superior } from '../../models/Superior';
 import { Project } from '../../models/Project';
 import { BookingService } from '../../service/booking.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Booking } from '../../models/Booking';
 import { TimeCodeService } from '../../service/time-code.service';
-import { QRCodeModule } from 'angularx-qrcode';
+import { MatCard } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    RouterLink,
-    NgForOf,
-    NgIf,
-    ReactiveFormsModule,
-    FormsModule,
-    QRCodeModule,
-  ],
+  imports: [MatCard, RouterLink, NgIf, NgForOf, MatButton, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -54,46 +48,29 @@ export class DashboardComponent {
       router.navigate(['/login']);
     }
     this.projects = this.projectService.getProjects();
-    // this.route.queryParams.subscribe(params => {
-    //   if (params['triggerFunction'] === 'true') {
-    //     this.startShift();
-    //     window.close();
-    //   }
-    // });
   }
-
-  // generateQRData() {
-  //   const baseUrl = window.location.href; // Or your app's base URL
-  //   const params = new URLSearchParams({ triggerFunction: 'true' }).toString();
-  //   return `${baseUrl}?${params}`;
-  // }
 
   getDatesOfWeek(): string[] {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + this.weekOffset * 7);
     const currentDay = currentDate.getDay();
     const mondayOffset = currentDay === 0 ? -6 : 1 - currentDay;
-    const monday = new Date(currentDate);
-    monday.setDate(monday.getDate() + mondayOffset);
-    const formatDate = (date: Date) => {
-      let day = date.getDate().toString().padStart(2, '0');
-      if (Number.parseInt(day) / 10 < 1) {
-        day = day.substring(1);
-      }
-      let month = (date.getMonth() + 1).toString().padStart(2, '0');
-      if (Number.parseInt(month) / 10 < 1) {
-        month = month.substring(1);
-      }
-      const year = date.getFullYear();
-      return `${day}.${month}.${year}`;
-    };
-    const weekDates = [];
-    for (let i = 0; i < 7; i++) {
-      const day = new Date(monday);
-      day.setDate(monday.getDate() + i);
-      weekDates.push(formatDate(day) + '');
-    }
+    currentDate.setDate(currentDate.getDate() + mondayOffset);
+
+    const weekDates = Array.from({ length: 7 }, (_, i) => {
+      const day = new Date(currentDate);
+      day.setDate(currentDate.getDate() + i);
+      return this.formatDate(day);
+    });
+
     return weekDates;
+  }
+
+  formatDate(date: Date): string {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
   }
 
   logout() {
@@ -111,36 +88,47 @@ export class DashboardComponent {
   }
 
   startShift() {
-    let shiftBookingIndex = this.activeUser.bookings.length;
-    let booking = new Booking(
-      this.projectService
-        .getProjects()
-        .filter((project) => project.name === this.project)[0] ??
-        this.projectService.getProjects()[0],
-      this.getDatesOfWeek()[new Date().getDay() - 1 || 6],
-      0,
-      this.timeCodeService.getTimeCodes()[0],
-      new Date().getHours() + new Date().getMinutes() / 60,
-    );
+    const booking: Booking = this.createBooking();
     this.shift = setInterval(() => {
-      if (
-        booking.date.substring(0, 2).replace('.', '') ===
-        new Date().getDate().toString().substring(0, 2)
-      ) {
-        booking.hours += 0.01;
-        booking.hours = Math.round(booking.hours * 100) / 100;
-        this.activeUser.bookings[shiftBookingIndex] = booking;
-        this.loginService.replaceSuperiorMember(
-          this.activeUser.id,
-          this.activeUser,
-        );
+      if (this.isSameDay(booking.date, new Date())) {
+        this.updateBooking(booking);
       } else {
-        booking.date = this.getDatesOfWeek()[new Date().getDay() - 1 || 6];
-        booking.hours = 0;
-        this.activeUser.bookings.push(booking);
-        shiftBookingIndex = this.activeUser.bookings.length;
+        this.resetBooking(booking);
       }
     }, 36000);
+  }
+
+  createBooking(): Booking {
+    return {
+      project:
+        this.projectService
+          .getProjects()
+          .find((project) => project.name === this.project) ||
+        this.projectService.getProjects()[0],
+      date: this.getDatesOfWeek()[new Date().getDay() - 1 || 6],
+      hours: 0,
+      timeCode: this.timeCodeService.getTimeCodes()[0],
+      startTime: new Date().getHours() + new Date().getMinutes() / 60,
+    };
+  }
+
+  isSameDay(date1: string, date2: Date): boolean {
+    return (
+      date1.substring(0, 2).replace('.', '') ===
+      date2.getDate().toString().substring(0, 2)
+    );
+  }
+
+  updateBooking(booking: Booking) {
+    booking.hours = Math.round((booking.hours + 0.01) * 100) / 100;
+    this.activeUser.bookings[this.activeUser.bookings.length - 1] = booking;
+    this.loginService.replaceSuperiorMember(this.activeUser);
+  }
+
+  resetBooking(booking: Booking) {
+    booking.date = this.getDatesOfWeek()[new Date().getDay() - 1 || 6];
+    booking.hours = 0;
+    this.activeUser.bookings.push(booking);
   }
 
   lastWeek() {
@@ -161,5 +149,8 @@ export class DashboardComponent {
     );
   }
 
-  protected readonly console = console;
+  setFocusedUserAndDate(user: Member, date: string) {
+    this.bookingService.setFocusedDate(date);
+    this.loginService.setFocusedUserId(user.id);
+  }
 }

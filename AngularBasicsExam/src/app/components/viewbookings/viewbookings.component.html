@@ -14,6 +14,12 @@
         X
       </button>
     </div>
-    <p style="font-size: 0.5rem; color: slategrey" *ngIf="booking.lastModified !== ''">Edited on: {{booking.lastModified}}</p>
+    <mat-card-subtitle class="duration">
+      {{ bookingService.calcTimeString(booking.startTime) + ' - ' + bookingService.calcTimeString(booking.startTime + booking.hours)}}
+    </mat-card-subtitle>
+    <br>
+    <mat-card-subtitle class="duration" *ngIf="booking.lastModified">
+      Edited on: {{ booking.lastModified }}
+    </mat-card-subtitle>
   </div>
 </div>

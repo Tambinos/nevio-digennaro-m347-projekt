@@ -1,24 +1,27 @@
 import {Component, OnDestroy} from '@angular/core';
-import {SubjectsService} from "../../service/subjects.service";
-import {GradeService} from "../../service/grade.service";
-import {LanguageService} from "../../service/language.service";
+import {SubjectsService} from "../../services/subjects.service";
+import {GradeService} from "../../services/grade.service";
+import {LanguageService} from "../../services/language.service";
 import {TranslateService} from "@ngx-translate/core";
-import {GradeSubject} from "../../models/GradeSubject";
+import {SubjectGrade} from "../../models/SubjectGrade";
 import {Subject as RxjsSubject} from "rxjs/internal/Subject";
-import {takeUntil} from "rxjs";
+import {Observable, takeUntil} from "rxjs";
+import {Store} from "@ngrx/store";
+import {Subject} from "../../models/Subject";
+import {removeSubjectGrade} from "../../actions/SubjectGrade.action";
 
 @Component({
   selector: 'app-gradedashboard',
   templateUrl: './gradedashboard.component.html',
   styleUrls: ['./gradedashboard.component.scss']
 })
-export class GradedashboardComponent implements OnDestroy{
+export class GradedashboardComponent implements OnDestroy {
   displayedColumns: string[] = ['grade', 'date', 'actions'];
   showPopup: boolean = false;
-  gradesOfLoggedInUser: GradeSubject[] = [];
-  gradesOfSubject: GradeSubject[] = [];
+  gradesOfLoggedInUser: SubjectGrade[] = [];
+  gradesOfSubject: SubjectGrade[] = [];
   subscriptions: RxjsSubject<void> = new RxjsSubject<void>();
-
+  grades$: Observable<SubjectGrade[]> = new Observable<SubjectGrade[]>();
 
   ngOnDestroy(): void {
     this.subscriptions.next();
@@ -29,24 +32,31 @@ export class GradedashboardComponent implements OnDestroy{
   constructor(protected subjectService: SubjectsService,
               protected languageService: LanguageService,
               protected gradeService: GradeService,
-              protected translate: TranslateService) {
+              protected translate: TranslateService,
+              private store: Store<{
+                subjectGrades: SubjectGrade[],
+                subject: Subject[]
+              }>) {
+    this.grades$ = this.store.select('subjectGrades');
     this.updateGradesOfSubject();
   }
 
   updateGradesOfSubject() {
-    this.gradeService.getGradesOfLoggedInUser().pipe(takeUntil(this.subscriptions)).subscribe((data: any) => {
+    this.grades$.pipe(takeUntil(this.subscriptions)).subscribe((data: any) => {
       this.gradesOfLoggedInUser = data;
-      this.gradesOfSubject = this.gradesOfLoggedInUser.filter((gradeSubject: GradeSubject) => gradeSubject.subject.id === this.subjectService.getFocusedSubject().id);
+      this.gradesOfSubject = this.gradesOfLoggedInUser.filter((gradeSubject: SubjectGrade) => gradeSubject.subject.id === this.subjectService.getFocusedSubject().id);
     });
   }
 
-  handleEvent(event: any, gradeSubject: GradeSubject) {
+  handleEvent(event: boolean, gradeSubject: SubjectGrade) {
     if (event) {
-      this.gradeService.deleteGrade(gradeSubject.id ?? 0);
+      this.store.dispatch(removeSubjectGrade(gradeSubject));
+      this.updateGradesOfSubject();
+      this.gradeService.deleteGrade(gradeSubject.id ?? 0)
+        .pipe(takeUntil(this.subscriptions))
+        .subscribe(() => {
+        });
     }
     this.showPopup = false;
-    setTimeout(() => {
-      this.updateGradesOfSubject();
-    }, 10)
   }
 }

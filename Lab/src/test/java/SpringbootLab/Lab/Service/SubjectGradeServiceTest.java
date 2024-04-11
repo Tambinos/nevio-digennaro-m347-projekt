@@ -1,9 +1,9 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.Grade;
-import SpringbootLab.Lab.Databases.Subject;
-import SpringbootLab.Lab.Databases.SubjectGrade;
-import SpringbootLab.Lab.Databases.User;
+import SpringbootLab.Lab.Entity.Grade;
+import SpringbootLab.Lab.Entity.Subject;
+import SpringbootLab.Lab.Entity.SubjectGrade;
+import SpringbootLab.Lab.Entity.User;
 import SpringbootLab.Lab.Repository.SubjectGradeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

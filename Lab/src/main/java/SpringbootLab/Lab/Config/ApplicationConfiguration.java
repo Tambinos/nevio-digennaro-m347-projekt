@@ -1,4 +1,4 @@
-package SpringbootLab.Lab.Configs;
+package SpringbootLab.Lab.Config;
 
 import SpringbootLab.Lab.Repository.UserRepository;
 import org.springframework.context.annotation.Bean;

@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router'; // Import RouterModule
-
-// Import your components
+import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileOverviewComponent } from './components/profile-overview/profile-overview.component';
@@ -11,8 +9,6 @@ import { BookingcreationComponent } from './components/bookingcreation/bookingcr
 import { ViewbookingsComponent } from './components/viewbookings/viewbookings.component';
 import { EditbookingComponent } from './components/editbooking/editbooking.component';
 import { AdmindashboardComponent } from './components/admindashboard/admindashboard.component';
-
-// Import your services
 import { RoleService } from './service/role.service';
 import { ProjectService } from './service/project.service';
 import { TimeCodeService } from './service/time-code.service';

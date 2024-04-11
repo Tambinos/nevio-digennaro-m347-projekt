@@ -1,6 +1,6 @@
 package SpringbootLab.Lab.Service;
 
-import SpringbootLab.Lab.Databases.Subject;
+import SpringbootLab.Lab.Entity.Subject;
 import SpringbootLab.Lab.Repository.SubjectGradeRepository;
 import SpringbootLab.Lab.Repository.SubjectRepository;
 import org.springframework.stereotype.Service;
@@ -17,11 +17,9 @@ public class SubjectService {
         this.subjectGradeRepository = subjectGradeRepository;
     }
 
-    public void add(Subject subject) {
-        if (contains(subject) != null) {
-        }
+    public Subject add(Subject subject) {
         subject.setSubject(subject.getSubject());
-        subjectRepository.save(subject);
+        return subjectRepository.save(subject);
     }
 
     public void delete(int id) {

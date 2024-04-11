@@ -54,15 +54,18 @@ export class EditbookingComponent {
   }
 
   updateBooking() {
-    let updatedBooking = new Booking(
-      this.projects.find((project) => project.name === this.project) ||
+    const updatedBooking: Booking = {
+      project:
+        this.projects.find((project) => project.name === this.project) ||
         this.focusedBooking.project,
-      this.bookingService.formatDate(this.date),
-      this.hours,
-      this.timeCodes.find((timeCode) => timeCode.name === this.timeCode) ||
+      date: this.bookingService.formatDate(this.date),
+      hours: this.hours,
+      timeCode:
+        this.timeCodes.find((timeCode) => timeCode.name === this.timeCode) ||
         this.focusedBooking.timeCode,
-      this.bookingService.calcTime(this.startTime),
-    );
+      startTime: this.bookingService.calcTime(this.startTime),
+    };
+
     updatedBooking.lastModified = new Date().toLocaleString();
     const focusedUser: Superior | Member = this.loginService.getById(
       this.loginService.getLoggedInUserId(),
@@ -79,7 +82,7 @@ export class EditbookingComponent {
         this.bookingService.formatDate(this.date),
       )
     ) {
-      this.loginService.replaceSuperiorMember(focusedUser.id, focusedUser);
+      this.loginService.replaceSuperiorMember(focusedUser);
     } else {
       focusedUser.bookings[this.bookingService.getIndexOfFocusedBooking()] =
         this.focusedBooking;
