@@ -30,7 +30,7 @@ export class GradeCreationComponent {
   ) {
   }
 
-  handleGrade() {
+  handleGrade():void {
     if (this.selectedGrade >= 1 && this.selectedGrade <= 6) {
       if (this.route.snapshot.url[0].path === 'editGrade') {
         this.store.dispatch(updateSubjectGrade({grade: this.selectedGrade}, this.gradeService.getFocusedGrade().id ?? 0));

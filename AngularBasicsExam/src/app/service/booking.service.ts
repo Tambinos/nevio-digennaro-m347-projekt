@@ -39,26 +39,14 @@ export class BookingService {
   formatDate(date: string): string {
     let year = date.substring(0, 4);
     let month = date.substring(5, 7);
-    if (month.charAt(0) === '0') {
-      month = month.substring(1);
-    }
     let day = date.substring(8, 10);
-    if (day.charAt(0) === '0') {
-      day = day.substring(1);
-    }
     return day + '.' + month + '.' + year;
   }
 
   deFormatDate(date: string): string {
     let dateArray = date.split('.');
     let day = dateArray[0];
-    if (Number.parseInt(day) < 10) {
-      day = '0' + day;
-    }
     let month = dateArray[1];
-    if (Number.parseInt(month) < 10) {
-      month = '0' + month;
-    }
     let year = dateArray[2];
     return year + '-' + month + '-' + day;
   }
@@ -127,6 +115,7 @@ export class BookingService {
   }
 
   calcTimeString(time: number) {
+    console.log(time);
     let hour = Math.floor(time);
     let min = Math.round((time - hour) * 60);
     let timeString = hour + ':' + min;
@@ -136,6 +125,7 @@ export class BookingService {
     if (hour < 10) {
       timeString = '0' + timeString;
     }
+    console.log(timeString);
     return timeString;
   }
 }

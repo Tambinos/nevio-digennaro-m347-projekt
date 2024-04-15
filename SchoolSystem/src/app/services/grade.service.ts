@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {SubjectGrade} from "../models/SubjectGrade";
 import {UsersService} from "./users.service";
 import {Grade} from "../models/Grade";
-import {map, Observable} from "rxjs";
-import {Subject} from "../models/Subject";
+import {Observable, switchMap} from "rxjs";
+import {User} from "../models/User";
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +25,18 @@ export class GradeService {
   }
 
   getGradesOfLoggedInUser(): Observable<SubjectGrade[]> {
-    return this.http.get('http://localhost:8080/api/subjectGrade/getAllGrades/' + this.userService.getLoggedInUser().id?.toString(), {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    }).pipe(map((data: any) => {
-      return data;
-    }))
+    return this.userService.getMe().pipe(
+      switchMap((user: User) => {
+        return this.http.get<SubjectGrade[]>(`http://localhost:8080/api/subjectGrade/getAllGrades/${user.id}`, {
+          headers: {
+            'Authorization': `Bearer ${this.userService.getToken()}`
+          }
+        });
+      })
+    );
   }
 
-  deleteGrade(gradeId: number) {
+  deleteGrade(gradeId: number): Observable<Object> {
     return this.http.delete('http://localhost:8080/api/subjectGrade/delete/' + gradeId.toString(), {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
@@ -42,7 +44,7 @@ export class GradeService {
     })
   }
 
-  createGrade(grade: SubjectGrade) {
+  createGrade(grade: SubjectGrade): Observable<Object> {
     return this.http.post('http://localhost:8080/api/subjectGrade/createNewGrade', grade, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
@@ -50,26 +52,13 @@ export class GradeService {
     })
   }
 
-  updateGrade(subjectGradeId: number, grade: Grade) {
+  updateGrade(subjectGradeId: number, grade: Grade): Observable<Object> {
     return this.http.put('http://localhost:8080/api/subjectGrade/edit/' + subjectGradeId, grade, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
       }
     })
   }
-
-  calculateAvgGrades(grades: SubjectGrade[], subject:Subject): Grade {
-    let sum = 0;
-    if (grades.length && grades.length > 0) {
-      grades.forEach((grade: SubjectGrade) => {
-        sum += grade.grade.grade;
-      });
-    } else {
-      return {id: subject.id, grade: 0};
-    }
-    return {id: subject.id, grade: sum / grades.length};
-  }
-
 
   getGradeRatingColor(grade: number): string {
     if (grade >= 4.5) {

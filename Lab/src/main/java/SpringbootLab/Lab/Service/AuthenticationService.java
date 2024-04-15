@@ -30,6 +30,10 @@ public class AuthenticationService {
         User user = new User();
         user.setUsername(input.getUsername());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setEnabled(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
         return userRepository.save(user);
     }
 

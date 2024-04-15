@@ -21,7 +21,6 @@ import { MatButton } from '@angular/material/button';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  // @ts-ignore
   activeUser: Member | Superior;
   projects: Project[] = [];
   weekOffset = 0;
@@ -37,16 +36,11 @@ export class DashboardComponent {
     private timeCodeService: TimeCodeService,
     private route: ActivatedRoute,
   ) {
-    if (
-      this.loginService.getById(this.loginService.getLoggedInUserId()) ??
-      false
-    ) {
-      this.activeUser = this.loginService.getById(
-        this.loginService.getLoggedInUserId(),
-      );
-    } else {
+    let user = this.loginService.getById(this.loginService.getLoggedInUserId());
+    if (!user) {
       router.navigate(['/login']);
     }
+    this.activeUser = user as Member | Superior;
     this.projects = this.projectService.getProjects();
   }
 
@@ -109,6 +103,7 @@ export class DashboardComponent {
       hours: 0,
       timeCode: this.timeCodeService.getTimeCodes()[0],
       startTime: new Date().getHours() + new Date().getMinutes() / 60,
+      endTime: new Date().getHours() + new Date().getMinutes() / 60,
     };
   }
 

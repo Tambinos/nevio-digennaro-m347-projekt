@@ -5,11 +5,14 @@ import {LanguageService} from "../../services/language.service";
 import {TranslateService} from "@ngx-translate/core";
 import {GradeService} from "../../services/grade.service";
 import {Subject} from "../../models/Subject";
-import {Grade} from "../../models/Grade";
-import {map, Observable, of, Subject as RxjsSubject, switchMap, takeUntil} from 'rxjs';
-import {SubjectGrade} from "../../models/SubjectGrade";
+import {Observable, Subject as RxjsSubject, takeUntil} from 'rxjs';
 import {Store} from "@ngrx/store";
-import {removeSubject} from "../../actions/Subject.action";
+import {loadSubjects, removeSubject} from "../../actions/Subject.action";
+import {loadSubjectsGrades} from "../../actions/SubjectGrade.action";
+import {AppState} from "../../state/app.state";
+import {SubjectsState} from "../../state/subject.state";
+import {SubjectGradesState} from "../../state/subject.grades.state";
+import {selectAvgGradeBySubjectId} from "../../selectors/avgGradeFeatureSelector";
 
 
 @Component({
@@ -20,72 +23,45 @@ import {removeSubject} from "../../actions/Subject.action";
 export class DashboardComponent implements OnDestroy {
   displayedColumns: string[] = ['subject', 'avgGrade'];
   showPopup: boolean = false;
-  subjects: Subject[] = [];
-  avgGrades: Grade[] = [];
   subscriptions: RxjsSubject<void> = new RxjsSubject<void>();
   Math: Math = Math;
-  subjectGrades$: Observable<SubjectGrade[]> = new Observable<SubjectGrade[]>;
-  subjects$: Observable<Subject[]> = new Observable<Subject[]>;
-
-  ngOnDestroy(): void {
-    this.subscriptions.next();
-    this.subscriptions.complete();
-  }
+  subjectGrades$: Observable<SubjectGradesState> = new Observable<SubjectGradesState>;
+  subjects$: Observable<SubjectsState> = new Observable<SubjectsState>;
 
   constructor(protected subjectService: SubjectsService,
               protected userService: UsersService,
               protected languageService: LanguageService,
               protected translate: TranslateService,
               protected gradeService: GradeService,
-              private store: Store<{ subjectGrades: SubjectGrade[], subject: Subject[] }>) {
+              private store: Store<AppState>) {
 
     if (this.userService.getLoggedInUser().admin) {
       this.displayedColumns = ['subject', 'avgGrade', 'actions'];
     }
-    this.subjects$ = this.store.select('subject');
-    this.subjectGrades$ = this.store.select('subjectGrades');
-    this.updateSubjectsAndAVGGrades();
+    if (this.userService.firstInitiated) {
+      this.store.dispatch(loadSubjects());
+      this.store.dispatch(loadSubjectsGrades());
+      this.userService.firstInitiated = false;
+    }
+    this.subjects$ = this.store.select('subjects')
+    this.subjectGrades$ = this.store.select('subjectGrades')
   }
 
-
-  updateSubjectsAndAVGGrades(): void {
-    this.subjects$
-      .pipe(
-        takeUntil(this.subscriptions),
-        switchMap((subjects: Subject[]) => {
-          this.subjects = subjects;
-          return this.subjectGrades$.pipe(
-            takeUntil(this.subscriptions),
-            map((grades: SubjectGrade[]) => {
-              return this.subjects.map(subject => {
-                const subjectGrades = grades.filter(grade => grade.subject.id === subject.id);
-                return this.gradeService.calculateAvgGrades(subjectGrades, subject);
-              });
-            })
-          );
-        })
-      )
-      .subscribe((avgGrades: Grade[]) => {
-        this.avgGrades = avgGrades;
-      });
+  ngOnDestroy(): void {
+    this.subscriptions.next();
+    this.subscriptions.complete();
   }
 
 
   handleEvent(event: boolean, subject: Subject): void {
     if (event) {
       this.store.dispatch(removeSubject(subject));
-      this.updateSubjectsAndAVGGrades();
       this.subjectService.deleteSubject(subject).pipe(takeUntil(this.subscriptions)).subscribe();
     }
     this.showPopup = false;
   }
 
-  getAvgGrade(subject: Subject): number {
-    let subjectGrade = this.avgGrades.find((grade: Grade) => grade.id === subject.id);
-    if (subjectGrade) {
-      return subjectGrade.grade;
-    } else {
-      return 0;
-    }
+  getAvgGradeBySubjectId(subjectId: number): Observable<number> {
+    return this.store.select(selectAvgGradeBySubjectId, {subjectId});
   }
 }

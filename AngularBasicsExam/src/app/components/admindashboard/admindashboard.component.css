@@ -49,6 +49,7 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: space-between;
   height: 50px;
+  margin-bottom: 20px;
 }
 .membersButton{
   background-color: #007bff;
@@ -60,3 +61,4 @@ button[type="submit"]:hover {
   font-size: 16px;
   width: 150px;
 }
+

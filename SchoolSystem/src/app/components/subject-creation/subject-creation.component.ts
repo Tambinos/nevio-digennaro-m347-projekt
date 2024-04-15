@@ -29,7 +29,7 @@ export class SubjectCreationComponent implements OnDestroy {
   }>) {
   }
 
-  handleSubject() {
+  handleSubject():void {
     if (this.route.snapshot.url[0].path === 'editSubject') {
       this.store.dispatch(updateSubject({subject: this.selectedSubject, id: this.subjectService.getFocusedSubject().id}))
       this.subjectService.editSubject(this.subjectService.getFocusedSubject(), this.selectedSubject).subscribe();

@@ -26,16 +26,11 @@ export class ViewbookingsComponent {
     protected bookingService: BookingService,
     protected router: Router,
   ) {
-    if (
-      this.loginService.getById(this.loginService.getLoggedInUserId()) ??
-      false
-    ) {
-    } else {
+    let user = this.loginService.getById(this.loginService.getLoggedInUserId());
+    if (!user) {
       router.navigate(['/login']);
     }
-    this.focusedUser = this.loginService.getById(
-      this.loginService.getFocusedUserId(),
-    );
+    this.focusedUser = user as Member | Superior;
     this.focusedDate = this.bookingService.getFocusedDate();
     this.bookings = this.focusedUser.bookings.filter(
       (booking) => booking.date === this.focusedDate,

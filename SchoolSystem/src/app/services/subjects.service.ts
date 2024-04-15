@@ -11,7 +11,7 @@ export class SubjectsService {
   constructor(private http: HttpClient, private userService: UsersService) {
   };
 
-  getSubjects():Observable<Subject[]>{
+  getSubjects(): Observable<Subject[]> {
     return this.http.get('http://localhost:8080/api/admin/subject/all', {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
@@ -27,11 +27,11 @@ export class SubjectsService {
         'Authorization': `Bearer ${this.userService.getToken()}`
       }
     }).pipe(map((data: any) => {
-        return data;
+      return data;
     }))
   }
 
-  addSubject(subject: Subject) {
+  addSubject(subject: Subject): Observable<Object> {
     return this.http.post('http://localhost:8080/api/admin/subject/create', subject, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`
@@ -39,7 +39,7 @@ export class SubjectsService {
     })
   }
 
-  editSubject(subject: Subject, newSubject: string) {
+  editSubject(subject: Subject, newSubject: string): Observable<Object> {
     let newSub: Subject = {id: subject.id, subject: newSubject};
     newSub.id = subject.id;
     return this.http.put('http://localhost:8080/api/admin/subject/editSubject', newSub, {
@@ -49,7 +49,7 @@ export class SubjectsService {
     })
   }
 
-  deleteSubject(subject: Subject) {
+  deleteSubject(subject: Subject): Observable<Object> {
     return this.http.delete('http://localhost:8080/api/admin/subject/delete/' + subject.id, {
       headers: {
         'Authorization': `Bearer ${this.userService.getToken()}`

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoleService } from '../../service/role.service';
+import { Member } from '../../models/Member';
 
 @Component({
   selector: 'app-login',
@@ -28,12 +29,19 @@ export class LoginComponent {
   }
 
   checkLogin() {
+    let allMembers: Member[] = [
+      ...this.loginService.members,
+      ...this.loginService.superiors,
+    ];
+    let loginsuccess = false;
     if (this.numberOfFailedAttempts < 3) {
-      this.loginService.members.forEach((member) => {
+      this.numberOfFailedAttempts++;
+      allMembers.forEach((member) => {
         if (
           member.username === this.username &&
           member.password === this.password
         ) {
+          loginsuccess = true;
           while (member.password === '1234' || member.password.length < 4) {
             member.password =
               prompt(
@@ -45,27 +53,11 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']);
         }
       });
-      this.loginService.superiors.forEach((superior) => {
-        if (
-          superior.username === this.username &&
-          superior.password === this.password
-        ) {
-          while (superior.password === '1234' || superior.password.length < 4) {
-            superior.password =
-              prompt(
-                'Please change your password. Your password must be at least 4 characters long.',
-              ) ?? '';
-          }
-          this.loginService.setSuperiors(this.loginService.superiors);
-          this.loginService.setLoggedInUserId(superior.id);
-          this.router.navigate(['/dashboard']);
-        }
-      });
-      this.numberOfFailedAttempts++;
     } else {
       alert(
         'You have exceeded the number of login attempts. Please try again later.',
       );
     }
+    if (!loginsuccess) alert('Invalid username or password');
   }
 }

@@ -9,8 +9,6 @@ import { Booking } from '../../models/Booking';
 import { Project } from '../../models/Project';
 import { TimeCode } from '../../models/TimeCode';
 import { RoleService } from '../../service/role.service';
-import { Superior } from '../../models/Superior';
-import { Member } from '../../models/Member';
 
 @Component({
   selector: 'app-editbooking',
@@ -25,7 +23,7 @@ export class EditbookingComponent {
   projects: Project[];
   date: string;
   startTime: string;
-  hours: number;
+  endTime: string;
   project: string;
   timeCode: string;
 
@@ -45,7 +43,9 @@ export class EditbookingComponent {
       .getProjects()
       .filter((project) => project.name !== this.focusedBooking.project.name);
     this.date = this.bookingService.deFormatDate(this.focusedBooking.date);
-    this.hours = this.focusedBooking.hours;
+    this.endTime = this.bookingService.calcTimeString(
+      this.focusedBooking.endTime,
+    );
     this.project = this.focusedBooking.project.name;
     this.timeCode = this.focusedBooking.timeCode.name;
     this.startTime = this.bookingService.calcTimeString(
@@ -54,38 +54,43 @@ export class EditbookingComponent {
   }
 
   updateBooking() {
+    console.log(this.endTime);
     const updatedBooking: Booking = {
       project:
         this.projects.find((project) => project.name === this.project) ||
         this.focusedBooking.project,
       date: this.bookingService.formatDate(this.date),
-      hours: this.hours,
+      endTime: this.bookingService.calcTime(this.endTime),
       timeCode:
         this.timeCodes.find((timeCode) => timeCode.name === this.timeCode) ||
         this.focusedBooking.timeCode,
       startTime: this.bookingService.calcTime(this.startTime),
+      hours:
+        this.bookingService.calcTime(this.endTime) -
+        this.bookingService.calcTime(this.startTime),
     };
-
     updatedBooking.lastModified = new Date().toLocaleString();
-    const focusedUser: Superior | Member = this.loginService.getById(
+    let focusedUser = this.loginService.getById(
       this.loginService.getLoggedInUserId(),
     );
-    focusedUser.bookings[this.bookingService.getIndexOfFocusedBooking()] =
-      updatedBooking;
-    if (
-      this.bookingService.checkForOverlappingBookings(
-        focusedUser.bookings,
-        this.bookingService.formatDate(this.date),
-      ) &&
-      this.bookingService.checkLunch(
-        focusedUser.bookings,
-        this.bookingService.formatDate(this.date),
-      )
-    ) {
-      this.loginService.replaceSuperiorMember(focusedUser);
-    } else {
+    if (focusedUser) {
       focusedUser.bookings[this.bookingService.getIndexOfFocusedBooking()] =
-        this.focusedBooking;
+        updatedBooking;
+      if (
+        this.bookingService.checkForOverlappingBookings(
+          focusedUser.bookings,
+          this.bookingService.formatDate(this.date),
+        ) &&
+        this.bookingService.checkLunch(
+          focusedUser.bookings,
+          this.bookingService.formatDate(this.date),
+        )
+      ) {
+        this.loginService.replaceSuperiorMember(focusedUser);
+      } else {
+        focusedUser.bookings[this.bookingService.getIndexOfFocusedBooking()] =
+          this.focusedBooking;
+      }
     }
   }
 }

@@ -31,7 +31,6 @@ import { ProjectService } from '../../service/project.service';
   styleUrl: './admindashboard.component.css',
 })
 export class AdmindashboardComponent {
-  // @ts-ignore
   activeUser: Member | Superior;
   roles: string[] = ['Member', 'Superior'];
   selectedRole: string = 'Member';
@@ -52,6 +51,31 @@ export class AdmindashboardComponent {
   membersWithOutUser: Member[];
   memberToAddName: string = 'Select Member to Add';
   actionIndex: number = 0;
+
+  constructor(
+    protected loginService: RoleService,
+    private router: Router,
+    private projectService: ProjectService,
+    private timeCodeService: TimeCodeService,
+  ) {
+    let user: Member | Superior | undefined = this.loginService.getById(
+      this.loginService.getLoggedInUserId(),
+    );
+    if (!user) {
+      router.navigate(['/login']);
+    }
+    this.activeUser = user as Member | Superior;
+    this.activeUser = user as Member | Superior;
+    if (!this.loginService.getAdminIds().includes(this.activeUser.id)) {
+      alert('GET BACK TO WORK!');
+      router.navigate(['/dashboard']);
+    }
+    this.membersWithOutUser = this.members.filter(
+      (member) => member.id !== this.members[this.index].id,
+    );
+    this.allMembers.push(...this.members);
+    this.allMembers.push(...this.superiors);
+  }
 
   nextAction() {
     this.actionIndex++;
@@ -99,29 +123,6 @@ export class AdmindashboardComponent {
     this.redefineAllMembers();
   }
 
-  constructor(
-    protected loginService: RoleService,
-    private router: Router,
-    private projectService: ProjectService,
-    private timeCodeService: TimeCodeService,
-  ) {
-    if (!this.loginService.getById(this.loginService.getLoggedInUserId())) {
-      router.navigate(['/login']);
-    }
-    this.activeUser = this.loginService.getById(
-      this.loginService.getLoggedInUserId(),
-    );
-    if (!this.loginService.getAdminIds().includes(this.activeUser.id)) {
-      alert('GET BACK TO WORK!');
-      router.navigate(['/dashboard']);
-    }
-    this.membersWithOutUser = this.members.filter(
-      (member) => member.id !== this.members[this.index].id,
-    );
-    this.allMembers.push(...this.members);
-    this.allMembers.push(...this.superiors);
-  }
-
   addMember() {
     let newUser;
     if (this.selectedRole === 'Member') {
@@ -132,7 +133,7 @@ export class AdmindashboardComponent {
           1,
         name: this.name,
         preName: this.preName,
-        username: (this.preName + '.' + this.name).toLowerCase(),
+        username: this.preName.toLowerCase(),
         password: this.password,
         department: this.department,
         bookings: this.bookings,

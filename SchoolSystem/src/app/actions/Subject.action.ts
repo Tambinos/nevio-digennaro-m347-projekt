@@ -31,5 +31,5 @@ export const loadSubjectsSuccess = createAction(
 );
 export const loadSubjectsFailure = createAction(
   SubjectActionTypes.loadSubjectsFailure,
-  props<{ error: any }>()
+  props<{ error:any }>()
 );

@@ -2,18 +2,20 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/User";
 import {Router} from "@angular/router";
-import {takeUntil} from "rxjs";
+import {Observable, takeUntil} from "rxjs";
 import {Subject as SubjectRxjs} from "rxjs/internal/Subject";
+import {loadSubjects} from "../actions/Subject.action";
+import {loadSubjectsGrades} from "../actions/SubjectGrade.action";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService implements OnDestroy {
-  private loggedInUser: User | undefined;
   private subscriptions: SubjectRxjs<void> = new SubjectRxjs<void>();
+firstInitiated: boolean = true;
 
-
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private store: Store) {
 
   }
 
@@ -23,34 +25,28 @@ export class UsersService implements OnDestroy {
   }
 
   login(user: User) {
-    this.http.post('http://localhost:8080/api/user/login', user).subscribe((data: any) => {
-      this.setToken(data.token);
-      this.http.get('http://localhost:8080/api/user/me', {
-        headers: {
-          'Authorization': `Bearer ${this.getToken()}`
-        }
-      }).pipe(takeUntil(this.subscriptions)).subscribe((data: any) => {
-        this.setLoggedInUser(data);
-        this.router.navigate(['/dashboard']);
-      })
-    });
+    return this.http.post('http://localhost:8080/api/user/login', user);
   }
 
   createUser(user: User) {
-    this.http.post('http://localhost:8080/api/user/createUser', user).pipe((takeUntil(this.subscriptions))).subscribe(() => {
+    return this.http.post('http://localhost:8080/api/user/createUser', user).pipe((takeUntil(this.subscriptions)));
+  }
+
+  getMe(): Observable<User> {
+    return this.http.get<User>('http://localhost:8080/api/user/me',{
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
     });
   }
-
-  setLoggedInUser(user: User | undefined) {
-    window.localStorage.setItem('loggedInUser', JSON.stringify(user));
-    this.loggedInUser = user;
-  }
-
   getLoggedInUser(): User {
-    return JSON.parse(window.localStorage.getItem('loggedInUser') ?? '');
+    return JSON.parse(window.localStorage.getItem('user') ?? '') as User;
+  }
+  setLoggedInUser(user: User) {
+    window.localStorage.setItem('user', JSON.stringify(user));
   }
 
-  getToken() {
+  getToken(): string {
     return window.localStorage.getItem('token') ?? '';
   }
 

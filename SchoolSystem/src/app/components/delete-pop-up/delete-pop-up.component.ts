@@ -8,8 +8,8 @@ import {LanguageService} from "../../services/language.service";
   styleUrls: ['./delete-pop-up.component.scss']
 })
 export class DeletePopUpComponent {
-  @Output() decision = new EventEmitter<boolean>();
-  parent = ''
+  @Output() decision:EventEmitter<boolean> = new EventEmitter<boolean>();
+  parent:string = ''
   constructor(languageService: LanguageService) {
     this.parent = window.parent.location.href.substring(window.parent.location.href.lastIndexOf('/'), window.parent.location.href.length);
   }

@@ -3,7 +3,7 @@
   <mat-card class="login-card">
     <mat-card-header class="headerAndButtonDiv">
       <mat-card-title class="title">{{ 'Login' | translate }}</mat-card-title>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelector"
+      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelectorPrimary"
                   (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
         <mat-option *ngFor="let language of languageService.languages" [value]="language">
           {{ language }}

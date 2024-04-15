@@ -5,18 +5,22 @@
       <label for="bookingDate">Date:</label>
       <input type="date" id="bookingDate" [(ngModel)]="date" name="bookingDate" required>
     </div>
-    <div class="form-group">
-      <label for="bookingStartTime">Start Time: </label>
-      <input type="time" id="bookingStartTime"  [(ngModel)]="this.startTimeString" name="bookingStartTime" required>
-    </div>
-    <div class="form-group">
-      <label for="bookingHours">Hours:</label>
-      <input type="number" [(ngModel)] ="this.hours" id="bookingHours" name="bookingHours" min="1" max="24" required>
-    </div>
+    <ng-container *ngFor="let times of endTimes; let i = index">
+      <div class="form-group">
+        <label for="bookingStartTime-{{i}}">Start Time: </label>
+        <input type="time" id="bookingStartTime-{{i}}" [(ngModel)]="this.startTimes[i]" name="bookingStartTime-{{i}}" required>
+      </div>
+      <div class="form-group">
+        <label for="bookingEndTime-{{i}}">End Time:</label>
+        <input type="time" id="bookingEndTime-{{i}}" [(ngModel)]="this.endTimes[i]" name="bookingEndTime-{{i}}" required>
+      </div>
+    </ng-container>
+    <button (click)="addEndAndStartTime()" mat-raised-button>Add another Time</button>
+    <button (click)="removeEndAndStartTime()" mat-raised-button>Remove Time</button>
     <div class="form-group">
       <label for="projectName">Project:</label>
-      <select [(ngModel)]="project" id="projectName"  name="project">
-        <option *ngFor="let project of projects" >{{ project.name }}</option>
+      <select [(ngModel)]="project" id="projectName" name="project">
+        <option *ngFor="let project of projects">{{ project.name }}</option>
       </select>
     </div>
     <div class="form-group">

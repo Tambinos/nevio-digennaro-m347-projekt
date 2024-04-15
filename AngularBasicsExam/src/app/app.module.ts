@@ -36,6 +36,5 @@ import { BookingService } from './service/booking.service';
     BookingService,
   ],
   bootstrap: [],
-  // Your root component here, for example, AppComponent
 })
 export class AppModule {}

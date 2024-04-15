@@ -13,23 +13,17 @@ import { Superior } from '../../models/Superior';
   styleUrl: './profile-overview.component.css',
 })
 export class ProfileOverviewComponent {
-  // @ts-ignore
   activeUser: Member | Superior;
 
   constructor(
     private loginService: RoleService,
     private router: Router,
   ) {
-    if (
-      this.loginService.getById(this.loginService.getLoggedInUserId()) ??
-      false
-    ) {
-      this.activeUser = this.loginService.getById(
-        this.loginService.getLoggedInUserId(),
-      );
-    } else {
+    let user = this.loginService.getById(this.loginService.getLoggedInUserId());
+    if (!user) {
       router.navigate(['/login']);
     }
+    this.activeUser = user as Member | Superior;
   }
 
   logout() {

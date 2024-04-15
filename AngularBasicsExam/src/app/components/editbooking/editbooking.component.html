@@ -6,8 +6,8 @@
     <label for="startTimeInput">Start Time:</label>
     <input [(ngModel)]="this.startTime" type="time" id="startTimeInput" name="startTime"
            value="{{this.focusedBooking.startTime}}">
-    <label for="durationInput">Duration (hours):</label>
-    <input [(ngModel)]="this.hours" type="number" id="durationInput" name="duration"
+    <label for="durationInput">End Time:</label>
+    <input [(ngModel)]="this.endTime" type="time" id="durationInput" name="duration"
            value="{{this.focusedBooking.hours}}">
     <label for="projectSelect">Project:</label>
     <select [(ngModel)]="this.project" id="projectSelect" name="project">

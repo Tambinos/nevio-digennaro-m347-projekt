@@ -26,10 +26,6 @@ $SchoolSystem-theme: mat.define-light-theme((
     warn: $SchoolSystem-warn,
   )
 ));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include mat.all-component-themes($SchoolSystem-theme);
 html, body {
   height: 100%;
@@ -121,7 +117,7 @@ $breakpoint-desktop: 1200px;
   justify-content: space-between
 }
 
-.languageSelector {
+.languageSelectorPrimary {
   width: 90px !important;
 }
 
@@ -136,6 +132,16 @@ $breakpoint-desktop: 1200px;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+}
+.mobileLanguageAndLogoutButton {
+  display: none;
+  margin-top: -20px;
+  width: 100vw;
+}
+.secondaryLanguageSelector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* Responsive Styles */
 @media only screen and (max-width: $breakpoint-mobile) {
@@ -159,6 +165,17 @@ $breakpoint-desktop: 1200px;
   }
   .secondaryAddButton {
     visibility: visible;
+  }
+  .languageSelectorPrimary {
+   visibility: hidden;
+  }
+  .primaryLogoutButton {
+    visibility: hidden;
+  }
+  .mobileLanguageAndLogoutButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
