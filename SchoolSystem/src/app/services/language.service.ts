@@ -6,7 +6,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class LanguageService {
   languages: string[] = ['English','Deutsch','Francais'];
-  selectedLanguage: string = 'English';
+  selectedLanguage: string = 'Deutsch';
   constructor(private translate: TranslateService) {
     translate.setDefaultLang(this.languageConverter(this.selectedLanguage));
   }

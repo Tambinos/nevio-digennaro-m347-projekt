@@ -3,8 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {SubjectGrade} from "../models/SubjectGrade";
 import {UsersService} from "./users.service";
 import {Grade} from "../models/Grade";
-import {Observable, switchMap} from "rxjs";
+import {Observable, of, switchMap} from "rxjs";
 import {User} from "../models/User";
+import {SubjectsService} from "./subjects.service";
+import {Subject} from "../models/Subject";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,14 @@ import {User} from "../models/User";
 export class GradeService {
 
 
-  constructor(private http: HttpClient, private userService: UsersService) {
+  constructor(private http: HttpClient, private userService: UsersService, private subjectService: SubjectsService) {
   }
+
+  public subjectGradeArray: SubjectGrade[] = [
+    {id: 0, grade: {id: 0, grade: 5}, date: "19.9.2024", subject: this.subjectService.subjectsArray[0]},
+    {id: 1, grade: {id: 1, grade: 4}, date: "20.9.2024", subject: this.subjectService.subjectsArray[1]},
+    {id: 2, grade: {id: 2, grade: 6}, date: "21.9.2024", subject: this.subjectService.subjectsArray[2]},
+  ];
 
 
   setFocusedGrade(grade: SubjectGrade) {
@@ -25,39 +33,39 @@ export class GradeService {
   }
 
   getGradesOfLoggedInUser(): Observable<SubjectGrade[]> {
-    return this.userService.getMe().pipe(
-      switchMap((user: User) => {
-        return this.http.get<SubjectGrade[]>(`http://localhost:8080/api/subjectGrade/getAllGrades/${user.id}`, {
-          headers: {
-            'Authorization': `Bearer ${this.userService.getToken()}`
-          }
-        });
-      })
-    );
+    return of(this.subjectGradeArray)
   }
 
-  deleteGrade(gradeId: number): Observable<Object> {
-    return this.http.delete('http://localhost:8080/api/subjectGrade/delete/' + gradeId.toString(), {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    })
+  addGrade(subjectGrade: SubjectGrade): Observable<Object> {
+    alert("Grade was added")
+    /*
+        subjectGrade.id = this.subjectGradeArray.length
+        this.subjectGradeArray.push(subjectGrade)
+        this.subjectService.averageGrades[subjectGrade.subject.id!].push(subjectGrade.grade.grade)
+
+     */
+    return of(this.subjectGradeArray)
   }
 
-  createGrade(grade: SubjectGrade): Observable<Object> {
-    return this.http.post('http://localhost:8080/api/subjectGrade/createNewGrade', grade, {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    })
+  editGrade(subjectGrade: SubjectGrade, grade: number): Observable<Object> {
+    alert("Grade was edited")
+
+    /*this.subjectGradeArray[subjectGrade.id!].grade.grade = grade
+    this.subjectService.averageGrades[subjectGrade.subject.id!][subjectGrade.id!] = grade;
+
+     */
+    return of(this.subjectGradeArray)
   }
 
-  updateGrade(subjectGradeId: number, grade: Grade): Observable<Object> {
-    return this.http.put('http://localhost:8080/api/subjectGrade/edit/' + subjectGradeId, grade, {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    })
+  deleteGrade(subjectGrade: SubjectGrade): Observable<Object> {
+    alert("Grade was deleted")
+    /*    this.subjectGradeArray = this.subjectGradeArray.filter(subjectGrade2 => subjectGrade2.id !== subjectGrade.id!)
+        for (let i = 0; i < this.subjectGradeArray.length; i++) {
+          this.subjectGradeArray[i].id = i
+        }
+
+     */
+    return of(this.subjectGradeArray)
   }
 
   getGradeRatingColor(grade: number): string {

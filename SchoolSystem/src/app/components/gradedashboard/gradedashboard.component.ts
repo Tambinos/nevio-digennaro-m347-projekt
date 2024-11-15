@@ -5,10 +5,12 @@ import {LanguageService} from "../../services/language.service";
 import {TranslateService} from "@ngx-translate/core";
 import {SubjectGrade} from "../../models/SubjectGrade";
 import {Subject as RxjsSubject} from "rxjs/internal/Subject";
-import {map, Observable, takeUntil} from "rxjs";
+import {map, Observable, of, takeUntil} from "rxjs";
 import {Store} from "@ngrx/store";
 import {removeSubjectGrade} from "../../actions/SubjectGrade.action";
 import {SubjectGradesState} from "../../state/subject.grades.state";
+import {DeletePopUpComponent} from "../delete-pop-up/delete-pop-up.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-gradedashboard',
@@ -33,20 +35,25 @@ export class GradedashboardComponent implements OnDestroy {
               protected translate: TranslateService,
               private store: Store<{
                 subjectGrades: SubjectGradesState,
-              }>) {
-    this.grades$ = this.store.select('subjectGrades').pipe(
-      takeUntil(this.subscriptions),
-      map((state: SubjectGradesState) => state.subjectGrades
-        .filter((grade: SubjectGrade) => grade.subject.id === this.subjectService.getFocusedSubject().id)
-      )
-    );
+              }>,
+              protected dialog: MatDialog
+  ) {
+    this.grades$ = of(this.gradeService.subjectGradeArray.filter(grade => grade.subject.id === this.subjectService.getFocusedSubject().id))
   }
 
+  openDialog() {
+    this.dialog.open(DeletePopUpComponent, {
+      disableClose: true, // Prevents closing on overlay click
+      data: '/gradeDashboard'
+    }).afterClosed().subscribe((event: boolean) => {
+      this.handleEvent(event, this.gradeService.getFocusedGrade())
+    })
+  }
 
   handleEvent(event: boolean, gradeSubject: SubjectGrade) {
     if (event) {
       this.store.dispatch(removeSubjectGrade(gradeSubject));
-      this.gradeService.deleteGrade(gradeSubject.id ?? 0)
+      this.gradeService.deleteGrade(gradeSubject)
         .pipe(takeUntil(this.subscriptions))
         .subscribe(() => {
         });

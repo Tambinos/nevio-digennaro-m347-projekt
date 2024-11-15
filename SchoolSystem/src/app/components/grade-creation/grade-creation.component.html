@@ -4,12 +4,6 @@
   <div class="app-content">
     <div class="headerAndButtonDiv">
       <button mat-button color="primary" routerLink="/gradeDashboard">❮{{ "Go Back"|translate }}</button>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelectorPrimary"
-                  (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
-        <mat-option *ngFor="let language of languageService.languages" [value]="language">
-          {{ language }}
-        </mat-option>
-      </mat-select>
     </div>
     <div class="creationDiv">
       <mat-form-field>

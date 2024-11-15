@@ -7,6 +7,4 @@ export interface SubjectGrade {
   grade: Grade;
   date?: string;
   subject: Subject;
-  user: User;
-
 }

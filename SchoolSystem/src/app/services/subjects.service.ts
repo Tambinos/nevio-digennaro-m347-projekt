@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "../models/Subject";
 import {UsersService} from "./users.service";
-import {map, Observable} from "rxjs";
+import {map, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,50 +11,55 @@ export class SubjectsService {
   constructor(private http: HttpClient, private userService: UsersService) {
   };
 
+  public subjectsArray: Subject[] = [
+    {id: 0, subject: 'Math'},
+    {id: 1, subject: 'Science'},
+    {id: 2, subject: 'History'}
+  ];
+
+  public averageGrades: number[][] = [[5], [4], [6]]
+
+
   getSubjects(): Observable<Subject[]> {
-    return this.http.get('http://localhost:8080/api/admin/subject/all', {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    }).pipe(map((data: any) => {
-      return data;
-    }))
+    return of(this.subjectsArray)
   }
 
   getAverageGrade(subjectId: number): Observable<number> {
-    return this.http.get<number>('http://localhost:8080/api/subjectGrade/avgGrade/' + this.userService.getLoggedInUser().id?.toString() + '/' + subjectId.toString(), {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    }).pipe(map((data: any) => {
-      return data;
-    }))
+    let sum: number = 0;
+    this.averageGrades[subjectId].forEach(number => sum += number)
+    return of(sum / this.averageGrades[subjectId].length)
   }
 
   addSubject(subject: Subject): Observable<Object> {
-    return this.http.post('http://localhost:8080/api/admin/subject/create', subject, {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    })
+    alert('Subject was added')
+
+    /*subject.id = this.subjectsArray.length
+    this.subjectsArray.push(subject)
+
+     */
+    return of(this.subjectsArray)
   }
 
   editSubject(subject: Subject, newSubject: string): Observable<Object> {
-    let newSub: Subject = {id: subject.id, subject: newSubject};
-    newSub.id = subject.id;
-    return this.http.put('http://localhost:8080/api/admin/subject/editSubject', newSub, {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    })
+    alert('Subject was edited')
+    // this.subjectsArray[subject.id!].subject = newSubject
+    return of(this.subjectsArray)
   }
 
   deleteSubject(subject: Subject): Observable<Object> {
-    return this.http.delete('http://localhost:8080/api/admin/subject/delete/' + subject.id, {
-      headers: {
-        'Authorization': `Bearer ${this.userService.getToken()}`
-      }
-    })
+    alert("Subject was deleted")
+    /* this.subjectsArray = this.subjectsArray.filter(subject2 => subject2.id !== subject.id!)
+     let newSubjectsArray: Subject[] = [];
+     for (let i = 0; i < this.subjectsArray.length; i++) {
+       let newSubject: Subject = { ...this.subjectsArray[i], id: i }; // Create a new object
+       newSubjectsArray.push(newSubject);
+     }
+     this.averageGrades = this.averageGrades.splice(0, subject.id)
+     this.averageGrades.push(...this.averageGrades.splice(subject.id!, this.averageGrades.length))
+     this.subjectsArray = newSubjectsArray;
+
+     */
+    return of(this.subjectsArray)
   }
 
   setFocusedSubject(subject: Subject) {

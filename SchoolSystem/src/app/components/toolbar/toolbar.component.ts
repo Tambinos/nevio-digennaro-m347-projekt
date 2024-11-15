@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {LanguageService} from "../../services/language.service";
 
 
@@ -9,7 +9,9 @@ import {LanguageService} from "../../services/language.service";
 })
 export class ToolbarComponent {
 
-  constructor(protected languageService: LanguageService) {
+  constructor() {
 
   }
+
+  protected readonly window = window;
 }

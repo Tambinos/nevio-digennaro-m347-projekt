@@ -34,13 +34,12 @@ export class GradeCreationComponent {
     if (this.selectedGrade >= 1 && this.selectedGrade <= 6) {
       if (this.route.snapshot.url[0].path === 'editGrade') {
         this.store.dispatch(updateSubjectGrade({grade: this.selectedGrade}, this.gradeService.getFocusedGrade().id ?? 0));
-        this.gradeService.updateGrade(this.gradeService.getFocusedGrade().id ?? 0, {grade: this.selectedGrade})
+        this.gradeService.editGrade(this.gradeService.getFocusedGrade(), this.selectedGrade)
           .subscribe();
       } else {
-        this.gradeService.createGrade({
+        this.gradeService.addGrade({
           grade: {grade: this.selectedGrade},
           subject: this.subjectService.getFocusedSubject(),
-          user: this.userService.getLoggedInUser()
         }).subscribe((data) => {
           const gradeData = data as SubjectGrade;
           this.store.dispatch(addSubjectGrade(gradeData));

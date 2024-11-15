@@ -1,16 +1,17 @@
 <mat-toolbar color="primary" class="app-header">
   <span class="title">{{ 'Grade System' | translate }}</span>
-  <button class="primaryLogoutButton" mat-button routerLink="">{{ 'Log out' | translate }}</button>
-  <div class="mobileLanguageAndLogoutButton">
-    <div class="secondaryLanguage">
-      <mat-select  style="width: 90px" [(ngModel)]="languageService.selectedLanguage"
-                  (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
-        <mat-option *ngFor="let language of languageService.languages" [value]="language">
-          {{ language }}
-        </mat-option>
-      </mat-select>
-    </div>
-    <button mat-button>
+  <button *ngIf="window.innerWidth > 720" class="primaryLogoutButton" mat-button routerLink="">{{ 'Zurück zur Startseite' | translate }}</button>
+  <div *ngIf="window.innerWidth <= 720" class="mobileLanguageAndLogoutButton"
+       style="width: 100vw; display: flex;justify-content: center; margin-top: 5px">
+    <!--  <div class="secondaryLanguage">
+         <mat-select style="width: 90px" [(ngModel)]="languageService.selectedLanguage" (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
+           <mat-option *ngFor="let language of languageService.languages" [value]="language">
+             {{ language }}
+           </mat-option>
+         </mat-select>
+       </div>
+       -->
+    <button routerLink="" mat-button>
       <i class="material-icons">logout</i>
     </button>
   </div>

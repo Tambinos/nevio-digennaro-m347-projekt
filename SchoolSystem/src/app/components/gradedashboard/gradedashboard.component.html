@@ -6,12 +6,6 @@
     </button>
     <div class="headerAndButtonDiv">
       <mat-card-title class="title">{{ 'Grades' | translate }}</mat-card-title>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelectorPrimary"
-                  (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
-        <mat-option *ngFor="let language of languageService.languages" [value]="language">
-          {{ language }}
-        </mat-option>
-      </mat-select>
       <button class="mat-elevation-z2 primaryAddButton" mat-raised-button color="primary"
               routerLink="/createGrade">{{ 'Add Grade'|translate }}
       </button>
@@ -40,15 +34,9 @@
               class="material-icons">{{ 'edit'|translate }}</i>
             </button>
             <button mat-button
-                    (click)="showPopup = true; this.gradeService.setFocusedGrade(subjectGrade)"><i
+                    (click)="showPopup = true; this.gradeService.setFocusedGrade(subjectGrade); openDialog()"><i
               class="material-icons">{{ 'delete' | translate }}</i>
             </button>
-            <div class="popup-backdrop" *ngIf="showPopup">
-              <app-delete-pop-up
-                (close)="showPopup = false"
-                (decision)="handleEvent($event,gradeService.getFocusedGrade())">
-              </app-delete-pop-up>
-            </div>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

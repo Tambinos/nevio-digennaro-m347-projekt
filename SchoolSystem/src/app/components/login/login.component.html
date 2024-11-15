@@ -1,31 +1,25 @@
 <body>
-<div class="login-container">
-  <mat-card class="login-card">
-    <mat-card-header class="headerAndButtonDiv">
-      <mat-card-title class="title">{{ 'Login' | translate }}</mat-card-title>
-      <mat-select [(ngModel)]="languageService.selectedLanguage" class="languageSelectorPrimary"
-                  (selectionChange)="languageService.switchLanguage(languageService.selectedLanguage)">
-        <mat-option *ngFor="let language of languageService.languages" [value]="language">
-          {{ language }}
-        </mat-option>
-      </mat-select>
+<div class="app-container">
+  <app-toolbar>
+  </app-toolbar>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Willkommen zur Notenverwaltung</mat-card-title>
+      <mat-card-subtitle>Verwalte deine Noten einfach und effizient</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form>
-        <mat-form-field appearance="fill" class="login-input">
-          <mat-label>{{ 'Username' | translate }}</mat-label>
-          <input [(ngModel)]="username" matInput name="userName" required>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="login-input">
-          <mat-label>{{ 'Password' | translate }}</mat-label>
-          <input [(ngModel)]="password" matInput type="password" name="password" required>
-        </mat-form-field>
-        <div class="buttonContainer">
-          <button mat-raised-button color="primary"  (click)="login()" class="formLeftButton" type="submit">{{ 'Login'|translate }}</button>
-          <button mat-raised-button color="primary"  (click)="register()" class="formRightButton" type="submit">{{'Register' | translate}}</button>
-        </div>
-      </form>
+      <p>
+        Unsere Notenverwaltungssoftware hilft dir, <br> deine akademischen Leistungen zu organisieren.
+      </p>
+      <p>
+        Mit einer benutzerfreundlichen Oberfläche <br> kannst du Noten und Fächer hinzufügen, bearbeiten und anzeigen.
+      </p>
     </mat-card-content>
+    <mat-card-actions>
+      <button (click)="login()" mat-button color="primary">Jetzt starten</button>
+      <button routerLink="/gallery" mat-button>Zu unserer Gallery</button>
+      <button routerLink="/impressum" mat-button>Impressum</button>
+    </mat-card-actions>
   </mat-card>
 </div>
 </body>

@@ -7,10 +7,14 @@ import {GradedashboardComponent} from "./components/gradedashboard/gradedashboar
 import {GradeCreationComponent} from "./components/grade-creation/grade-creation.component";
 import {SubjectCreationComponent} from "./components/subject-creation/subject-creation.component";
 import {LoginGuard} from "./guards/login.guard";
+import {ImpressumComponent} from "./components/impressum/impressum.component";
+import {GalleryComponent} from "./components/gallery/gallery.component";
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'home', component: LoginComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'impressum',component: ImpressumComponent },
+  {path: 'gallery', component: GalleryComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]},
   {path: 'gradeDashboard', component: GradedashboardComponent, canActivate: [LoginGuard]},
   {path: 'createGrade', component: GradeCreationComponent, canActivate: [LoginGuard]},

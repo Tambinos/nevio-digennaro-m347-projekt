@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import {LanguageService} from "../../services/language.service";
+import {Router} from "@angular/router";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 
 @Component({
@@ -8,12 +10,15 @@ import {LanguageService} from "../../services/language.service";
   styleUrls: ['./delete-pop-up.component.scss']
 })
 export class DeletePopUpComponent {
-  @Output() decision:EventEmitter<boolean> = new EventEmitter<boolean>();
-  parent:string = ''
-  constructor(languageService: LanguageService) {
-    this.parent = window.parent.location.href.substring(window.parent.location.href.lastIndexOf('/'), window.parent.location.href.length);
+
+  constructor(
+    public dialogRef: MatDialogRef<DeletePopUpComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: string
+  ) {
+    console.log(this.data)
   }
-  onDecide(decision: boolean): void {
-    this.decision.emit(decision);
+
+  onDecide(confirm: boolean): void {
+    this.dialogRef.close(confirm);
   }
 }

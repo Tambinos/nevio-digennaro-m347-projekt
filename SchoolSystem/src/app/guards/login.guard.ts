@@ -10,10 +10,6 @@ export class  LoginGuard implements CanActivate {
   constructor(private usersService: UsersService, private router: Router) {
   }
   canActivate(): boolean {
-    if (this.usersService.getToken() === '') {
-      this.router.navigate(['/login']);
-      return false;
-    }
     return true;
   }
 }

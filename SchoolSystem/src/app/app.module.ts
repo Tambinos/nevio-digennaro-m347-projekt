@@ -16,7 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTableModule} from "@angular/material/table";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
@@ -28,6 +28,9 @@ import {EffectsModule} from "@ngrx/effects";
 import {SubjectEffects} from "./events/subject.effects";
 import {SubjectGradesEffects} from "./events/subjectGrades.effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import { ImpressumComponent } from './components/impressum/impressum.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -43,7 +46,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     GradeCreationComponent,
     SubjectCreationComponent,
     DeletePopUpComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ImpressumComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StoreModule.forFeature('subjectGrades', subjectGradeReducer),
     EffectsModule.forRoot([SubjectEffects, SubjectGradesEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

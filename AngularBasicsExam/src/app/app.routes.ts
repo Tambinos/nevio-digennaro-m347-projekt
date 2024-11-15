@@ -9,7 +9,7 @@ import { AdmindashboardComponent } from './components/admindashboard/admindashbo
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
     component: DashboardComponent,

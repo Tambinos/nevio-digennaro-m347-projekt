@@ -1,39 +1,18 @@
-<body>
-<mat-card class="popup">
-  <div>
-    <mat-card-title *ngIf="parent === '/gradeDashboard'" class="popup-title">
-      {{
-        'Delete Grade'|translate
-      }}
-    </mat-card-title>
-    <mat-card-title *ngIf="parent === '/dashboard'" class="popup-title">
-      {{
-        'Delete Subject'|translate
-      }}
-    </mat-card-title>
-    <mat-card-content class="popup-content">
-      <div>
-        <p *ngIf="parent === '/gradeDashboard'" class="popup-text">
-          {{
-            'Do you really wanna delete this grade ?' | translate
-          }} </p>
-        <p *ngIf="parent === '/dashboard'" class="popup-text">
-          {{
-            'Do you really wanna delete this subject ?' | translate
-          }}
-          <br>
-          {{
-            'All the related grades will be deleted as well.' | translate
-          }}
-        </p>
-      </div>
-    </mat-card-content>
-    <div class="popup-actions">
-      <button mat-button mat-raised-button color="primary" class="button-save"
-              (click)="onDecide(true)">{{ 'Confirm' | translate }}
-      </button>
-      <button mat-button class="button-cancel" (click)="onDecide(false)">{{ 'Cancel' | translate }}</button>
-    </div>
-  </div>
-</mat-card>
-</body>
+<div>
+  <h2
+  mat-dialog-title>{{ data === '/gradeDashboard' ? ('Delete Grade' | translate) : ('Delete Subject' | translate) }}</h2>
+  <mat-dialog-content>
+    <p *ngIf="data === '/gradeDashboard'">
+      {{ 'Do you really wanna delete this grade ?' | translate }}
+    </p>
+    <p *ngIf="data === '/dashboard'">
+      {{ 'Do you really wanna delete this subject ?' | translate }}
+      <br>
+      {{ 'All the related grades will be deleted as well.' | translate }}
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onDecide(true)">{{ 'Confirm' | translate }}</button>
+    <button mat-button (click)="onDecide(false)">{{ 'Cancel' | translate }}</button>
+  </mat-dialog-actions>
+</div>

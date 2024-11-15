@@ -5,7 +5,7 @@ import {LanguageService} from "../../services/language.service";
 import {TranslateService} from "@ngx-translate/core";
 import {GradeService} from "../../services/grade.service";
 import {Subject} from "../../models/Subject";
-import {Observable, Subject as RxjsSubject, takeUntil} from 'rxjs';
+import {Observable, of, Subject as RxjsSubject, takeUntil} from 'rxjs';
 import {Store} from "@ngrx/store";
 import {loadSubjects, removeSubject} from "../../actions/Subject.action";
 import {loadSubjectsGrades} from "../../actions/SubjectGrade.action";
@@ -13,6 +13,8 @@ import {AppState} from "../../state/app.state";
 import {SubjectsState} from "../../state/subject.state";
 import {SubjectGradesState} from "../../state/subject.grades.state";
 import {selectAvgGradeBySubjectId} from "../../selectors/avgGradeFeatureSelector";
+import {MatDialog} from "@angular/material/dialog";
+import {DeletePopUpComponent} from "../delete-pop-up/delete-pop-up.component";
 
 
 @Component({
@@ -33,7 +35,8 @@ export class DashboardComponent implements OnDestroy {
               protected languageService: LanguageService,
               protected translate: TranslateService,
               protected gradeService: GradeService,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              protected dialog: MatDialog) {
 
     if (this.userService.getLoggedInUser().admin) {
       this.displayedColumns = ['subject', 'avgGrade', 'actions'];
@@ -43,8 +46,8 @@ export class DashboardComponent implements OnDestroy {
       this.store.dispatch(loadSubjectsGrades());
       this.userService.firstInitiated = false;
     }
-    this.subjects$ = this.store.select('subjects')
-    this.subjectGrades$ = this.store.select('subjectGrades')
+    this.subjects$ = of({subjects: this.subjectService.subjectsArray})
+    this.subjectGrades$ = of({subjectGrades: this.gradeService.subjectGradeArray})
   }
 
   ngOnDestroy(): void {
@@ -64,4 +67,17 @@ export class DashboardComponent implements OnDestroy {
   getAvgGradeBySubjectId(subjectId: number): Observable<number> {
     return this.store.select(selectAvgGradeBySubjectId, {subjectId});
   }
+
+  openDialog() {
+    this.dialog.open(DeletePopUpComponent, {
+      disableClose: true, // Prevents closing on overlay click
+      data:
+        '/dashboard'
+
+    }).afterClosed().subscribe((event: boolean) => {
+      this.handleEvent(event, this.subjectService.getFocusedSubject())
+    })
+  }
+
+  protected readonly DeletePopUpComponent = DeletePopUpComponent;
 }

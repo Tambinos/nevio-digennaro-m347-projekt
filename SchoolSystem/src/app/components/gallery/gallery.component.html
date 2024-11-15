@@ -1,0 +1,14 @@
+<body>
+<div class="app-container">
+  <app-toolbar></app-toolbar>
+  <div class="gallery-container">
+    <div class="image-display">
+      <img id="gallery-image" [src]="images[currentIndex]" alt="Gallery Image" (click)="openFullscreen()" />
+    </div>
+    <div class="gallery-controls">
+      <button mat-button (click)="prevImage()">Previous</button>
+      <button mat-button (click)="nextImage()">Next</button>
+    </div>
+  </div>
+</div>
+</body>
