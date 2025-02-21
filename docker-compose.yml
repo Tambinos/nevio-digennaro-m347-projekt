@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  school-system:
+    image: ghcr.io/tambinos/nevio-digennaro-m347-projekt/school-system:latest
+    ports:
+      - "8080:80"
+    restart: always
