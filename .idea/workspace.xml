@@ -1,17 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3205e20-2307-4461-a5f2-62a3ee98b947" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Ngrx/src/app/actions/counter.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Ngrx/src/app/actions/counter.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/components/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/components/gradedashboard/gradedashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/components/gradedashboard/gradedashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/service/grade.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/service/grade.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/service/language.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/service/language.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SchoolSystem/src/app/service/users.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolSystem/src/app/service/users.service.ts" afterDir="false" />
+    <list default="true" id="77cd3c2f-23f6-4c5f-8ec8-71bf1ff260e0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Angular Exam/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Exam/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/.vscode/tasks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/app.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/admindashboard/admindashboard.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/admindashboard/admindashboard.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/admindashboard/admindashboard.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/admindashboard/admindashboard.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/bookingcreation/bookingcreation.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/bookingcreation/bookingcreation.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/bookingcreation/bookingcreation.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/bookingcreation/bookingcreation.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/dashboard/dashboard.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/dashboard/dashboard.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/dashboard/dashboard.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/dashboard/dashboard.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/editbooking/editbooking.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/editbooking/editbooking.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/editbooking/editbooking.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/editbooking/editbooking.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/login/login.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/login/login.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/login/login.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/login/login.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/profile-overview/profile-overview.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/profile-overview/profile-overview.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/profile-overview/profile-overview.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/profile-overview/profile-overview.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/viewbookings/viewbookings.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/viewbookings/viewbookings.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/viewbookings/viewbookings.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/components/viewbookings/viewbookings.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/models/Booking.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/models/Member.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/models/Project.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/models/Superior.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/models/TimeCode.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/booking.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/booking.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/project.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/project.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/role.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/role.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/time-code.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/app/service/time-code.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/assets/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/src/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AngularBasicsExam/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NgrxLab3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../NgrxLab3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ngrxlab3.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,47 +81,107 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
-  <component name="ProjectId" id="2eoXwtHrbBxhnrJufbufV4wkjs5" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2npSjlasiTmbnwETXa2KZIIMRiI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/ndigennaro/SBB",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;cracked-version&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/M210&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\digen\\Basislehrjahr\\SchoolSystem\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\digen\Basislehrjahr\SchoolSystem\src" />
+      <recent name="C:\Users\digen\Basislehrjahr\SchoolSystem\src\app" />
+      <recent name="C:\Users\digen\Basislehrjahr\SchoolSystem\src\app\components\gallery" />
+      <recent name="C:\Users\digen\Basislehrjahr\SchoolSystem\src\app\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\digen\Basislehrjahr\SchoolSystem\src\app\components\gallery" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d3205e20-2307-4461-a5f2-62a3ee98b947" name="Changes" comment="" />
-      <created>1712572145330</created>
+      <changelist id="77cd3c2f-23f6-4c5f-8ec8-71bf1ff260e0" name="Changes" comment="" />
+      <created>1729668661364</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1712572145330</updated>
-      <workItem from="1712572146546" duration="5000" />
+      <updated>1729668661364</updated>
+      <workItem from="1729668662385" duration="946000" />
+      <workItem from="1729670873905" duration="1845000" />
+      <workItem from="1729836711208" duration="5899000" />
+      <workItem from="1730444765544" duration="9297000" />
+      <workItem from="1730455963324" duration="28000" />
+      <workItem from="1731657978238" duration="1269000" />
+      <workItem from="1731912980498" duration="8000" />
+      <workItem from="1734679454068" duration="1000" />
+      <workItem from="1738522172275" duration="25000" />
+      <workItem from="1738522339310" duration="595000" />
+      <workItem from="1740123977709" duration="407000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/app-routing.module.ts</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
