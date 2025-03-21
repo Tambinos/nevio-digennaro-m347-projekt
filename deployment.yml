@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: school-system
+  labels:
+    app: school-system
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: school-system
+  template:
+    metadata:
+      labels:
+        app: school-system
+    spec:
+      containers:
+      - name: school-system
+        image: ghcr.io/tambinos/nevio-digennaro-m347-projekt/school-system:latest
+        ports:
+        - containerPort: 80
